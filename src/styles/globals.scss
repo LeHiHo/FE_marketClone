@@ -1,0 +1,41 @@
+@import "reset";
+
+@font-face {
+  font-family: "ImcreSoojin";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+$main-color: #4acd93;
+$sub-color: #1dc078;
+
+html {
+  font-family: "ImcreSoojin", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  width: 70vw;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 1fr 10fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+
+header {
+  border: 1px solid black;
+}
+
+main {
+  border: 1px solid black;
+}
+
+footer {
+  border: 1px solid black;
+}
