@@ -1,3 +1,3 @@
 export default function Home() {
-  return <></>;
+  return <>처음페이지</>;
 }
