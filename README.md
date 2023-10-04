@@ -1,4 +1,5 @@
 # 맞왜틀조와 함께하는 당근마켓 클론 프로젝트
+
 <br>
 <div>
   <a href="https://fe-market-clone.vercel.app/" target="_blank">
@@ -15,7 +16,7 @@
 2. 생성한 `Issue` 번호로 로컬에서 브랜치 생성(feature/#이슈번호)
 3. `dev`의 최신변경사항을 pull 받아서 동기화
 4. 구현완료후 `dev`로 push후 Pull Request 생성
-5. 14:00에 팀원들과 함께 conflict \*\*\*\*해결 후 `dev`로 merge
+5. 14:00에 팀원들과 함께 conflict 해결 후 `dev`로 merge
 6. 브랜치 삭제후 1번으로
 
 ### ✅ Commit log
