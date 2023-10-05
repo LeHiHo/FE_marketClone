@@ -1,3 +1,9 @@
+import Start from '@/containers/start/start';
+
 export default function Home() {
-  return <>처음페이지</>;
+  return (
+    <>
+      <Start />
+    </>
+  );
 }
