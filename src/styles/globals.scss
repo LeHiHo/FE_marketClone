@@ -1,9 +1,9 @@
-@import "reset";
+@import 'reset';
 
 @font-face {
-  font-family: "ImcreSoojin";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff")
-    format("woff");
+  font-family: 'ImcreSoojin';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -11,26 +11,29 @@
 $main-color: #4acd93;
 $sub-color: #1dc078;
 
+* {
+  box-sizing: border-box;
+  font-family: 'ImcreSoojin', sans-serif;
+}
+
 html {
-  font-family: "ImcreSoojin", sans-serif;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  font-size: 16px;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 20rem;
 }
 
 body {
-  min-height: 100vh;
-  width: 70vw;
-  margin: auto;
+  border: 1px solid black;
+  width: 100%;
+  height: 40rem;
   display: grid;
-  grid-template-rows: 1fr 10fr 1fr;
+  grid-template-rows: 1fr 12fr;
   grid-template-columns: 1fr;
   grid-template-areas:
-    "header"
-    "main";
-}
-
-header {
-  border: 1px solid black;
-}
-
-main {
-  border: 1px solid black;
+    'header'
+    'main';
 }

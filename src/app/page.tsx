@@ -1,3 +1,9 @@
+import HomePage from '@/templates/home/homePage';
+
 export default function Home() {
-  return <>처음페이지</>;
+  return (
+    <>
+      <HomePage />
+    </>
+  );
 }
