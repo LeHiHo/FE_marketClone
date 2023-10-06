@@ -1,4 +1,4 @@
-import LoginPage from '@/containers/login/loginPage';
+import LoginPage from '@/templates/login/loginPage';
 
 export default function Login() {
   return (

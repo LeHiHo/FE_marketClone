@@ -1,5 +1,5 @@
 import Btn from '@/components/btn';
-import '@/styles/home.scss';
+import '@/styles/app/home.scss';
 import Link from 'next/link';
 
 export default function HomePage() {

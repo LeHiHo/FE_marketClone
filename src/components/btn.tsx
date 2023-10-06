@@ -1,5 +1,5 @@
 import React from 'react';
-import '@/styles/btn.scss';
+import '@/styles/components/btn.scss';
 import Link from 'next/link';
 
 export default function Btn({ href, label }: { href: string; label: string }) {
