@@ -1,5 +1,5 @@
 import Btn from '@/components/btn';
-import '@/styles/app/login.scss';
+import '@/styles/templates/login.scss';
 import Link from 'next/link';
 
 export default function LoginPage() {
