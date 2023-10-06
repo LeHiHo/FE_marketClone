@@ -9,9 +9,9 @@ export default function LoginPage() {
       <div className="login">
         <div className="login__text">
           <p>이메일(ID)</p>
-          <input />
+          <input type="email" name="useremail" />
           <p>비밀번호(PW)</p>
-          <input />
+          <input type="password" name="password" />
         </div>
         <Btn href="/main" label="로그인" />
         <div className="login__pw-text">
