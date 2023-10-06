@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "g": "^2.0.1",
     "next": "13.5.4",
+    "pnpm": "^8.8.0",
     "react": "^18",
     "react-dom": "^18",
     "sass": "^1.68.0"
