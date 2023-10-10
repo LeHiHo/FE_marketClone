@@ -1,5 +1,5 @@
 import Btn from '@/components/btn';
-import '@/styles/app/home.scss';
+import '@/styles/templates/home.scss';
 import Link from 'next/link';
 
 export default function HomePage() {
@@ -11,7 +11,7 @@ export default function HomePage() {
         <p>이제 내동네에서</p>
         <p>간편하게 중고거래 하자</p>
       </div>
-      <Btn href="/signup" label="시작하기" />
+      <Btn href="/signup" label="시작하기" disabled={false} />
       <div className="home__login-text">
         이미 계정이 있나요?
         <Link className="login" href="login">

@@ -1,6 +1,6 @@
 import Header from '@/components/header';
 
-import '@/styles/app/category.scss';
+import '@/styles/templates/category/category.scss';
 
 export default function CategoryPage() {
   return (
