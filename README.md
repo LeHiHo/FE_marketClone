@@ -1,4 +1,5 @@
-# 맞왜틀조와 함께하는 당근마켓 클론 프로젝트
+# 맞왜틀조와 함께하는 당근마켓 클론 프로젝트‼️
+
 <br>
 <div>
   <a href="https://fe-market-clone.vercel.app/" target="_blank">
@@ -23,15 +24,14 @@
 ```
 Feat : 새로운 기능 추가
 Fix : 버그 수정
-Env : 개발 환경 관련 설정
 Style : 코드 스타일 수정 (세미 콜론, 인덴트 등의 스타일적인 부분만)
 Refactor : 코드 리팩토링 (더 효율적인 코드로 변경 등)
 Design : CSS 등 디자인 추가/수정
 Comment : 주석 추가/수정
 Docs : 내부 문서 추가/수정
 Test : 테스트 추가/수정
-Chore : 빌드 관련 코드 수정
-Rename : 파일 및 폴더명 수정
+Chore : 빌드 관련 코드 수정, 개발 환경 관련 설정(과거 Env)
+Move : 파일 및 폴더명 수정(과거 Rename)
 Remove : 파일 삭제
 ```
 
@@ -73,6 +73,7 @@ feature/#이슈번호
 
 ```
 📦src
+┣ 📂api ➡️ API 요청관련 코드
 ┣ 📂app ➡️ 직접적인 라우팅 구조를 나타내는 폴더
 ┃ ┣ 📂category
 ┃ ┣ 📂login
@@ -85,13 +86,13 @@ feature/#이슈번호
 ┃ ┣ 📜layout.tsx ➡️ 최상단 레이아웃(테마)
 ┃ ┗ 📜page.tsx ➡️ 시작페이지
 ┣ 📂components ➡️ 재사용이 가능한 코드
-┣ 📂containers ➡️ 재사용이 곤란한 컴포넌트(하나의 기능이나 페이지에 주로사용)
-┣ 📂services ➡️ API 요청 코드
+┣ 📂data ➡️ 정적데이터(서버에서 불러오지않는), 설정파일
 ┣ 📂styles ➡️ css 파일
 ┃ ┣ 📜globals.scss
 ┃ ┗ 📜reset.scss
+┣ 📂templates ➡️ 재사용이 곤란한 컴포넌트(하나의 기능이나 페이지에 주로사용)
 ┣ 📂types ➡️ 타입 지정 함수
-┗ 📂utils ➡️ 데이터나 유틸관련 함수
+┗ 📂utils ➡️ 유틸관련(날짜및시간관련 코드, 커스텀훅 등)
 ```
 
 ---

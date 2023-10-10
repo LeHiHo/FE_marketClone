@@ -1,3 +1,9 @@
+import LoginPage from '@/templates/login/loginPage';
+
 export default function Login() {
-  return <main>Login</main>;
+  return (
+    <>
+      <LoginPage />
+    </>
+  );
 }
