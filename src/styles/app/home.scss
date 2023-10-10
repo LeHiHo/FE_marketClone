@@ -1,6 +1,6 @@
-@import 'globals';
+@import '@/styles/globals';
 
-.start {
+.home {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -12,10 +12,11 @@
     width: 20rem;
   }
 
-  .start__text {
+  .home__text {
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 10rem;
     h1 {
       font-size: 1.5rem;
       padding-bottom: 0.5rem;
@@ -26,11 +27,7 @@
     }
   }
 
-  .start__text {
-    padding-bottom: 10rem;
-  }
-
-  .start__login-text {
+  .home__login-text {
     padding-top: 2rem;
     display: inline-block;
 

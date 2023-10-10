@@ -1,11 +1,25 @@
 @import 'globals';
 
-header {
-    display:flex;
-    font-size: 20px;
+.header {
+  display: flex;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  font-size: 20px;
+  position: relative;
 }
 
 .backNav {
-    margin-right: 5px;
+  margin-right: 5px;
+}
+
+.mainBar {
+  position: absolute;
+  top : 0;
+  right: 30px;
+
+}
+
+.hide {
+    display:none;
 }
 

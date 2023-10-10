@@ -1,11 +1,13 @@
 import Header from '@/components/header';
+import ProductStateList from '@/templates/product/productStateList/productStateList';
 
 
 
 export default function SalesList() {
   return (
     <>
-    <Header isBackNav={true} href={'/mypage'} content={'판매내역'}/>
+    <Header isBackNav={false} href={'/.'}isMainBar={true} content={'개발자님'} />
+    <ProductStateList/>
     </>
   )
 }

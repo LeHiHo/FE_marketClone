@@ -1,9 +1,9 @@
-import Start from '@/containers/start/start';
+import HomePage from '@/templates/home/homePage';
 
 export default function Home() {
   return (
     <>
-      <Start />
+      <HomePage />
     </>
   );
 }

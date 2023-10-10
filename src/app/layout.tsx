@@ -10,7 +10,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body>
-        <header>헤더임</header>
         <main>
           <div></div>
           {children}
