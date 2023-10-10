@@ -1,7 +1,8 @@
 'use client';
-import '@/styles/signup.scss';
+import '@/styles/templates/signup/signup.scss';
+import Btn from '@/components/btn';
 import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
+import Header from '@/components/header';
 
 interface FormData {
   email: string;
@@ -20,132 +21,198 @@ export default function SignupPage() {
     phone: '',
     nickname: '',
   });
+
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+    name: '',
+    phone: '',
+    nickname: '',
+  });
+
   const [isValid, setIsValid] = useState<boolean>(false);
-  const [errorMessage, setErrormessage] = useState<string>('');
+
   useEffect(() => {
-    if (
-      formData.email &&
-      formData.password &&
-      formData.confirmPassword &&
-      formData.name &&
-      formData.phone &&
-      formData.nickname &&
-      formData.password === formData.confirmPassword
-    ) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-    if (formData.password === formData.confirmPassword) {
-      setErrormessage('');
-    } else {
-      setErrormessage('비밀번호가 일치하지 않습니다.');
-    }
-  }, [
-    formData.email,
-    formData.password,
-    formData.confirmPassword,
-    formData.name,
-    formData.phone,
-    formData.nickname,
-  ]);
+    validateForm();
+  }, [formData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
-
-    // const emailIsValid = ''; // 이메일 유효성 검사
-    // const passwordIsValid = ''; // 비밀번호 유효성 검사
   };
 
-  const handleSubmit = async () => {
-    console.log(formData);
-    // try {
-    //   // 클라이언트에서 입력한 데이터를 서버로 전송
-    //   const response = await axios.post('/api/signup', formData);
+  const validateForm = () => {
+    setIsValid(true);
 
-    //   // 서버로부터의 응답 처리
-    //   if (response.data.success) {
-    //     alert('회원가입이 성공적으로 완료되었습니다.');
-    //     // 필요한 리다이렉트 또는 다른 작업 수행
-    //   } else {
-    //     alert('회원가입에 실패했습니다.');
-    //   }
-    // } catch (error) {
-    //   console.error('회원가입 오류:', error);
-    //   alert('회원가입 중 오류가 발생했습니다.');
-    // }
+    const newErrors = {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      phone: '',
+      nickname: '',
+    };
+
+    // 이메일 유효성 검사
+    if (formData.email.trim() === '') {
+      newErrors.email = '이메일을 입력하세요.';
+      setIsValid(false);
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = '올바른 이메일 형식이 아닙니다.';
+      setIsValid(false);
+    }
+
+    // 비밀번호 유효성 검사
+    if (formData.password.trim() === '') {
+      newErrors.password = '비밀번호를 입력하세요.';
+      setIsValid(false);
+    } else if (formData.password.length < 6) {
+      newErrors.password = '비밀번호는 최소 6자 이상이어야 합니다.';
+      setIsValid(false);
+    }
+
+    // 비밀번호 일치 검사
+    if (formData.confirmPassword !== formData.password) {
+      newErrors.confirmPassword = '비밀번호가 일치하지 않습니다.';
+      setIsValid(false);
+    }
+
+    // 이름 유효성 검사
+    if (formData.name.trim() === '') {
+      newErrors.name = '사용자 이름을 입력하세요.';
+      setIsValid(false);
+    } else if (!/^[a-zA-Z0-9가-힣]+$/.test(formData.name)) {
+      newErrors.name = '특수 문자를 포함할 수 없습니다.';
+      setIsValid(false);
+    }
+
+    // 휴대폰 번호 유효성 검사
+    if (formData.phone.trim() === '') {
+      newErrors.phone = '휴대폰 번호를 입력하세요.';
+      setIsValid(false);
+    } else if (!/^(010|02)-\d{3,4}-\d{4}$/.test(formData.phone)) {
+      newErrors.phone = '010-1234-1234 형식으로 입력해주세요';
+      setIsValid(false);
+    }
+
+    // 닉네임 유효성 검사
+    if (formData.nickname.trim() === '') {
+      newErrors.nickname = '닉네임을 입력하세요.';
+      setIsValid(false);
+    } else if (formData.nickname.length < 2 || formData.nickname.length > 20) {
+      newErrors.nickname = '닉네임은 2자에서 20자 사이어야 합니다.';
+      setIsValid(false);
+    } else if (!/^[a-zA-Z0-9가-힣]+$/.test(formData.nickname)) {
+      newErrors.nickname = '특수 문자를 포함할 수 없는 닉네임입니다.';
+      setIsValid(false);
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleButtonClick = async () => {
+    if (validateForm()) {
+      console.log('formData:', formData);
+    } else {
+      console.log('유효하지 않은 폼 데이터');
+    }
   };
   return (
-    <form className="signup-form">
-      <label className="signup-form__label" htmlFor="email">
-        이메일(ID)
-      </label>
-      <input
-        value={formData.email}
-        onChange={handleInputChange}
-        id="email"
-        className="signup-form__input"
-        type="email"
-      />
-      <label className="signup-form__label" htmlFor="password">
-        비밀번호(PW)
-      </label>
-      <input
-        value={formData.password}
-        onChange={handleInputChange}
-        id="password"
-        className="signup-form__input"
-        type="password"
-      />
-      <label className="signup-form__label" htmlFor="confirmPassword">
-        비밀번호 확인(PW)
-      </label>
-      <input
-        value={formData.confirmPassword}
-        onChange={handleInputChange}
-        id="confirmPassword"
-        className="signup-form__input"
-        type="password"
-      />
-      <label className="signup-form__label" htmlFor="name">
-        이름
-      </label>
-      <input
-        value={formData.name}
-        onChange={handleInputChange}
-        id="name"
-        className="signup-form__input"
-        type="text"
-      />
-      <label className="signup-form__label" htmlFor="phone">
-        핸드폰번호
-      </label>
-      <input
-        value={formData.phone}
-        onChange={handleInputChange}
-        id="phone"
-        className="signup-form__input"
-        type="text"
-      />
-      <label className="signup-form__label" htmlFor="nickname">
-        닉네임
-      </label>
-      <input
-        value={formData.nickname}
-        onChange={handleInputChange}
-        id="nickname"
-        className="signup-form__input"
-        type="text"
-      />
-      <p className="signup-message">{errorMessage}</p>
-      <button
-        onClick={handleSubmit}
-        className="submit-button"
-        type="button"
-        disabled={!isValid}>
-        가입하기
-      </button>
-    </form>
+    <div id="signup">
+      <Header goBack={false} border={false} title="회원가입" />
+      <form className="signup-form">
+        <div>
+          <label className="signup-form__label" htmlFor="email">
+            이메일(ID)
+          </label>
+          <input
+            value={formData.email}
+            onChange={handleInputChange}
+            id="email"
+            className="signup-form__input"
+            type="email"
+          />
+          <p className="signup-form__message">{errors.email}</p>
+        </div>
+        <div>
+          <label className="signup-form__label" htmlFor="password">
+            비밀번호(PW)
+          </label>
+          <input
+            value={formData.password}
+            onChange={handleInputChange}
+            id="password"
+            className="signup-form__input"
+            type="password"
+          />
+          <p className="signup-form__message">{errors.password}</p>
+        </div>
+        <div>
+          <label className="signup-form__label" htmlFor="confirmPassword">
+            비밀번호 확인(PW)
+          </label>
+          <input
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+            id="confirmPassword"
+            className="signup-form__input"
+            type="password"
+          />
+          <p className="signup-form__message">{errors.confirmPassword}</p>
+        </div>
+
+        <div>
+          <label className="signup-form__label" htmlFor="name">
+            이름
+          </label>
+          <input
+            value={formData.name}
+            onChange={handleInputChange}
+            id="name"
+            className="signup-form__input"
+            type="text"
+          />
+          <p className="signup-form__message">{errors.name}</p>
+        </div>
+
+        <div>
+          <label className="signup-form__label" htmlFor="phone">
+            휴대폰 번호
+          </label>
+          <input
+            value={formData.phone}
+            onChange={handleInputChange}
+            id="phone"
+            className="signup-form__input"
+            type="text"
+          />
+          <p className="signup-form__message">{errors.phone}</p>
+        </div>
+
+        <div>
+          <label className="signup-form__label" htmlFor="nickname">
+            닉네임
+          </label>
+          <input
+            value={formData.nickname}
+            onChange={handleInputChange}
+            id="nickname"
+            className="signup-form__input"
+            type="text"
+          />
+          <p className="signup-form__message">{errors.nickname}</p>
+        </div>
+
+        <Btn
+          type="button"
+          onClick={handleButtonClick}
+          href=""
+          label="가입하기"
+          disabled={!isValid}
+        />
+      </form>
+    </div>
   );
 }
