@@ -1,3 +1,9 @@
+import MypagePage from '@/templates/mypage/mypagePage';
+
 export default function Mypage() {
-  return <main>Mypage</main>;
+  return (
+    <>
+      <MypagePage />
+    </>
+  );
 }

@@ -1,3 +1,9 @@
-export default function Signup() {
-  return <main>Signup</main>;
+import SearchPage from '@/templates/search/searchPage';
+
+export default function Search() {
+  return (
+    <>
+      <SearchPage />
+    </>
+  );
 }
