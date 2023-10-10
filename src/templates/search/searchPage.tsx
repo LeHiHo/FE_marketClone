@@ -1,6 +1,6 @@
 import Header from '@/components/header';
 
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 
 import '@/styles/app/search.scss';
 
