@@ -1,4 +1,5 @@
 @import 'reset';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
 
 @font-face {
   font-family: 'ImcreSoojin';
@@ -13,7 +14,8 @@ $sub-color: #1dc078;
 
 * {
   box-sizing: border-box;
-  font-family: 'ImcreSoojin', sans-serif;
+  // font-family: 'ImcreSoojin', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 html {
