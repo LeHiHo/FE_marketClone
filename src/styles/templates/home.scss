@@ -1,6 +1,6 @@
 @import '@/styles/globals';
 
-.home {
+.homePage {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -8,11 +8,11 @@
   height: 100%;
   width: 100%;
 
-  img {
+  &__img {
     width: 20rem;
   }
 
-  .home__text {
+  &__text {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -27,11 +27,12 @@
     }
   }
 
-  .home__login-text {
+  &__text--login {
     padding-top: 2rem;
-    display: inline-block;
+    text-align: center;
+    padding-bottom: 1rem;
 
-    .login {
+    a {
       color: $sub-color;
       padding-left: 0.5rem;
     }
