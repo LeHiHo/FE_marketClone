@@ -1,0 +1,37 @@
+#signup {
+  .signup-form {
+    width: 100%;
+    margin: 0.8rem auto;
+    > div {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+    button {
+      margin-left: 0.5rem;
+    }
+    &__label {
+      width: 80%;
+      margin: 0 auto;
+      margin-bottom: 0.5rem;
+    }
+
+    &__input {
+      width: 80%;
+      height: 1.7rem;
+      margin: 0 auto;
+      margin-bottom: 0.3rem;
+      padding-left: 0.4rem;
+      border: 1px solid #000;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    &__message {
+      width: 80%;
+      margin: 0 auto;
+      color: #ff0000;
+      font-size: 0.8rem;
+    }
+  }
+}
