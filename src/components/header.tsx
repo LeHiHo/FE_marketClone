@@ -1,54 +1,28 @@
-'use client'
-import { AiOutlineArrowLeft, AiOutlineSearch } from 'react-icons/Ai';
-import { GiHamburgerMenu } from 'react-icons/Gi';
-import '@/styles/header.scss';
-import Link from 'next/link';
-import { useEffect } from 'react';
+import React, { ReactNode } from 'react';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
+import '@/styles/components/header.scss';
+
+interface HeaderProps {
+  goBack?: boolean;
+  border?: boolean;
+  title?: string;
+  children?: ReactNode;
+  button?: ReactNode;
+}
 
 export default function Header({
-  isBackNav,
-  content,
-  isMainBar,
-  href,
-}: {
-  isBackNav: boolean;
-  content: string | null;
-  isMainBar : boolean;
-  href : string;
-}) {
-  function handleSearchClick() {
-    isBackNav = true;
-    const mainBar = document.querySelector('.mainBar');
-    const searchBar = document.querySelector('.searchBar');
-    const headerContent = document.querySelector('.header__content')
-    mainBar?.classList.add('hide');
-    headerContent?.classList.add('hide');
-    searchBar?.classList.remove('hide');
-    
-  }
-
-  
+  goBack,
+  border,
+  title,
+  children,
+  button,
+}: HeaderProps) {
   return (
-    <header className="header">
-     
-        <Link href={href} className={`backNav`+ isBackNav ?'' : 'hide' }>
-          <AiOutlineArrowLeft />
-        </Link>
-     
-      <p className='header__content'>{content}</p>
-      {isMainBar && <div className="mainBar">
-        <span onClick={handleSearchClick}>
-          <AiOutlineSearch />
-        </span>
-        <GiHamburgerMenu />
-      </div>}
-      <div>
-        <input
-          className="searchBar hide"
-          type="text"
-          placeholder="우리동네에서 검색"
-        />
-      </div>
-    </header>
+    <div id="header" className={`${border ? 'header__border--bottom' : ''}`}>
+      {goBack && <AiOutlineArrowLeft className="header__btn--goback" />}
+      <h1 className="header__title">{title}</h1>
+      {children}
+      <div className="header__btn__wrap">{button}</div>
+    </div>
   );
 }

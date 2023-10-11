@@ -1,3 +1,4 @@
+
 import Header from '@/components/header';
 import ProductStateList from '@/templates/product/productStateList/productStateList';
 
@@ -6,7 +7,7 @@ import ProductStateList from '@/templates/product/productStateList/productStateL
 export default function SalesList() {
   return (
     <>
-    <Header isBackNav={false} href={'/.'}isMainBar={true} content={'개발자님'} />
+    <Header goBack={true} border={true} title={'판매내역'}/>
     <ProductStateList/>
     </>
   )

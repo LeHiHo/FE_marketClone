@@ -10,10 +10,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <body>
-        <main>
-          <div></div>
-          {children}
-        </main>
+        <main>{children}</main>
       </body>
     </html>
   );
