@@ -1,3 +1,5 @@
+import SignupPage from '@/templates/signup/signupPage';
+
 export default function Signup() {
-  return <main>Signup</main>;
+  return <SignupPage />;
 }
