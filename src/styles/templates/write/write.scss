@@ -1,0 +1,41 @@
+@import '@/styles/globals';
+.header__btn__wrap {
+  color: $main-color;
+  font-weight: 700;
+}
+
+.writePage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  &__input {
+    margin-bottom: 10rem;
+
+    input,
+    textarea {
+      width: 16rem;
+      height: 2rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      margin-left: 0.5rem;
+    }
+
+    input:focus,
+    textarea:focus {
+      border: 2px solid $main-color;
+    }
+
+    p {
+      margin-top: 0.5rem;
+      margin-left: 0.5rem;
+    }
+  }
+  .writePage__input-detail {
+    height: 7rem;
+    resize: none;
+    outline: none;
+  }
+}
