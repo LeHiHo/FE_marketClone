@@ -17,6 +17,10 @@
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
+    input:focus,
+    textarea:focus {
+      border: 2px solid $main-color;
+    }
     p {
       margin-top: 1rem;
     }
