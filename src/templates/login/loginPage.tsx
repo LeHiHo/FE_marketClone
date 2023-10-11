@@ -15,7 +15,7 @@ export default function LoginPage() {
           <input className="pw" type="password" name="password" />
         </div>
         <footer>
-          <Btn href="/main" label="로그인" />
+          <Btn type="button" disabled={false} href="/main" label="로그인" />
           <div className="loginPage__text-pw">
             <p>비밀번호를 잊어버리셨나요?</p>
             <Link href="/login">비밀번호 찾기</Link>
