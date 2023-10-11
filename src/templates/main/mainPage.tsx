@@ -1,9 +1,14 @@
+import { getProducts } from '@/api/product';
+import Header from '@/components/header';
 import ProductList from '@/components/productList';
+import { IProduct } from '@/types/interface';
 
-export default function MainPage() {
+export default async function MainPage() {
+  const data: IProduct[] = await getProducts();
   return (
     <>
-      <ProductList />
+      <Header title={'개발자님'} border={true} />
+      <ProductList data={data} />
     </>
   );
 }
