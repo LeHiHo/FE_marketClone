@@ -40,3 +40,21 @@
     }
   }
 }
+
+.product__state{
+  display: flex;
+  &__change-box{
+    width:50%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #a5a5a5;
+    color : black;
+  }
+  &__change-box:nth-child(1) {
+    border-right: 2px solid #a5a5a5;
+  }
+}
+
+

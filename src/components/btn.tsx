@@ -3,16 +3,16 @@ import '@/styles/components/btn.scss';
 import Link from 'next/link';
 
 export default function Btn({
-  type,
+  type = 'button',
   href,
   label,
-  disabled,
+  disabled = false,
   onClick,
 }: {
-  type: 'button' | 'submit' | 'reset';
+  type?: 'button' | 'submit' | 'reset';
   href: string;
-  label: string;
-  disabled: boolean;
+  label?: string;
+  disabled?: boolean;
   onClick?: () => void;
 }) {
   return (
