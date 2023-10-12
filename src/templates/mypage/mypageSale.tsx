@@ -1,4 +1,4 @@
-import { getProducts } from '@/api/product';
+import { getProducts } from '@/api/service';
 import Header from '@/components/header';
 import ProductItem from '@/components/productItem';
 import ProductState from '@/components/productState';
