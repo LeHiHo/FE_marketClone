@@ -7,7 +7,6 @@ import { usePathname, useRouter } from 'next/navigation';
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  console.log(pathname);
 
   const onClickHome = () => {
     router.push('/main');

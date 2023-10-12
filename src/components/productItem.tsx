@@ -2,11 +2,7 @@ import '@/styles/components/productItem.scss';
 import { IProduct } from '@/types/interface';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
-export default function ProductItem({
-  product,
-}: {
-  product: IProduct;
-}) {
+export default function ProductItem({ product }: { product: IProduct }) {
   return (
     <>
       <li className="product">
