@@ -11,6 +11,7 @@ import Navbar from '@/components/navbar';
 
 export default async function MainPage() {
   const data: IProduct[] = await getProducts();
+
   return (
     <div id="mainPage">
       <header>
