@@ -7,6 +7,7 @@ import AddBtn from './addBtn';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import Link from 'next/link';
+import Navbar from '@/components/navbar';
 
 export default async function MainPage() {
   const data: IProduct[] = await getProducts();
@@ -32,8 +33,7 @@ export default async function MainPage() {
         <ProductList data={data} />
         <AddBtn />
       </section>
-
-      <nav>navbar</nav>
+      <Navbar />
     </div>
   );
 }
