@@ -4,10 +4,8 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 export default function ProductItem({
   product,
-  isUserProducts = false,
 }: {
   product: IProduct;
-  isUserProducts: boolean;
 }) {
   return (
     <>
@@ -26,16 +24,6 @@ export default function ProductItem({
           </div>
         </div>
       </li>
-      {isUserProducts && (
-        <div className="product__state">
-          <div className="product__state__change-box">
-            <p className='product__state__btn--reserve'>예약중 변경</p>
-          </div>
-          <div className="product__state__change-box">
-            <p className='product__state__btn--complete'>거래완료 변경</p>
-          </div>
-        </div>
-      )}
     </>
   );
 }

@@ -5,6 +5,7 @@ import { IProduct } from '@/types/interface';
 
 export default async function MainPage() {
   const data: IProduct[] = await getProducts();
+
   return (
     <>
       <Header title={'개발자님'} border={true} />

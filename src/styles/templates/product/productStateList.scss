@@ -1,21 +1,20 @@
 @import 'src/styles/globals';
 
-.productStateList{
-    display:flex;
-    
+.productStateList {
+  display: flex;
 }
 
 .productState {
-    width:50%;
-    padding: 20px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 2px solid grey;
-    color : grey;
+  width: 50%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid grey;
+  color: grey;
 }
 
 .active {
-    color: black;
-    border-bottom: 2px solid black;
+  color: black;
+  border-bottom: 2px solid black;
 }

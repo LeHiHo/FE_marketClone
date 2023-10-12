@@ -1,20 +1,11 @@
 
-import { getProducts } from '@/api/product';
-import Header from '@/components/header';
-import ProductList from '@/components/productList';
-import ProductStateList from '@/templates/product/productStateList/productStateList';
-import { IProduct } from '@/types/interface';
 
+import MypageSale from '@/templates/mypage/mypageSale';
 
-
-export default async function SalesList() {
-  const data: IProduct[] = await getProducts();
+export default function Mypage() {
   return (
     <>
-    <Header goBack={true} border={true} title={'판매내역'}/>
-    <ProductStateList/>
-    <ProductList data={data} isUserProducts={true} />
+      <MypageSale />
     </>
-  )
+  );
 }
-
