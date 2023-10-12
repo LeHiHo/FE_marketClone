@@ -1,25 +1,26 @@
 import Btn from '@/components/btn';
 import '@/styles/templates/login/login.scss';
 import Link from 'next/link';
+import Header from '@/components/header';
 
 export default function LoginPage() {
   return (
     <>
-      <div className="sub_header">로그인</div>
-      <div className="login">
-        <div className="login__text">
+      <Header title={'로그인'} />
+      <div className="loginPage">
+        <div className="loginPage__text">
           <p>이메일(ID)</p>
-          <input />
+          <input type="email" name="useremail" />
           <p>비밀번호(PW)</p>
-          <input />
+          <input className="pw" type="password" name="password" />
         </div>
-        <Btn href="/main" label="로그인" />
-        <div className="login__pw-text">
-          <p>비밀번호를 잊어버리셨나요?</p>
-          <Link className="pw" href="login">
-            비밀번호 찾기
-          </Link>
-        </div>
+        <footer>
+          <Btn type="button" disabled={false} href="/main" label="로그인" />
+          <div className="loginPage__text-pw">
+            <p>비밀번호를 잊어버리셨나요?</p>
+            <Link href="/login">비밀번호 찾기</Link>
+          </div>
+        </footer>
       </div>
     </>
   );
