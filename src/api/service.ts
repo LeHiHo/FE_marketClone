@@ -6,8 +6,7 @@ const client = axios.create({
 
 export const getProducts = async () => {
   const res = await client.get('/products');
-  console.log(res);
-  return res.data.data;
+  return res.data;
 };
 
 export const postSignUp = async (
