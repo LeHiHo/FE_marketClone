@@ -1,4 +1,4 @@
-import { getProducts } from '@/api/product';
+import { getProducts } from '@/api/service';
 import Header from '@/components/header';
 import ProductList from '@/components/productList';
 import { AXIOSResponse, IProduct } from '@/types/interface';

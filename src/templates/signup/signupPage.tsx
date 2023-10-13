@@ -1,23 +1,23 @@
 'use client';
-import '@/styles/templates/signup/signup.scss';
+import { postSignUp } from '@/api/service';
 import Btn from '@/components/btn';
-import React, { useEffect, useState } from 'react';
 import Header from '@/components/header';
+import '@/styles/templates/signup/signup.scss';
+import React, { useEffect, useState } from 'react';
 
 interface FormData {
   email: string;
   password: string;
   confirmPassword: string;
-  name: string;
   phone: string;
   nickname: string;
 }
+
 export default function SignupPage() {
   const [formData, setFormData] = useState<FormData>({
     email: '',
     password: '',
     confirmPassword: '',
-    name: '',
     phone: '',
     nickname: '',
   });
@@ -26,7 +26,6 @@ export default function SignupPage() {
     email: '',
     password: '',
     confirmPassword: '',
-    name: '',
     phone: '',
     nickname: '',
   });
@@ -46,7 +45,6 @@ export default function SignupPage() {
     setIsValid(true);
 
     const newErrors = {
-      name: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -78,15 +76,6 @@ export default function SignupPage() {
       setIsValid(false);
     }
 
-    // 이름 유효성 검사
-    if (formData.name.trim() === '') {
-      newErrors.name = '사용자 이름을 입력하세요.';
-      setIsValid(false);
-    } else if (!/^[a-zA-Z0-9가-힣]+$/.test(formData.name)) {
-      newErrors.name = '특수 문자를 포함할 수 없습니다.';
-      setIsValid(false);
-    }
-
     // 휴대폰 번호 유효성 검사
     if (formData.phone.trim() === '') {
       newErrors.phone = '휴대폰 번호를 입력하세요.';
@@ -114,9 +103,20 @@ export default function SignupPage() {
 
   const handleButtonClick = async () => {
     if (validateForm()) {
-      console.log('formData:', formData);
+      const data = await postSignUp(
+        formData.email,
+        formData.password,
+        formData.phone,
+        formData.nickname,
+      );
+      if (data.status == 200) {
+        alert('회원가입 성공!');
+      } else {
+        console.log(data.status);
+        alert('회원가입 실패');
+      }
     } else {
-      console.log('유효하지 않은 폼 데이터');
+      alert('유효하지 않은 값을 입력하셨습니다.');
     }
   };
   return (
@@ -164,20 +164,6 @@ export default function SignupPage() {
         </div>
 
         <div>
-          <label className="signup-form__label" htmlFor="name">
-            이름
-          </label>
-          <input
-            value={formData.name}
-            onChange={handleInputChange}
-            id="name"
-            className="signup-form__input"
-            type="text"
-          />
-          <p className="signup-form__message">{errors.name}</p>
-        </div>
-
-        <div>
           <label className="signup-form__label" htmlFor="phone">
             휴대폰 번호
           </label>
@@ -204,14 +190,15 @@ export default function SignupPage() {
           />
           <p className="signup-form__message">{errors.nickname}</p>
         </div>
-
-        <Btn
-          type="button"
-          onClick={handleButtonClick}
-          href=""
-          label="가입하기"
-          disabled={!isValid}
-        />
+        <footer>
+          <Btn
+            type="button"
+            onClick={handleButtonClick}
+            href="/main"
+            label="가입하기"
+            disabled={!isValid}
+          />
+        </footer>
       </form>
     </div>
   );
