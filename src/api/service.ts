@@ -9,6 +9,36 @@ export const getProducts = async () => {
   return res.data;
 };
 
+export const postProducts = async (
+  title: string,
+  categoryId: number,
+  content: string,
+  price: number,
+  images?: FileList,
+) => {
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('categoryId', categoryId.toString()); // 숫자를 문자열로 변환
+  formData.append('content', content);
+  formData.append('price', price.toString()); // 숫자를 문자열로 변환
+
+  // 여러 이미지를 처리하는 경우
+  if (images) {
+    for (let i = 0; i < images.length; i++) {
+      formData.append('images', images[i]);
+    }
+  }
+
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  };
+
+  const res = await axios.post('/products', formData, config);
+  return res.data;
+};
+
 export const postSignUp = async (
   email: string,
   password: string,
@@ -24,53 +54,16 @@ export const postSignUp = async (
   return res;
 };
 
-export const getAuth = async (email: string, password: string) => {
-  const res = await client.post('/login', {
-    email: email,
-    password: password,
-  });
+export const postAuth = async (email: string, password: string) => {
+  const res = await client.post(
+    '/login',
+    {
+      email: email,
+      password: password,
+    },
+    {
+      withCredentials: true,
+    },
+  );
   return res;
 };
-
-// const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-
-// export const getProducts = async () => {
-//   const res = await fetch(`${baseURL}/products`);
-//   const data = await res.json();
-//   return data;
-// };
-
-// export const postSignUp = async (
-//   email: string,
-//   password: string,
-//   phone: string,
-//   nickname: string,
-// ) => {
-//   const res = await fetch(`${baseURL}/signup`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       email,
-//       password,
-//       phone,
-//       nickname,
-//     }),
-//   });
-//   return res;
-// };
-
-// export const getAuth = async (email: string, password: string) => {
-//   const res = await fetch(`${baseURL}/login`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       email,
-//       password,
-//     }),
-//   });
-//   return res;
-// };
