@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Header from '@/components/header';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getAuth } from '@/api/service';
+import { postAuth } from '@/api/service';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -16,11 +16,11 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await getAuth(email, password);
+      const response = await postAuth(email, password);
       if (response.data.statusCode === 200) {
         setIsLogin(!isLogin);
         router.push('/main');
-        return response.data;
+        console.log(response);
       } else {
         console.error('Login failed:', response.data);
       }
@@ -33,29 +33,6 @@ export default function LoginPage() {
       }
     }
   };
-  // const handleLogin = async () => {
-  //   try {
-  //     const response = await getAuth(email, password);
-
-  //     // 응답 객체를 JSON으로 파싱합니다.
-  //     const data = await response.json();
-
-  //     if (data.statusCode === 200) {
-  //       setIsLogin(!isLogin);
-  //       router.push('/main');
-  //       return data;
-  //     } else {
-  //       console.error('Login failed:', data);
-  //     }
-  //   } catch (error: any) {
-  //     if (error.response) {
-  //       const errorData = await error.response.json();
-  //       console.error('Login failed:', errorData);
-  //     } else {
-  //       console.error('An unexpected error occurred:', error);
-  //     }
-  //   }
-  // };
 
   return (
     <>
