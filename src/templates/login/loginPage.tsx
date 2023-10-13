@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Header from '@/components/header';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getAuth } from '@/api/service';
+import { postAuth } from '@/api/service';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -16,7 +16,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await getAuth(email, password);
+      const response = await postAuth(email, password);
       if (response.data.statusCode === 200) {
         setIsLogin(!isLogin);
         router.push('/main');
