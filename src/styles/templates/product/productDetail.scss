@@ -1,0 +1,16 @@
+#product-detail {
+  .product-detail {
+    &__icon {
+      cursor: pointer;
+    }
+    &__menu {
+      border: 1px solid black;
+      z-index: 99;
+    }
+
+    &__footer {
+      display: flex;
+      background-color: #000;
+    }
+  }
+}
