@@ -18,7 +18,7 @@ export default function LoginPage() {
     try {
       const response = await getAuth(email, password);
       if (response.data.statusCode === 200) {
-        setIsLogin(true);
+        setIsLogin(!isLogin);
         router.push('/main');
         return response.data;
       } else {
