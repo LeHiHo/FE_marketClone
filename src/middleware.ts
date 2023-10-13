@@ -31,7 +31,7 @@ export async function middleware(request: NextRequest) {
   // 요청에서 'access-token' 쿠키를 검색합니다.
   // console.log(request.cookies.get('refresh-token'));
   // 요청에 'access-token' 쿠키가 있는지 확인합니다.
-  // console.log(request.cookies.has('access-token'));
+  console.log(request.cookies.has('access-token'));
   // 쿠키 삭제
   // request.cookies.delete('access-token')
 

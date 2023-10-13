@@ -20,6 +20,7 @@ export default function LoginPage() {
       if (response.data.statusCode === 200) {
         setIsLogin(true);
         router.push('/main');
+        return response.data;
       } else {
         console.error('Login failed:', response.data);
       }
