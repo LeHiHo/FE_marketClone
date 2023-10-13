@@ -15,7 +15,7 @@ export default function HomePage() {
           <p>간편하게 중고거래 하자</p>
         </div>
         <footer>
-          <Btn type="button" disabled={false} href="/signup" label="시작하기" />
+          <Btn href="/signup" label="시작하기" />
           <div className="homePage__text--login">
             이미 계정이 있나요?
             <Link href="/login">로그인</Link>

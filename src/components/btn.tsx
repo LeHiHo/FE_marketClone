@@ -11,7 +11,7 @@ interface BtnProps {
 }
 
 export default function Btn({
-  type,
+  type = 'button',
   href,
   label,
   disabled,

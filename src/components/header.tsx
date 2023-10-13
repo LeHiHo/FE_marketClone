@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
-
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-
 import '@/styles/components/header.scss';
 
 interface HeaderProps {
