@@ -1,7 +1,7 @@
 // route.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
     const clientIp =
       req.connection.remoteAddress ||

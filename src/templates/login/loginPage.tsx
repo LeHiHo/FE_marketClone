@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Header from '@/components/header';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { getAuth } from '@/api/service';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -15,33 +16,20 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(
-        'api/login',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
-        },
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        // 여기에서 응답 데이터를 확인하고 필요한 처리를 수행합니다.
+      const response = await getAuth(email, password);
+      if (response.data.statusCode === 200) {
         setIsLogin(true);
         router.push('/main');
-        console.log(data);
       } else {
-        // 로그인 실패 시의 처리를 추가합니다.
-        console.error('Login failed:', await response.json());
+        console.error('Login failed:', response.data);
       }
-    } catch (error) {
-      const errorData = await response.json(); // 실패 응답의 본문을 가져옵니다.
-      console.error('Login failed:', errorData);
+    } catch (error: any) {
+      if (error.response) {
+        const errorData = error.response.data;
+        console.error('Login failed:', errorData);
+      } else {
+        console.error('An unexpected error occurred:', error);
+      }
     }
   };
 

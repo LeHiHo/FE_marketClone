@@ -23,3 +23,11 @@ export const postSignUp = async (
   });
   return res;
 };
+
+export const getAuth = async (email: string, password: string) => {
+  const res = await client.post('/login', {
+    email: email,
+    password: password,
+  });
+  return res;
+};
