@@ -8,3 +8,10 @@ export interface IProduct {
   status: string;
   thumbnail: string;
 }
+
+// axios
+export interface AXIOSResponse<T> {
+  statusCode: number;
+  message: string;
+  data: T;
+}

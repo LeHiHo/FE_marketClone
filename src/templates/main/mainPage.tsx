@@ -1,7 +1,7 @@
 import { getProducts } from '@/api/product';
 import Header from '@/components/header';
 import ProductList from '@/components/productList';
-import { IProduct } from '@/types/interface';
+import { AXIOSResponse, IProduct } from '@/types/interface';
 import '@/styles/templates/main/main.scss';
 import AddBtn from './addBtn';
 import { AiOutlineSearch } from 'react-icons/ai';
@@ -10,7 +10,8 @@ import Link from 'next/link';
 import Navbar from '@/components/navbar';
 
 export default async function MainPage() {
-  const data: IProduct[] = await getProducts();
+  const res: AXIOSResponse<IProduct[]> = await getProducts();
+  const data = res.statusCode === 200 ? res.data : [];
 
   return (
     <div id="mainPage">
