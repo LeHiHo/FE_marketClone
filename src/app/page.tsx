@@ -1,6 +1,8 @@
-import HomePage from '@/templates/home/homePage';
+import HomePage from '@/templates/homePage';
 
-export default function Home() {
+
+
+export default async function Home() {
   return (
     <>
       <HomePage />

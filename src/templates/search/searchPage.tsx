@@ -1,8 +1,7 @@
 import Header from '@/components/header';
 
 import { AiOutlineHeart } from 'react-icons/ai';
-
-import '@/styles/app/search.scss';
+import '@/styles/templates/search/search.scss';
 
 export default function SearchPage() {
   return (

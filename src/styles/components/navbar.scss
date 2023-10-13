@@ -1,0 +1,22 @@
+@import '@/styles/mixin';
+
+#navbar {
+  $size: 32px;
+  @include flex($justify: space-around, $align: center);
+  @include font($size: 14px);
+  text-align: center;
+  padding: 1rem;
+  width: 100%;
+  //   position: fixed;
+  //   bottom: 0;
+  background-color: #fff;
+  .home,
+  .my {
+    width: 80px;
+    line-height: 1.4;
+  }
+  .icon {
+    width: $size;
+    height: $size;
+  }
+}
