@@ -4,8 +4,12 @@ import Header from '@/components/header';
 export default function WirtePage() {
   return (
     <>
-      <Header goBack={true} title={'중고거래 글쓰기'} button={'완료'} />
-      <div></div>
+      <Header
+        goBack={true}
+        title={'중고거래 글쓰기'}
+        button={'완료'}
+        color={true}
+      />
       <div className="writePage">
         <div className="writePage__input">
           <input type="file" name="product_img" />

@@ -1,9 +1,10 @@
 'use client';
 import Header from '@/components/header';
 import { useState } from 'react';
-import { CiMenuKebab } from 'react-icons/ci';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 import { AiOutlineHeart } from 'react-icons/ai';
 import Link from 'next/link';
+import '@/styles/templates/product/ProductDetail.scss';
 
 export const ProductDetail = () => {
   const [isMenu, setIsMenu] = useState<boolean>(false);
@@ -19,7 +20,7 @@ export const ProductDetail = () => {
         title=""
         button={
           <>
-            <CiMenuKebab
+            <BsThreeDotsVertical
               size="26"
               background="#ccc"
               className="product-detail__icon"
