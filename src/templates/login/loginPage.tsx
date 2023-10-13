@@ -14,48 +14,48 @@ export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(false);
   const router = useRouter();
 
-  // const handleLogin = async () => {
-  //   try {
-  //     const response = await getAuth(email, password);
-  //     if (response.data.statusCode === 200) {
-  //       setIsLogin(!isLogin);
-  //       router.push('/main');
-  //       return response.data;
-  //     } else {
-  //       console.error('Login failed:', response.data);
-  //     }
-  //   } catch (error: any) {
-  //     if (error.response) {
-  //       const errorData = error.response.data;
-  //       console.error('Login failed:', errorData);
-  //     } else {
-  //       console.error('An unexpected error occurred:', error);
-  //     }
-  //   }
-  // };
   const handleLogin = async () => {
     try {
       const response = await getAuth(email, password);
-
-      // 응답 객체를 JSON으로 파싱합니다.
-      const data = await response.json();
-
-      if (data.statusCode === 200) {
+      if (response.data.statusCode === 200) {
         setIsLogin(!isLogin);
         router.push('/main');
-        return data;
+        return response.data;
       } else {
-        console.error('Login failed:', data);
+        console.error('Login failed:', response.data);
       }
     } catch (error: any) {
       if (error.response) {
-        const errorData = await error.response.json();
+        const errorData = error.response.data;
         console.error('Login failed:', errorData);
       } else {
         console.error('An unexpected error occurred:', error);
       }
     }
   };
+  // const handleLogin = async () => {
+  //   try {
+  //     const response = await getAuth(email, password);
+
+  //     // 응답 객체를 JSON으로 파싱합니다.
+  //     const data = await response.json();
+
+  //     if (data.statusCode === 200) {
+  //       setIsLogin(!isLogin);
+  //       router.push('/main');
+  //       return data;
+  //     } else {
+  //       console.error('Login failed:', data);
+  //     }
+  //   } catch (error: any) {
+  //     if (error.response) {
+  //       const errorData = await error.response.json();
+  //       console.error('Login failed:', errorData);
+  //     } else {
+  //       console.error('An unexpected error occurred:', error);
+  //     }
+  //   }
+  // };
 
   return (
     <>
