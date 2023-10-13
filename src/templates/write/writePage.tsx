@@ -15,17 +15,19 @@ export default function WirtePage() {
 
   const handleWrite = async () => {
     try {
-      const response = await postProducts(
-        title,
-        categoryId,
-        content,
-        price,
-        images,
-      );
-      if (response.statusCode === 200) {
-        console.log('Post success', response);
-      } else {
-        console.error('Post failed:', response);
+      if (images !== null) {
+        const response = await postProducts(
+          title,
+          categoryId,
+          content,
+          price,
+          images,
+        );
+        if (response.statusCode === 200) {
+          console.log('Post success', response);
+        } else {
+          console.error('Post failed:', response);
+        }
       }
     } catch (error: any) {
       if (error.response) {
