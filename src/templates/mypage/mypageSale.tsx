@@ -17,6 +17,7 @@ export default function MypageSale() {
       const res: AXIOSResponse<IProduct[]> = await getProducts();
       if (res.statusCode === 200) {
         setData(res.data);
+        setProductList('all');
       }
     };
 
@@ -27,11 +28,12 @@ export default function MypageSale() {
     if (productList === 'all') {
       return product;
     } else if (productList === 'completed' && product.status === '거래완료') {
-    
       return product;
+    } else {
+      return;
     }
   });
-  console.log(test)
+  console.log(test);
   return (
     <>
       <Header goBack={true} border={true} title={'판매내역'} />
