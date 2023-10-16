@@ -1,17 +1,59 @@
 'use client';
+import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/ProductDetail.scss';
 import Link from 'next/Link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 
 export const ProductDetail = () => {
-  const [isMenu, setIsMenu] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const menuRef = useRef<HTMLUListElement | null>(null);
 
-  const handleOnclick = () => {
-    setIsMenu(!isMenu);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  const settings = {
+    dots: true, // 페이지 네비게이션(점) 표시
+    infinite: true, // 무한 루프
+    slidesToShow: 1, // 한 번에 보여질 슬라이드 개수
+    slidesToScroll: 1, // 슬라이딩 시 한 번에 넘어갈 슬라이드 개수
+    swipeToSlide: true,
+    autoplay: false, // 자동 재생
+    arrows: false,
+  };
+
+  const slides = [
+    <div className="product-detail__image" key={1}>
+      <img src="/svg/cat.jpg" />
+    </div>,
+    <div className="product-detail__image" key={2}>
+      <img src="/svg/default_profile.png" />
+    </div>,
+    <div className="product-detail__image" key={3}>
+      <img src="/svg/cat.jpg" />
+    </div>,
+  ];
 
   return (
     <div id="product-detail">
@@ -26,30 +68,39 @@ export const ProductDetail = () => {
                 size="30"
                 background="#ccc"
                 className="product-detail__icon"
-                onClick={handleOnclick}
+                onClick={toggleMenu}
               />
-              {isMenu && <div className="product-detail__menu">미니메뉴</div>}
+              {isMenuOpen && (
+                <ul ref={menuRef} className="product-detail__menu">
+                  <li>게시글 수정</li>
+                  <li>삭제</li>
+                </ul>
+              )}
             </>
           }
         />
 
-        <div className="product-detail__image-wrapper">
-          <img src="" alt="img" className="product-detail__image" />
-        </div>
+        <Slider className="product-detail__image-wrapper" {...settings}>
+          {slides}
+        </Slider>
 
         <div className="product-detail__main">
           <div className="product-detail__profile">
-            <img
-              src="@/styles/templates/product/cat.jpg"
-              alt="profile"
-              className="profile__image"
-            />
+            <Link href={'/mypage'}>
+              <img
+                src="/svg/default_profile.png"
+                alt="profile"
+                className="profile__image"
+              />
+            </Link>
+
             <p className="profile__name">닉네임</p>
           </div>
 
           <select>
             <option>판매중</option>
             <option>예약중</option>
+            <option>거래완료</option>
           </select>
 
           <div className="product-detail__content-wrapper">
@@ -71,6 +122,38 @@ export const ProductDetail = () => {
               ✔️ 기스 없음 <br />
               ✔️ 풀박 <br />ㄴ 필요하시면 멀티포트 같이 드리겠습니다.
             </p>
+          </div>
+
+          <div className="product-detail__more-product">
+            <div>
+              <div className="more-product__title">
+                <p>닉네임님의 판매상품</p>
+                <Btn type="button" href="products" label="모두보기" />
+              </div>
+
+              <div className="more-product__grid">
+                <div className="more-product">
+                  <img src="/svg/cat.jpg" alt="cat" />
+                  <p>고양이는 귀엽다 고양이는 귀엽다 고양이는 귀엽다</p>
+                  <p>가격</p>
+                </div>
+                <div className="more-product">
+                  <img src="/svg/cat.jpg" alt="cat" />
+                  <p>고양이는 귀엽다</p>
+                  <p>가격</p>
+                </div>
+                <div className="more-product">
+                  <img src="/svg/cat.jpg" alt="cat" />
+                  <p>고양이는 귀엽다 고양이는 귀엽다 고양이는 귀엽다</p>
+                  <p>가격</p>
+                </div>
+                <div className="more-product">
+                  <img src="/svg/cat.jpg" alt="cat" />
+                  <p>고양이는 귀엽다</p>
+                  <p>가격</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
