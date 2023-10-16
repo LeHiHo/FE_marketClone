@@ -111,13 +111,27 @@ export default function SignupPage() {
         formData.phone,
         formData.nickname,
       );
-      console.log(res);
-      if (res.data.statusCode === 200) {
+      const statusCode = res.data.statusCode;
+      console.log(res.data);
+      if (res.status === 200) {
         alert('회원가입 성공!');
         router.push('/login');
+
+        // } else if (res.status === 400) {
+        // console.log('400 들어옴');
+        // if (statusCode === 401) {
+        //   console.log(statusCode);
+        //   alert('이미 가입된 이메일이 있습니다.');
+        // } else if (statusCode === 402) {
+        //   console.log(statusCode);
+        //   alert('이미 가입된 휴대폰 번호가 있습니다.');
+        // } else if (statusCode === 403) {
+        //   console.log(statusCode);
+        //   alert('이미 가입된 닉네임이 있습니다.');
       } else {
-        console.log(res.data.status);
+        console.log(res);
         alert('회원가입 실패');
+        // }
       }
     } else {
       alert('유효하지 않은 값을 입력하셨습니다.');

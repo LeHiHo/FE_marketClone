@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  withCredentials: true,
 });
 
 export const getProducts = async () => {
@@ -55,15 +56,9 @@ export const postSignUp = async (
 };
 
 export const postAuth = async (email: string, password: string) => {
-  const res = await client.post(
-    '/login',
-    {
-      email: email,
-      password: password,
-    },
-    {
-      withCredentials: true,
-    },
-  );
+  const res = await client.post('/login', {
+    email: email,
+    password: password,
+  });
   return res;
 };
