@@ -1,3 +1,5 @@
+'use client';
+
 import { getProducts } from '@/api/service';
 import Header from '@/components/header';
 import ProductList from '@/components/productList';
