@@ -1,5 +1,6 @@
 'use client';
-import { getMyInfo, getProducts } from '@/api/service';
+
+import { getProducts } from '@/api/service';
 import Header from '@/components/header';
 import ProductList from '@/components/productList';
 import { AXIOSResponse, IProduct } from '@/types/interface';
@@ -9,17 +10,25 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import Link from 'next/link';
 import Navbar from '@/components/navbar';
+import { useEffect, useState } from 'react';
 
-export default async function MainPage() {
-  const res: AXIOSResponse<IProduct[]> = await getProducts();
-  const data = res.statusCode === 200 ? res.data : [];
-  const test = async () => {
-    const res = await getMyInfo();
-    console.log(res);
-  };
+export default function MainPage() {
+  const [data, setData] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res: AXIOSResponse<IProduct[]> = await getProducts();
+      if (res.statusCode === 200) {
+        setData(res.data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div id="mainPage">
-      <header onClick={test}>
+      <header>
         <Header
           title={'개발자님'}
           border={true}
