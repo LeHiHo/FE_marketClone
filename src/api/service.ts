@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const client = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   withCredentials: true,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
 export const getProducts = async () => {
@@ -36,7 +36,7 @@ export const postProducts = async (
     },
   };
 
-  const res = await axios.post('/products', formData, config);
+  const res = await client.post('/products', formData, config);
   return res.data;
 };
 
@@ -60,5 +60,21 @@ export const postAuth = async (email: string, password: string) => {
     email: email,
     password: password,
   });
+  return res;
+};
+
+export const updateProductState = async (
+  productStateId: number,
+  changeStateCode: number,
+) => {
+  const res = await client.put(`/products/${productStateId}/status`, {
+    status: changeStateCode,
+  });
+  return res;
+};
+
+export const getMyInfo = async () => {
+  const res = await client.get('/myInfo');
+  console.log(res);
   return res;
 };
