@@ -1,4 +1,5 @@
-import { getProducts } from '@/api/service';
+'use client';
+import { getMyInfo, getProducts } from '@/api/service';
 import Header from '@/components/header';
 import ProductList from '@/components/productList';
 import { AXIOSResponse, IProduct } from '@/types/interface';
@@ -12,10 +13,13 @@ import Navbar from '@/components/navbar';
 export default async function MainPage() {
   const res: AXIOSResponse<IProduct[]> = await getProducts();
   const data = res.statusCode === 200 ? res.data : [];
-
+  const test = async () => {
+    const res = await getMyInfo();
+    console.log(res);
+  };
   return (
     <div id="mainPage">
-      <header>
+      <header onClick={test}>
         <Header
           title={'개발자님'}
           border={true}
