@@ -36,7 +36,7 @@ export const postProducts = async (
     },
   };
 
-  const res = await axios.post('/products', formData, config);
+  const res = await client.post('/products', formData, config);
   return res.data;
 };
 
