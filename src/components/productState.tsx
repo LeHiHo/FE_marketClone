@@ -1,7 +1,6 @@
 import { updateProductState } from '../api/service';
 
-export default function ProductState({ product }) {
-  console.log(product.id)
+export default function ProductState({ product } : any) {
   return (
     <>
       <div className="product__state">

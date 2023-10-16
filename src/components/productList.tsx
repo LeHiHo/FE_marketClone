@@ -1,7 +1,8 @@
 import { IProduct } from '@/types/interface';
 import ProductItem from './productItem';
 
-export default async function ProductList({ data }: { data: IProduct[] }) {
+export default function ProductList({ data }: { data: IProduct[] }) {
+  console.log('hi');
   return (
     <ul className="products">
       {data?.map((product: IProduct) => (

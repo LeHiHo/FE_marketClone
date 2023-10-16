@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  withCredentials: true,
+
 });
 
 export const getProducts = async () => {
@@ -61,24 +63,18 @@ export const postAuth = async (email: string, password: string) => {
       email: email,
       password: password,
     },
-    {
-      withCredentials: true,
-    },
   );
   return res;
 };
 
 export const updateProductState = async (
   productStateId: number,
-  changeStateCode,
+  changeStateCode: number,
 ) => {
   const res = await client.put(
     `/products/${productStateId}/status`,
     {
       status: changeStateCode,
-    },
-    {
-      withCredentials: true,
     },
   );
   return res;

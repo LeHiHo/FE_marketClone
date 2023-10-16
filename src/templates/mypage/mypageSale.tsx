@@ -10,7 +10,7 @@ import { AXIOSResponse, IProduct } from '@/types/interface';
 
 export default function MypageSale() {
   const [data, setData] = useState<IProduct[]>([]);
-  const [productList, setProductList] = useState('all');
+  const [productList, setProductList] = useState('completed');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,14 +24,14 @@ export default function MypageSale() {
   }, []);
 
   const test = data.filter((product) => {
-    console.log('test');
     if (productList === 'all') {
       return product;
-    } else if (productList === 'completed' && product.status === '판매완료') {
+    } else if (productList === 'completed' && product.status === '거래완료') {
+    
       return product;
     }
   });
-  // console.log(data)
+  console.log(test)
   return (
     <>
       <Header goBack={true} border={true} title={'판매내역'} />
