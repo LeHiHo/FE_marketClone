@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const client = axios.create({
+  withCredentials: true,
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
@@ -35,7 +36,7 @@ export const postProducts = async (
     },
   };
 
-  const res = await axios.post('/products', formData, config);
+  const res = await client.post('/products', formData, config);
   return res.data;
 };
 
