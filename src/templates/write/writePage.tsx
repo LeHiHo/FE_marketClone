@@ -5,6 +5,7 @@ import Header from '@/components/header';
 import { useState } from 'react';
 import { postProducts } from '@/api/service';
 import { useRouter } from 'next/navigation';
+import CategoryModal from '@/templates/write/categoryModal';
 import Btn from '@/components/btn';
 
 export default function WirtePage() {
@@ -13,8 +14,17 @@ export default function WirtePage() {
   const [content, setContent] = useState('');
   const [price, setPrice] = useState(0);
   const [images, setImages] = useState<FileList | null>(null);
-
   const router = useRouter();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const handleWrite = async () => {
     try {
@@ -45,6 +55,10 @@ export default function WirtePage() {
 
   return (
     <>
+      <div>
+        <button onClick={openModal}>Open Modal</button>
+        <CategoryModal isOpen={isOpen} onClose={closeModal} />
+      </div>
       <Header
         goBack={true}
         title={'중고거래 글쓰기'}
@@ -73,6 +87,7 @@ export default function WirtePage() {
             name="product_category"
             value={categoryId}
             onChange={(e) => setCategoryId(Number(e.target.value))}
+            // onClick={}
             placeholder="카테고리 입력해주세요"
           />
           <p>가격</p>
