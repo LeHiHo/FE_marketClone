@@ -7,6 +7,7 @@
       padding: 30px 20px 0;
       div {
         @include flex($justify: center, $align: center);
+        white-space: nowrap;
         height: 68px;
         cursor: pointer;
       }
