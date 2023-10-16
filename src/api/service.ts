@@ -5,11 +5,6 @@ const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
-export const getProducts = async () => {
-  const res = await client.get('/products');
-  return res.data;
-};
-
 export const postProducts = async (
   title: string,
   categoryId: number,
@@ -42,6 +37,15 @@ export const postProducts = async (
 
 export const getProductCategory = async () => {
   const res = await client.get(`/products/categories`);
+  return res.data;
+};
+
+export const getProducts = async (keyword?: string) => {
+  const res = await client.get('/products', {
+    params: {
+      searchWord: keyword,
+    },
+  });
   return res.data;
 };
 
