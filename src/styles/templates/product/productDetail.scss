@@ -1,14 +1,116 @@
+@import '@/styles/globals';
+
 #product-detail {
   .product-detail {
+    height: 555px;
+    overflow-y: scroll;
+    &__image {
+      width: 320px;
+      height: 320px;
+      position: absolute;
+      &-wrapper {
+        position: relative;
+        top: -50px;
+        width: 320px;
+        height: 320px;
+        background-color: rgba($color: #000000, $alpha: 0.2);
+        border-bottom: 1px solid black;
+        box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+      }
+    }
+    &__main {
+      width: 100%;
+      position: relative;
+      top: -50px;
+      > select {
+        margin: 1rem;
+        padding: 0.2rem 0.6rem;
+      }
+    }
+    &__profile {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+      padding: 0.8rem;
+      border-bottom: 1px solid #a5a5a5;
+      > img {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        border: 2px solid black;
+        margin: 0 0.8rem;
+      }
+    }
     &__icon {
       cursor: pointer;
     }
     &__menu {
+      position: absolute;
       z-index: 99;
     }
 
-    &__footer {
+    &__content-wrapper {
+      width: 280px;
+      margin: 0 auto;
+      > div {
+        display: flex;
+      }
+    }
+
+    &__title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    &__description {
       display: flex;
+      color: #a5a5a5;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      > p:first-of-type {
+        margin-right: 0.5rem;
+        text-decoration: underline;
+      }
+    }
+    &__content {
+      white-space: pre-line;
+      line-height: 1.2rem;
+    }
+
+    &__footer {
+      width: 100%;
+      height: 4rem;
+      padding: 0 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #a5a5a5;
+      z-index: 98;
+      background-color: #fff;
+      &--wrapper {
+        display: flex;
+        margin-right: 0.5rem;
+        align-items: center;
+        > span {
+          margin: 0 0.5rem;
+        }
+      }
+    }
+
+    &__chat-button {
+      background-color: $main-color;
+      border: none;
+      color: white;
+      padding: 0.8rem;
+      text-align: center;
+      text-decoration: none;
+      font-size: 0.8;
+      cursor: pointer;
+      border-radius: 0.25rem;
+      margin-left: auto;
+      &:hover {
+        background-color: $sub-color;
+      }
     }
   }
 }
