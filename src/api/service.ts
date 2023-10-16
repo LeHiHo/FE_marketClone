@@ -3,8 +3,6 @@ import axios from 'axios';
 const client = axios.create({
   withCredentials: true,
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  withCredentials: true,
-
 });
 
 export const getProducts = async () => {
@@ -58,13 +56,10 @@ export const postSignUp = async (
 };
 
 export const postAuth = async (email: string, password: string) => {
-  const res = await client.post(
-    '/login',
-    {
-      email: email,
-      password: password,
-    },
-  );
+  const res = await client.post('/login', {
+    email: email,
+    password: password,
+  });
   return res;
 };
 
@@ -72,12 +67,9 @@ export const updateProductState = async (
   productStateId: number,
   changeStateCode: number,
 ) => {
-  const res = await client.put(
-    `/products/${productStateId}/status`,
-    {
-      status: changeStateCode,
-    },
-  );
+  const res = await client.put(`/products/${productStateId}/status`, {
+    status: changeStateCode,
+  });
   return res;
 };
 
