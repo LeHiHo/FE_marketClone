@@ -40,6 +40,11 @@ export const postProducts = async (
   return res.data;
 };
 
+export const getProductCategory = async () => {
+  const res = await client.get(`/products/categories`);
+  return res.data;
+};
+
 export const postSignUp = async (
   email: string,
   password: string,
