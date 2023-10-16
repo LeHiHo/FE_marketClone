@@ -2,7 +2,7 @@
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
-import Link from 'next/Link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -13,6 +13,7 @@ import 'slick-carousel/slick/slick.css';
 export const ProductDetail = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
+  const router = useRouter();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -72,7 +73,9 @@ export const ProductDetail = () => {
               />
               {isMenuOpen && (
                 <ul ref={menuRef} className="product-detail__menu">
-                  <li>게시글 수정</li>
+                  <li onClick={() => router.push('/product/edit')}>
+                    게시글 수정
+                  </li>
                   <li>삭제</li>
                 </ul>
               )}
@@ -86,13 +89,13 @@ export const ProductDetail = () => {
 
         <div className="product-detail__main">
           <div className="product-detail__profile">
-            <Link href={'/mypage'}>
+            <div onClick={() => router.push('/mypage')}>
               <img
                 src="/svg/default_profile.png"
                 alt="profile"
                 className="profile__image"
               />
-            </Link>
+            </div>
 
             <p className="profile__name">닉네임</p>
           </div>
@@ -165,9 +168,9 @@ export const ProductDetail = () => {
           <p>125만원</p>
         </div>
 
-        <Link href={'/chatList'}>
+        <div onClick={() => router.push('/chatList')}>
           <button className="product-detail__chat-button">관련 채팅보기</button>
-        </Link>
+        </div>
       </footer>
     </div>
   );
