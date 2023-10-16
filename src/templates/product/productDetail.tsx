@@ -2,7 +2,7 @@
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
-import Link from 'next/Link';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
