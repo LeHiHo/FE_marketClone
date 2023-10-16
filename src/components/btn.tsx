@@ -6,7 +6,7 @@ interface BtnProps {
   type: 'button' | 'submit' | 'reset';
   href?: string; // href는 선택적인 프로퍼티로 변경
   label: string;
-  disabled: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 }
 

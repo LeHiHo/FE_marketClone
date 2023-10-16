@@ -1,5 +1,5 @@
 @import '@/styles/globals';
-.header__btn__wrap {
+.header__btn__wrap--color {
   color: $main-color;
   font-weight: 700;
 }
@@ -11,6 +11,13 @@
   height: 100%;
   width: 100%;
 
+  &__temporaryStorage {
+    cursor: pointer;
+
+    &:hover {
+      color: black;
+    }
+  }
   &__input {
     margin-bottom: 10rem;
 
@@ -33,7 +40,7 @@
       margin-left: 0.5rem;
     }
   }
-  .writePage__input-detail {
+  .writePage__input-content {
     height: 7rem;
     resize: none;
     outline: none;

@@ -3,6 +3,7 @@ import { postSignUp } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/signup/signup.scss';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 interface FormData {
@@ -14,6 +15,7 @@ interface FormData {
 }
 
 export default function SignupPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     email: '',
     password: '',
@@ -103,16 +105,18 @@ export default function SignupPage() {
 
   const handleButtonClick = async () => {
     if (validateForm()) {
-      const data = await postSignUp(
+      const res = await postSignUp(
         formData.email,
         formData.password,
         formData.phone,
         formData.nickname,
       );
-      if (data.status == 200) {
+      console.log(res);
+      if (res.data.statusCode === 200) {
         alert('회원가입 성공!');
+        router.push('/login');
       } else {
-        console.log(data.status);
+        console.log(res.data.status);
         alert('회원가입 실패');
       }
     } else {
@@ -194,7 +198,6 @@ export default function SignupPage() {
           <Btn
             type="button"
             onClick={handleButtonClick}
-            href="/main"
             label="가입하기"
             disabled={!isValid}
           />
