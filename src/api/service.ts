@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const client = axios.create({
+  withCredentials: true,
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   withCredentials: true,
 
@@ -37,7 +38,7 @@ export const postProducts = async (
     },
   };
 
-  const res = await axios.post('/products', formData, config);
+  const res = await client.post('/products', formData, config);
   return res.data;
 };
 
@@ -77,5 +78,11 @@ export const updateProductState = async (
       status: changeStateCode,
     },
   );
+  return res;
+};
+
+export const getMyInfo = async () => {
+  const res = await client.get('/myInfo');
+  console.log(res);
   return res;
 };

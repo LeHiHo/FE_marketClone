@@ -15,11 +15,6 @@
       font-weight: bold;
       font-size: 18px;
     }
-    &__border {
-      &--bottom {
-        border: 1px solid #a5a5a5;
-      }
-    }
     &__btn {
       width: 30px;
       height: 30px;
@@ -40,4 +35,7 @@
       }
     }
   }
+}
+.header__border--bottom {
+  border-bottom: 1px solid #a5a5a5;
 }
