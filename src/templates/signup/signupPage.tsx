@@ -114,7 +114,7 @@ export default function SignupPage() {
       console.log(res);
       if (res.data.statusCode === 200) {
         alert('회원가입 성공!');
-        router.push('/');
+        router.push('/login');
       } else {
         console.log(res.data.status);
         alert('회원가입 실패');
