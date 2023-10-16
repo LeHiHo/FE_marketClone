@@ -1,3 +1,4 @@
+'use client';
 import { getProducts } from '@/api/service';
 import Header from '@/components/header';
 import ProductList from '@/components/productList';
@@ -8,11 +9,9 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import Link from 'next/link';
 import Navbar from '@/components/navbar';
-
 export default async function MainPage() {
   const res: AXIOSResponse<IProduct[]> = await getProducts();
   const data = res.statusCode === 200 ? res.data : [];
-  
   return (
     <div id="mainPage">
       <header>

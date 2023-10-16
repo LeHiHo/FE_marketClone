@@ -67,3 +67,19 @@ export const postAuth = async (email: string, password: string) => {
   );
   return res;
 };
+
+export const updateProductState = async (
+  productStateId: number,
+  changeStateCode,
+) => {
+  const res = await client.put(
+    `/products/${productStateId}/status`,
+    {
+      status: changeStateCode,
+    },
+    {
+      withCredentials: true,
+    },
+  );
+  return res;
+};
