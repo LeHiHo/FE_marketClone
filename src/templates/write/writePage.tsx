@@ -4,6 +4,7 @@ import '@/styles/templates/write/write.scss';
 import Header from '@/components/header';
 import { useState } from 'react';
 import { postProducts } from '@/api/service';
+import { useRouter } from 'next/navigation';
 import Btn from '@/components/btn';
 
 export default function WirtePage() {
@@ -12,6 +13,8 @@ export default function WirtePage() {
   const [content, setContent] = useState('');
   const [price, setPrice] = useState(0);
   const [images, setImages] = useState<FileList | null>(null);
+
+  const router = useRouter();
 
   const handleWrite = async () => {
     try {
@@ -24,6 +27,7 @@ export default function WirtePage() {
           images,
         );
         if (response.statusCode === 200) {
+          router.push('/main');
           console.log('Post success', response);
         } else {
           console.error('Post failed:', response);

@@ -1,6 +1,6 @@
 import { updateProductState } from '../api/service';
 
-export default function ProductState({ product } : any) {
+export default function ProductState({ product }: any) {
   return (
     <>
       <div className="product__state">
