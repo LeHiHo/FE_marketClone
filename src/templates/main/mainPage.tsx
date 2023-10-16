@@ -10,10 +10,21 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import Link from 'next/link';
 import Navbar from '@/components/navbar';
+import { useEffect, useState } from 'react';
 
-export default async function MainPage() {
-  const res: AXIOSResponse<IProduct[]> = await getProducts();
-  const data = res.statusCode === 200 ? res.data : [];
+export default function MainPage() {
+  const [data, setData] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res: AXIOSResponse<IProduct[]> = await getProducts();
+      if (res.statusCode === 200) {
+        setData(res.data);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div id="mainPage">

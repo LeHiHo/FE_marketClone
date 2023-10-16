@@ -68,3 +68,9 @@ export const postAuth = async (email: string, password: string) => {
   );
   return res;
 };
+
+export const getMyInfo = async () => {
+  const res = await client.get('/myInfo');
+  console.log(res);
+  return res;
+};
