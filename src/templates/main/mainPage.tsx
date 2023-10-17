@@ -11,9 +11,12 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import Link from 'next/link';
 import Navbar from '@/components/navbar';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function MainPage() {
   const [data, setData] = useState<IProduct[]>([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,12 +37,12 @@ export default function MainPage() {
           border={true}
           button={
             <>
-              <Link href="search">
+              <div onClick={() => router.push('/search')}>
                 <AiOutlineSearch className="header__btn" />
-              </Link>
-              <Link href="category">
+              </div>
+              <div onClick={() => router.push('/category')}>
                 <RxHamburgerMenu className="header__btn" />
-              </Link>
+              </div>
             </>
           }
         />
