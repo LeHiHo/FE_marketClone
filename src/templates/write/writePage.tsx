@@ -10,20 +10,15 @@ import Btn from '@/components/btn';
 
 export default function WirtePage() {
   const [title, setTitle] = useState('');
-  const [categoryId, setCategoryId] = useState(0);
+  const [categoryId, setCategoryId] = useState<string>('');
   const [content, setContent] = useState('');
   const [price, setPrice] = useState(0);
   const [images, setImages] = useState<FileList | null>(null);
   const router = useRouter();
-
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
   };
 
   const handleWrite = async () => {
@@ -53,12 +48,12 @@ export default function WirtePage() {
     }
   };
 
+  const handleCategorySelect = (selectedCategory: string) => {
+    setCategoryId(selectedCategory); // 선택된 카테고리로 상태 업데이트
+  };
+
   return (
     <>
-      <div>
-        <button onClick={openModal}>Open Modal</button>
-        <CategoryModal isOpen={isOpen} onClose={closeModal} />
-      </div>
       <Header
         goBack={true}
         title={'중고거래 글쓰기'}
@@ -81,15 +76,21 @@ export default function WirtePage() {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="제목 입력해주세요"
           />
-          <p>카테고리</p>
-          <input
-            type="number"
-            name="product_category"
-            value={categoryId}
-            onChange={(e) => setCategoryId(Number(e.target.value))}
-            // onClick={}
-            placeholder="카테고리 입력해주세요"
-          />
+          <div>
+            <p>카테고리</p>
+            <input
+              type="text"
+              readOnly
+              value={categoryId}
+              onClick={toggleModal}
+              placeholder="카테고리를 선택해주세요"
+            />
+            <CategoryModal
+              isOpen={isOpen}
+              onClose={toggleModal}
+              onSelectCategory={handleCategorySelect}
+            />
+          </div>
           <p>가격</p>
           <input
             type="number"
@@ -98,6 +99,7 @@ export default function WirtePage() {
             onChange={(e) => setPrice(Number(e.target.value))}
             placeholder="가격을 입력해주세요"
           />
+
           <p>자세한 설명</p>
           <textarea
             name="product_content"
