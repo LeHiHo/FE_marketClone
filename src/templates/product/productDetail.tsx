@@ -65,7 +65,6 @@ export const ProductDetail = () => {
       const res: AXIOSResponse<Product> = await getProductDetail(productId);
       try {
         if (res.statusCode === 200) {
-          console.log(res.data);
           setProduct(res.data);
           res.data.images.map((image) => {
             console.log(image);
