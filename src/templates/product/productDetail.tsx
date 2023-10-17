@@ -1,8 +1,10 @@
 'use client';
+import { getProductDetail } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
-import { useRouter } from 'next/navigation';
+import { AXIOSResponse } from '@/types/interface';
+import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -10,10 +12,34 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
+type Seller = {
+  sellerId: number;
+  profileImage: string;
+  nickname: string;
+};
+
+type Product = {
+  id: number;
+  title: string;
+  price: number;
+  categoryId: number;
+  content: string;
+  images: string[];
+  status: string;
+  likes: number;
+  seller: Seller;
+};
+
 export const ProductDetail = () => {
+  const router = useRouter();
+  const id = usePathname().split('/')[2];
+  const productId: number | any =
+    typeof id === 'string' ? parseInt(id, 10) : undefined;
+
+  const [product, setProduct] = useState<Product | null>(null);
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
-  const router = useRouter();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -34,6 +60,29 @@ export const ProductDetail = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res: AXIOSResponse<Product> = await getProductDetail(productId);
+      try {
+        if (res.statusCode === 200) {
+          console.log(res.data);
+          setProduct(res.data);
+          res.data.images.map((image) => {
+            console.log(image);
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      setProduct(null);
+    };
+  }, [id]);
+
   const settings = {
     dots: true, // 페이지 네비게이션(점) 표시
     infinite: true, // 무한 루프
@@ -43,18 +92,6 @@ export const ProductDetail = () => {
     autoplay: false, // 자동 재생
     arrows: false,
   };
-
-  const slides = [
-    <div className="product-detail__image" key={1}>
-      <img src="/svg/cat.jpg" />
-    </div>,
-    <div className="product-detail__image" key={2}>
-      <img src="/svg/default_profile.png" />
-    </div>,
-    <div className="product-detail__image" key={3}>
-      <img src="/svg/cat.jpg" />
-    </div>,
-  ];
 
   return (
     <div id="product-detail">
@@ -84,20 +121,26 @@ export const ProductDetail = () => {
         />
 
         <Slider className="product-detail__image-wrapper" {...settings}>
-          {slides}
+          {product?.images.map((image) => {
+            return (
+              <div className="product-detail__image" key={image}>
+                <img src={image} alt="" />
+              </div>
+            );
+          })}
         </Slider>
 
         <div className="product-detail__main">
           <div className="product-detail__profile">
             <div onClick={() => router.push('/mypage')}>
               <img
-                src="/svg/default_profile.png"
+                src={product?.seller.profileImage}
                 alt="profile"
                 className="profile__image"
               />
             </div>
 
-            <p className="profile__name">닉네임</p>
+            <p className="profile__name">{product?.seller.nickname}</p>
           </div>
 
           <select>
@@ -107,24 +150,13 @@ export const ProductDetail = () => {
           </select>
 
           <div className="product-detail__content-wrapper">
-            <p className="product-detail__title">
-              2022 맥북에어 M2 256GB 판매합니다!
-            </p>
+            <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
-              <p className="product-detail__category">디지털기기</p>
+              <p className="product-detail__category">{product?.categoryId}</p>
               <p className="product-detail__time">⋅ 1일 전</p>
             </div>
 
-            <p className="product-detail__content">
-              2022 맥북에어 M2 256GB 판매합니다! <br />
-              사진에 관련된 업무를 하다보니 아이폰이랑 연동이 잘 되어서 1월에
-              구매하였는데 조심한다고 거의 들고 나가질 않았습니다! 퇴사하게되어
-              판매합니다! <br /> <br />
-              금액대가 있는 제품이라 마곡역에서 직거래했으면 좋겠습니다! <br />
-              <br />
-              ✔️ 기스 없음 <br />
-              ✔️ 풀박 <br />ㄴ 필요하시면 멀티포트 같이 드리겠습니다.
-            </p>
+            <p className="product-detail__content">{product?.content}</p>
           </div>
 
           <div className="product-detail__more-product">

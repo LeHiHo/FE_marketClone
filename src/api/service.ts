@@ -10,6 +10,15 @@ export const getProducts = async () => {
   return res.data;
 };
 
+export const getProductDetail = async (id: number) => {
+  const res = await client.get(`/products/${id}`, {
+    params: {
+      productId: id,
+    },
+  });
+  return res.data;
+};
+
 export const postProducts = async (
   title: string,
   categoryId: number,
