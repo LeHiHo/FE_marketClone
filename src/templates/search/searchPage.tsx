@@ -1,50 +1,41 @@
-import Header from '@/components/header';
+'use client';
 
-import { AiOutlineHeart } from 'react-icons/ai';
+import { getProducts } from '@/api/service';
+import Header from '@/components/header';
+import ProductList from '@/components/productList';
 import '@/styles/templates/search/search.scss';
+import { AXIOSResponse, IProduct } from '@/types/interface';
+import { useEffect, useState } from 'react';
 
 export default function SearchPage() {
+  const [keyword, setKeyword] = useState<string>('');
+  const [data, setData] = useState<IProduct[]>([]);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+  };
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const res: AXIOSResponse<IProduct[]> = await getProducts(keyword);
+    if (res.statusCode === 200) {
+      setData(res.data);
+    }
+  };
   return (
     <div id="searchPage">
       <Header goBack={true} border={true}>
-        <label className="searchBar__wrap">
-          <input
-            className="searchBar"
-            type="text"
-            placeholder="우리동네에서 검색"
-          />
-        </label>
+        <form onSubmit={onSubmit}>
+          <label className="searchBar__wrap">
+            <input
+              className="searchBar"
+              type="text"
+              placeholder="검색어를 입력해주세요."
+              onChange={onChange}
+              value={keyword}
+            />
+          </label>
+        </form>
       </Header>
-      <div className="search__container">
-        <div className="search__list">
-          <div className="search__list__img">
-            <img src="https://via.placeholder.com/119x119" alt="임시이미지" />
-          </div>
-          <div className="search__list__content">
-            <div className="title">제목</div>
-            <div className="place">장소</div>
-            <div className="price">가격</div>
-            <div className="like">
-              <AiOutlineHeart className="heart heart--off" />
-              <span className="likeCounter">n</span>
-            </div>
-          </div>
-        </div>
-        <div className="search__list">
-          <div className="search__list__img">
-            <img src="https://via.placeholder.com/119x119" alt="임시이미지" />
-          </div>
-          <div className="search__list__content">
-            <div className="title">제목</div>
-            <div className="place">장소</div>
-            <div className="price">가격</div>
-            <div className="like">
-              <AiOutlineHeart className="heart heart--off" />
-              <span className="likeCounter">n</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ProductList data={data} />
     </div>
   );
 }
