@@ -3,7 +3,8 @@
 import { getProductCategory, getProducts } from '@/api/service';
 import Header from '@/components/header';
 import '@/styles/templates/category/category.scss';
-import { AXIOSResponse, IProduct } from '@/types/interface';
+import { AXIOSResponse } from '@/types/interface';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 type CategoryType = {
@@ -13,11 +14,11 @@ type CategoryType = {
 
 export default function CategoryPage() {
   const [category, setCategory] = useState<CategoryType[]>([]);
+  const router = useRouter();
   useEffect(() => {
     const fetchData = async () => {
       const res: AXIOSResponse<CategoryType[]> = await getProductCategory();
       if (res.statusCode === 200) {
-        console.log(res.data);
         setCategory(res.data);
       }
     };
@@ -25,12 +26,8 @@ export default function CategoryPage() {
     fetchData();
   }, []);
 
-  const onClick = async (categoryId: number) => {
-    const res: AXIOSResponse<IProduct[]> = await getProducts(
-      undefined,
-      categoryId,
-    );
-    console.log(res);
+  const onClick = async (item: CategoryType) => {
+    router.push(`/main?category=${item.name}&categoryId=${item.id}`);
   };
   return (
     <div id="categoryPage">
@@ -39,7 +36,7 @@ export default function CategoryPage() {
         {category.map((item: CategoryType) => (
           <div
             onClick={() => {
-              onClick(item.id);
+              onClick(item);
             }}>
             {item.name}
           </div>
