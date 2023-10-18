@@ -33,6 +33,7 @@ type Product = {
 export const ProductDetail = () => {
   const router = useRouter();
   const id = usePathname().split('/')[2];
+
   const productId: number | any =
     typeof id === 'string' ? parseInt(id, 10) : undefined;
 
@@ -78,7 +79,6 @@ export const ProductDetail = () => {
       try {
         if (res2.statusCode === 200) {
           setMyProduct(res2.data);
-          console.log(res2.data);
         }
       } catch (error) {
         console.error(error);
