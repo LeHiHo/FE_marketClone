@@ -87,3 +87,9 @@ export const getMyInfo = async () => {
   console.log(res);
   return res;
 };
+
+// 내 판매 상품 리스트 조회
+export const getMyProduct = async () => {
+  const res = await client.get('/myPage/products');
+  return res.data;
+};

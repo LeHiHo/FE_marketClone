@@ -1,9 +1,9 @@
 'use client';
-import { getProductDetail } from '@/api/service';
+import { getMyProduct, getProductDetail } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
-import { AXIOSResponse } from '@/types/interface';
+import { AXIOSResponse, IProduct } from '@/types/interface';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
@@ -37,6 +37,7 @@ export const ProductDetail = () => {
     typeof id === 'string' ? parseInt(id, 10) : undefined;
 
   const [product, setProduct] = useState<Product | null>(null);
+  const [myProduct, setMyProduct] = useState<IProduct[]>([]);
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
@@ -66,9 +67,18 @@ export const ProductDetail = () => {
       try {
         if (res.statusCode === 200) {
           setProduct(res.data);
-          res.data.images.map((image) => {
-            console.log(image);
-          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const fetchMyProductData = async () => {
+      const res2: AXIOSResponse<IProduct[]> = await getMyProduct();
+      try {
+        if (res2.statusCode === 200) {
+          setMyProduct(res2.data);
+          console.log(res2.data);
         }
       } catch (error) {
         console.error(error);
@@ -76,6 +86,7 @@ export const ProductDetail = () => {
     };
 
     fetchData();
+    fetchMyProductData();
 
     return () => {
       setProduct(null);
@@ -120,9 +131,9 @@ export const ProductDetail = () => {
         />
 
         <Slider className="product-detail__image-wrapper" {...settings}>
-          {product?.images.map((image) => {
+          {product?.images.map((image, index) => {
             return (
-              <div className="product-detail__image" key={image}>
+              <div className="product-detail__image" key={index}>
                 <img src={image} alt="" />
               </div>
             );
@@ -161,31 +172,20 @@ export const ProductDetail = () => {
           <div className="product-detail__more-product">
             <div>
               <div className="more-product__title">
-                <p>닉네임님의 판매상품</p>
+                <p>{product?.seller.nickname}님의 판매상품</p>
                 <Btn type="button" href="products" label="모두보기" />
               </div>
 
               <div className="more-product__grid">
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다 고양이는 귀엽다 고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다 고양이는 귀엽다 고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
+                {myProduct?.slice(0, 4).map((product, index) => {
+                  return (
+                    <div className="more-product" key={index}>
+                      <img src={product.thumbnail} alt="sale image" />
+                      <p>{product.title}</p>
+                      <p>{product.price}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

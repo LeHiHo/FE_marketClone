@@ -8,7 +8,6 @@ import '@/styles/templates/main/main.scss';
 import AddBtn from './addBtn';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import Link from 'next/link';
 import Navbar from '@/components/navbar';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
