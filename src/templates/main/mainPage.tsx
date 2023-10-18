@@ -11,15 +11,22 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import Navbar from '@/components/navbar';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 export default function MainPage() {
   const [data, setData] = useState<IProduct[]>([]);
+  const categoryParams = useSearchParams();
+  const category = categoryParams.get('category') || '전체';
+  const categoryId = categoryParams.get('categoryId') || undefined;
 
   const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res: AXIOSResponse<IProduct[]> = await getProducts();
+      const res: AXIOSResponse<IProduct[]> = await getProducts(
+        undefined,
+        categoryId,
+      );
       if (res.statusCode === 200) {
         setData(res.data);
       }
@@ -32,7 +39,7 @@ export default function MainPage() {
     <div id="mainPage">
       <header>
         <Header
-          title={'개발자님'}
+          title={category}
           border={true}
           button={
             <>
