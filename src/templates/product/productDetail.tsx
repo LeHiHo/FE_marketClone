@@ -34,6 +34,7 @@ type Product = {
   images: string[];
   status: string;
   likes: number;
+  myProduct: boolean;
   seller: Seller;
   sellerProductInfos: sellerProductInfos[];
 };
@@ -108,22 +109,24 @@ export const ProductDetail = () => {
           border={false}
           title=""
           button={
-            <>
-              <BsThreeDotsVertical
-                size="30"
-                background="#ccc"
-                className="product-detail__icon"
-                onClick={toggleMenu}
-              />
-              {isMenuOpen && (
-                <ul ref={menuRef} className="product-detail__menu">
-                  <li onClick={() => router.push('/product/edit')}>
-                    게시글 수정
-                  </li>
-                  <li>삭제</li>
-                </ul>
-              )}
-            </>
+            product?.myProduct && (
+              <>
+                <BsThreeDotsVertical
+                  size="30"
+                  background="#ccc"
+                  className="product-detail__icon"
+                  onClick={toggleMenu}
+                />
+                {isMenuOpen && (
+                  <ul ref={menuRef} className="product-detail__menu">
+                    <li onClick={() => router.push('/product/edit')}>
+                      게시글 수정
+                    </li>
+                    <li>삭제</li>
+                  </ul>
+                )}
+              </>
+            )
           }
         />
 
@@ -150,11 +153,13 @@ export const ProductDetail = () => {
             <p className="profile__name">{product?.seller.nickname}</p>
           </div>
 
-          <select>
-            <option>판매중</option>
-            <option>예약중</option>
-            <option>거래완료</option>
-          </select>
+          {product?.myProduct && (
+            <select>
+              <option>판매중</option>
+              <option>예약중</option>
+              <option>거래완료</option>
+            </select>
+          )}
 
           <div className="product-detail__content-wrapper">
             <p className="product-detail__title">{product?.title}</p>
@@ -168,29 +173,31 @@ export const ProductDetail = () => {
             <p className="product-detail__content">{product?.content}</p>
           </div>
 
-          <div className="product-detail__more-product">
-            <div>
-              <div className="more-product__title">
-                <p>{product?.seller.nickname}님의 판매상품</p>
-                <Btn type="button" href="products" label="모두보기" />
-              </div>
+          {product?.myProduct && (
+            <div className="product-detail__more-product">
+              <div>
+                <div className="more-product__title">
+                  <p>{product?.seller.nickname}님의 판매상품</p>
+                  <Btn type="button" href="products" label="모두보기" />
+                </div>
 
-              <div className="more-product__grid">
-                {product?.sellerProductInfos.map((product, index) => {
-                  return (
-                    <div
-                      onClick={() => router.push(`/product/${product.id}`)}
-                      className="more-product"
-                      key={index}>
-                      <img src={product.thumbnail} alt="sale image" />
-                      <p>{product.title}</p>
-                      <p>{product.price}</p>
-                    </div>
-                  );
-                })}
+                <div className="more-product__grid">
+                  {product?.sellerProductInfos.map((product, index) => {
+                    return (
+                      <div
+                        onClick={() => router.push(`/product/${product.id}`)}
+                        className="more-product"
+                        key={index}>
+                        <img src={product.thumbnail} alt="sale image" />
+                        <p>{product.title}</p>
+                        <p>{product.price}</p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
