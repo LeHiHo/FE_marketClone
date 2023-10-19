@@ -205,7 +205,7 @@ export const ProductDetail = () => {
         <div className="product-detail__footer--wrapper">
           <AiOutlineHeart size="28" className="product-detail__footer-icon" />
           <span>|</span>
-          <p>125만원</p>
+          <p>{product?.price}</p>
         </div>
 
         <div onClick={() => router.push(`/product/${id}/chats`)}>
