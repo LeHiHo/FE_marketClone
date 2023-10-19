@@ -55,7 +55,7 @@ export default function MypageEditPage() {
 
       <div className="mypage-edit__main">
         <div className="mypage-edit__image">
-          <img src={user.profileImage} alt="profile image" />
+          <img src={user.profileImage} alt="profile" />
           <div onClick={handleImgOnClick} className="mypage-edit__icon">
             <BsCamera size="28" />
           </div>
