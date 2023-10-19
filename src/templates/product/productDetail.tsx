@@ -142,7 +142,7 @@ export const ProductDetail = () => {
 
         <div className="product-detail__main">
           <div className="product-detail__profile">
-            <div onClick={() => router.push('/mypage')}>
+            <div onClick={() => product?.myProduct && router.push('/mypage')}>
               <img
                 src={product?.seller.profileImage}
                 alt="profile"
