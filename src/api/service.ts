@@ -94,8 +94,7 @@ export const updateProductState = async (
 
 export const getMyInfo = async () => {
   const res = await client.get('/myInfo');
-  console.log(res);
-  return res;
+  return res.data;
 };
 
 // 내 판매 상품 리스트 조회
