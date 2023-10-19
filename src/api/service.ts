@@ -49,11 +49,11 @@ export const getProductCategory = async () => {
   return res.data;
 };
 
-export const getProducts = async (searchWord?: string, categoryId?: string) => {
+export const getProducts = async (searchWord?: string, category?: string) => {
   const res = await client.get('/products', {
     params: {
       searchWord,
-      categoryIds: categoryId,
+      categoryNames: category,
     },
   });
   return res.data;
@@ -99,7 +99,7 @@ export const getMyInfo = async () => {
 
 // 내 판매 상품 리스트 조회
 export const getMyProduct = async () => {
-  const res = await client.get(`/myPage/products`);
+  const res = await client.get('/myPage/products');
   return res.data;
 };
 
