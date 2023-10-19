@@ -16,14 +16,14 @@ export const getProductDetail = async (id: number) => {
 
 export const postProducts = async (
   title: string,
-  categoryId: number,
+  categoryName: string,
   content: string,
   price: number,
   images?: FileList,
 ) => {
   const formData = new FormData();
   formData.append('title', title);
-  formData.append('categoryId', categoryId.toString()); // 숫자를 문자열로 변환
+  formData.append('categoryName', categoryName); // 숫자를 문자열로 변환
   formData.append('content', content);
   formData.append('price', price.toString()); // 숫자를 문자열로 변환
 

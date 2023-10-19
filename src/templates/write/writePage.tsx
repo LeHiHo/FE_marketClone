@@ -20,7 +20,8 @@ export default function WritePage() {
 
   const router = useRouter();
 
-  const { imageArray, removeImage, handleImageChange } = useHandleImg();
+  const { imageArray, removeImage, handleImageChange } =
+    useHandleImg(setImages);
 
   const toggleModal = () => {
     setIsModal(!isModal);
@@ -36,14 +37,15 @@ export default function WritePage() {
         // 이미지 배열 -> file list로 변환
         // const dataTransfer = new DataTransfer();
         // imageArray.forEach((file) => dataTransfer.items.add(file));
-        // const images = dataTransfer.files;
+        // const convertImg = dataTransfer.files;
+        // setImages(convertImg);
 
         const response = await postProducts(
           title,
           category,
           content,
           price,
-          imageArray,
+          images,
         );
         if (response.statusCode === 200) {
           router.push('/main');
@@ -77,33 +79,37 @@ export default function WritePage() {
       />
       <div className="writePage">
         <form className="writePage__input">
-          <div className="previewImg">
-            {imageArray.map((image, index) => (
-              <div key={generateUniqueId(image, index)}>
-                <img
-                  src={URL.createObjectURL(image)}
-                  alt={`Uploaded ${index}`}
-                  width="50"
-                  height="50"
-                />
-                <button onClick={() => removeImage(index)}>Delete</button>
-              </div>
-            ))}
-          </div>
           <div className="writePage__input-container">
-            <label htmlFor="fileInput" className="writePage__input-UploadBox">
-              <img src="/svg/camera.svg" alt="사진기" />
-              {`${number}/10`}
-              <input
-                className="writePage__input-fileUpload"
-                accept="image/*"
-                id="fileInput"
-                type="file"
-                name="product_img"
-                onChange={handleImageChange}
-                multiple
-              />
-            </label>
+            <div className="previewImg">
+              <label htmlFor="fileInput" className="writePage__input-UploadBox">
+                <img src="/svg/camera.svg" alt="사진기" />
+                {`${number}/10`}
+                <input
+                  className="writePage__input-fileUpload"
+                  accept="image/*"
+                  id="fileInput"
+                  type="file"
+                  name="product_img"
+                  onChange={handleImageChange}
+                  multiple
+                />
+              </label>
+              {imageArray.map((image, index) => (
+                <div
+                  className="previewImg-item"
+                  key={generateUniqueId(image, index)}>
+                  <img
+                    src={URL.createObjectURL(image)}
+                    alt={`Uploaded ${index}`}
+                    width="50"
+                    height="50"
+                  />
+                  <div className="x_btn" onClick={() => removeImage(index)}>
+                    <img src="/svg/x_btn.svg" alt="x_btn" />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <p>제목</p>
