@@ -49,7 +49,7 @@ export default function CategoryModal({
 
   return (
     <div className="modal" onClick={modalEscape}>
-      <div className={`modal-content ${isModal ? 'active' : ''}`}>
+      <div className="modal-content">
         {category.map((category) => (
           <div key={category} onClick={() => handleCategoryClick(category)}>
             {category}
