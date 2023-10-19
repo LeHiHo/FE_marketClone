@@ -2,10 +2,6 @@ import 'src/styles/templates/product/productStateList.scss';
 
 export default function ProductStateList({ onChangeList }) {
   const productStates = document.querySelectorAll('.productState');
-  const productAllState = document.querySelector('.all');
-  const productSaleState = document.querySelector('.sale');
-  const productCompleteState = document.querySelector('.completed');
-  
   return (
     <>
       <div className="productStateList">
