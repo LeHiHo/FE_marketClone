@@ -14,6 +14,7 @@ export const getProductDetail = async (id: number) => {
   return res.data;
 };
 
+// 상품등록
 export const postProducts = async (
   title: string,
   categoryName: string,
@@ -25,7 +26,7 @@ export const postProducts = async (
   formData.append('title', title);
   formData.append('categoryName', categoryName);
   formData.append('content', content);
-  formData.append('price', price.toString()); // 숫자를 문자열로 변환
+  formData.append('price', price.toString());
 
   // 여러 이미지를 처리하는 경우
   if (images) {
@@ -74,6 +75,7 @@ export const postSignUp = async (
   return res;
 };
 
+//로그인
 export const postAuth = async (email: string, password: string) => {
   const res = await client.post('/login', {
     email: email,

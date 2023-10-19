@@ -129,13 +129,18 @@ export default function WritePage() {
           </div>
           <p>가격</p>
           <input
-            type="number"
-            name="product_price"
+            type="text" // 'number' 대신 'text'를 사용
             value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            onChange={(e) => {
+              const newValue = e.target.value;
+              // 숫자 또는 빈 문자열만 허용
+              const isNumeric = /^[0-9]*$/.test(newValue);
+              if (isNumeric) {
+                setPrice(newValue);
+              }
+            }}
             placeholder="가격을 입력해주세요"
           />
-
           <p>자세한 설명</p>
           <textarea
             name="product_content"
