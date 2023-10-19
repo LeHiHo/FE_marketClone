@@ -68,7 +68,7 @@ export default function MypagePage() {
           <div
             className="option"
             onClick={() => {
-              onClick('chat');
+              onClick('chats');
             }}>
             <div className="icon">
               <HiOutlineChatAlt2 />
