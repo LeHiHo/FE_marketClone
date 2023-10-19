@@ -1,6 +1,8 @@
+'use client';
 import React, { ReactNode } from 'react';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { BiArrowBack } from 'react-icons/bi';
 import '@/styles/components/header.scss';
+import { useRouter } from 'next/navigation';
 
 interface HeaderProps {
   goBack?: boolean;
@@ -8,6 +10,7 @@ interface HeaderProps {
   title?: string;
   children?: ReactNode;
   button?: ReactNode;
+  color?: boolean;
 }
 
 export default function Header({
@@ -16,13 +19,25 @@ export default function Header({
   title,
   children,
   button,
+  color,
 }: HeaderProps) {
+  const router = useRouter();
   return (
     <div id="header" className={`${border ? 'header__border--bottom' : ''}`}>
-      {goBack && <AiOutlineArrowLeft className="header__btn--goback" />}
+      {goBack && (
+        <BiArrowBack
+          onClick={() => router.back()}
+          className="header__btn--goback"
+        />
+      )}
       <h1 className="header__title">{title}</h1>
       {children}
-      <div className="header__btn__wrap">{button}</div>
+      <div
+        className={`header__btn__wrap ${
+          color ? 'header__btn__wrap--color' : ''
+        }`}>
+        {button}
+      </div>
     </div>
   );
 }

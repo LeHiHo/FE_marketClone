@@ -3,6 +3,7 @@ import { postSignUp } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/signup/signup.scss';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 interface FormData {
@@ -14,6 +15,7 @@ interface FormData {
 }
 
 export default function SignupPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     email: '',
     password: '',
@@ -103,17 +105,27 @@ export default function SignupPage() {
 
   const handleButtonClick = async () => {
     if (validateForm()) {
-      const data = await postSignUp(
-        formData.email,
-        formData.password,
-        formData.phone,
-        formData.nickname,
-      );
-      if (data.status == 200) {
+      try {
+        const res = await postSignUp(
+          formData.email,
+          formData.password,
+          formData.phone,
+          formData.nickname,
+        );
+        console.log(res.data);
         alert('회원가입 성공!');
-      } else {
-        console.log(data.status);
-        alert('회원가입 실패');
+        router.push('/login');
+      } catch (error: any) {
+        if (error.response.data.statusCode === 401) {
+          alert('이미 가입된 이메일이 있습니다.');
+        } else if (error.response.data.statusCode === 402) {
+          alert('이미 가입된 휴대폰 번호가 있습니다.');
+        } else if (error.response.data.statusCode === 403) {
+          alert('이미 가입된 닉네임이 있습니다.');
+        } else {
+          console.log(error.response);
+          alert('회원가입 실패');
+        }
       }
     } else {
       alert('유효하지 않은 값을 입력하셨습니다.');
@@ -194,7 +206,6 @@ export default function SignupPage() {
           <Btn
             type="button"
             onClick={handleButtonClick}
-            href="/main"
             label="가입하기"
             disabled={!isValid}
           />
