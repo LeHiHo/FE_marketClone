@@ -94,7 +94,6 @@ export const ProductDetail = () => {
       setMyProduct([]);
     };
   }, [id]);
-  console.log(myProduct);
 
   const settings = {
     dots: true, // 페이지 네비게이션(점) 표시
