@@ -99,7 +99,19 @@ export const getMyInfo = async () => {
 };
 
 // 내 판매 상품 리스트 조회
-export const getMyProduct = async () => {
-  const res = await client.get('/myPage/products');
+export const getMyProduct = async (pageSize: number) => {
+  const res = await client.get(`/myPage/products?pageSize=${pageSize}`);
+  return res.data;
+};
+
+// 판매자의
+
+export const getMyChatList = async () => {
+  const res = await client.get('/myPage/chats');
+  return res.data;
+};
+
+export const getProductChatList = async (id: number | null) => {
+  const res = await client.get(`/products/${id}/chats`);
   return res.data;
 };

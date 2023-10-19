@@ -1,9 +1,9 @@
 'use client';
-import { getMyProduct, getProductDetail } from '@/api/service';
+import { getProductDetail } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
-import { AXIOSResponse, IProduct } from '@/types/interface';
+import { AXIOSResponse } from '@/types/interface';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
@@ -18,27 +18,36 @@ type Seller = {
   nickname: string;
 };
 
+type sellerProductInfos = {
+  id: number;
+  price: number;
+  thumbnail: string;
+  title: string;
+};
+
 type Product = {
   id: number;
   title: string;
   price: number;
-  categoryId: number;
+  categoryName: string;
   content: string;
   images: string[];
   status: string;
   likes: number;
+  myProduct: boolean;
   seller: Seller;
+  sellerProductInfos: sellerProductInfos[];
 };
 
 export const ProductDetail = () => {
   const router = useRouter();
-  const id = usePathname().split('/')[2];
+  const path = usePathname();
+  const id = path.split('/')[2];
 
   const productId: number | any =
     typeof id === 'string' ? parseInt(id, 10) : undefined;
 
   const [product, setProduct] = useState<Product | null>(null);
-  const [myProduct, setMyProduct] = useState<IProduct[]>([]);
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
@@ -74,22 +83,11 @@ export const ProductDetail = () => {
       }
     };
 
-    const fetchMyProductData = async () => {
-      const res2: AXIOSResponse<IProduct[]> = await getMyProduct();
-      try {
-        if (res2.statusCode === 200) {
-          setMyProduct(res2.data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     fetchData();
-    fetchMyProductData();
 
     return () => {
       setProduct(null);
+      [];
     };
   }, [id]);
 
@@ -111,22 +109,24 @@ export const ProductDetail = () => {
           border={false}
           title=""
           button={
-            <>
-              <BsThreeDotsVertical
-                size="30"
-                background="#ccc"
-                className="product-detail__icon"
-                onClick={toggleMenu}
-              />
-              {isMenuOpen && (
-                <ul ref={menuRef} className="product-detail__menu">
-                  <li onClick={() => router.push('/product/edit')}>
-                    게시글 수정
-                  </li>
-                  <li>삭제</li>
-                </ul>
-              )}
-            </>
+            product?.myProduct && (
+              <>
+                <BsThreeDotsVertical
+                  size="30"
+                  background="#ccc"
+                  className="product-detail__icon"
+                  onClick={toggleMenu}
+                />
+                {isMenuOpen && (
+                  <ul ref={menuRef} className="product-detail__menu">
+                    <li onClick={() => router.push('/product/edit')}>
+                      게시글 수정
+                    </li>
+                    <li>삭제</li>
+                  </ul>
+                )}
+              </>
+            )
           }
         />
 
@@ -153,42 +153,51 @@ export const ProductDetail = () => {
             <p className="profile__name">{product?.seller.nickname}</p>
           </div>
 
-          <select>
-            <option>판매중</option>
-            <option>예약중</option>
-            <option>거래완료</option>
-          </select>
+          {product?.myProduct && (
+            <select>
+              <option>판매중</option>
+              <option>예약중</option>
+              <option>거래완료</option>
+            </select>
+          )}
 
           <div className="product-detail__content-wrapper">
             <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
-              <p className="product-detail__category">{product?.categoryId}</p>
+              <p className="product-detail__category">
+                {product?.categoryName}
+              </p>
               <p className="product-detail__time">⋅ 1일 전</p>
             </div>
 
             <p className="product-detail__content">{product?.content}</p>
           </div>
 
-          <div className="product-detail__more-product">
-            <div>
-              <div className="more-product__title">
-                <p>{product?.seller.nickname}님의 판매상품</p>
-                <Btn type="button" href="products" label="모두보기" />
-              </div>
+          {!product?.myProduct && (
+            <div className="product-detail__more-product">
+              <div>
+                <div className="more-product__title">
+                  <p>{product?.seller.nickname}님의 판매상품</p>
+                  <Btn type="button" href="products" label="모두보기" />
+                </div>
 
-              <div className="more-product__grid">
-                {myProduct?.slice(0, 4).map((product, index) => {
-                  return (
-                    <div className="more-product" key={index}>
-                      <img src={product.thumbnail} alt="sale image" />
-                      <p>{product.title}</p>
-                      <p>{product.price}</p>
-                    </div>
-                  );
-                })}
+                <div className="more-product__grid">
+                  {product?.sellerProductInfos.map((product, index) => {
+                    return (
+                      <div
+                        onClick={() => router.push(`/product/${product.id}`)}
+                        className="more-product"
+                        key={index}>
+                        <img src={product.thumbnail} alt="sale image" />
+                        <p>{product.title}</p>
+                        <p>{product.price}</p>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
@@ -199,7 +208,7 @@ export const ProductDetail = () => {
           <p>125만원</p>
         </div>
 
-        <div onClick={() => router.push('/chatList')}>
+        <div onClick={() => router.push(`/product/${id}/chats`)}>
           <button className="product-detail__chat-button">관련 채팅보기</button>
         </div>
       </footer>
