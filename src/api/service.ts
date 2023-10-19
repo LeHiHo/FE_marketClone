@@ -103,8 +103,6 @@ export const getMyProduct = async () => {
   return res.data;
 };
 
-// 판매자의
-
 export const getMyChatList = async () => {
   const res = await client.get('/myPage/chats');
   return res.data;
@@ -112,5 +110,10 @@ export const getMyChatList = async () => {
 
 export const getProductChatList = async (id: number | null) => {
   const res = await client.get(`/products/${id}/chats`);
+  return res.data;
+};
+
+export const getSellerProduct = async (id: number | null) => {
+  const res = await client.get(`/products/${id}/list`);
   return res.data;
 };
