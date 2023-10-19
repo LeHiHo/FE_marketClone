@@ -114,3 +114,19 @@ export const getProductChatList = async (id: number | null) => {
   const res = await client.get(`/products/${id}/chats`);
   return res.data;
 };
+
+// 위시상품 추가 / 삭제
+
+export const addWishProduct = async (id : number) => {
+  const res = await client.post(`wish/${id}`, {
+    productId : id,
+  });
+  return res
+}
+
+export const deleteWishProduct = async (id : number) => {
+  const res = await client.delete(`wish/${id}`, {
+    productId : id,
+  });
+  return res
+}
