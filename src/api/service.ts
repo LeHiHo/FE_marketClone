@@ -98,8 +98,8 @@ export const getMyInfo = async () => {
 };
 
 // 내 판매 상품 리스트 조회
-export const getMyProduct = async (pageSize: number) => {
-  const res = await client.get(`/myPage/products?pageSize=${pageSize}`);
+export const getMyProduct = async () => {
+  const res = await client.get('/myPage/products');
   return res.data;
 };
 
