@@ -117,16 +117,12 @@ export const getProductChatList = async (id: number | null) => {
 
 // 위시상품 추가 / 삭제
 
-export const addWishProduct = async (id : number) => {
-  const res = await client.post(`wish/${id}`, {
-    productId : id,
-  });
-  return res
-}
+export const addWishProduct = async (id: number) => {
+  const res = await client.post(`wish/${id}`);
+  return res;
+};
 
-export const deleteWishProduct = async (id : number) => {
-  const res = await client.delete(`wish/${id}`, {
-    productId : id,
-  });
-  return res
-}
+export const deleteWishProduct = async (id: number) => {
+  const res = await client.delete(`wish/${id}`);
+  return res;
+};

@@ -1,5 +1,9 @@
 'use client';
-import { addWishProduct, deleteWishProduct, getProductDetail } from '@/api/service';
+import {
+  addWishProduct,
+  deleteWishProduct,
+  getProductDetail,
+} from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
@@ -37,6 +41,7 @@ type Product = {
   myProduct: boolean;
   seller: Seller;
   sellerProductInfos: sellerProductInfos[];
+  like: boolean;
 };
 
 export const ProductDetail = () => {
@@ -77,7 +82,7 @@ export const ProductDetail = () => {
       try {
         if (res.statusCode === 200) {
           setProduct(res.data);
-          setOnLike(res.data.like);
+          setOnLike(res.data?.like);
         }
       } catch (error) {
         console.error(error);
@@ -101,7 +106,7 @@ export const ProductDetail = () => {
     autoplay: false, // 자동 재생
     arrows: false,
   };
-  
+
   return (
     <div id="product-detail">
       <div className="product-detail">
@@ -210,7 +215,7 @@ export const ProductDetail = () => {
               className="product-detail__footer-icon"
               onClick={() => {
                 setOnLike((prev) => !prev);
-                addWishProduct(productId)
+                addWishProduct(productId);
               }}
             />
           ) : (
