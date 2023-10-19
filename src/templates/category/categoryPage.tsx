@@ -1,6 +1,6 @@
 'use client';
 
-import { getProductCategory, getProducts } from '@/api/service';
+import { getProductCategory } from '@/api/service';
 import Header from '@/components/header';
 import '@/styles/templates/category/category.scss';
 import { AXIOSResponse } from '@/types/interface';
