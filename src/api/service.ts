@@ -49,11 +49,11 @@ export const getProductCategory = async () => {
   return res.data;
 };
 
-export const getProducts = async (searchWord?: string, categoryId?: string) => {
+export const getProducts = async (searchWord?: string, category?: string) => {
   const res = await client.get('/products', {
     params: {
       searchWord,
-      categoryIds: categoryId,
+      categoryNames: category,
     },
   });
   return res.data;

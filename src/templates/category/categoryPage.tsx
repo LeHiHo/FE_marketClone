@@ -27,7 +27,7 @@ export default function CategoryPage() {
   }, []);
 
   const onClick = async (item: CategoryType) => {
-    router.push(`/main?category=${item.name}&categoryId=${item.id}`);
+    router.push(`/main?category=${item.name}`);
   };
   return (
     <div id="categoryPage">
