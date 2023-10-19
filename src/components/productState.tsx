@@ -1,6 +1,8 @@
 import { updateProductState } from '../api/service';
+import { useRouter, usePathname } from 'next/navigation';
 
-export default function ProductState({ product } : any) {
+export default function ProductState({ product }: any) {
+  const router = useRouter();
   return (
     <>
       <div className="product__state">
@@ -8,6 +10,7 @@ export default function ProductState({ product } : any) {
           <p
             onClick={() => {
               updateProductState(product.id, 2);
+              router.push('./sales')
             }}
             className="product__state__btn--reserve">
             예약중 변경
@@ -17,6 +20,7 @@ export default function ProductState({ product } : any) {
           <p
             onClick={() => {
               updateProductState(product.id, 3);
+              router.push('./sales')
             }}
             className="product__state__btn--complete">
             거래완료 변경
