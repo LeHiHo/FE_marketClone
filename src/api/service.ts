@@ -104,6 +104,8 @@ export const getMyProduct = async (pageSize: number) => {
   return res.data;
 };
 
+// 판매자의
+
 export const getMyChatList = async () => {
   const res = await client.get('/myPage/chats');
   return res.data;

@@ -1,9 +1,9 @@
 'use client';
-import { getMyProduct, getProductDetail } from '@/api/service';
+import { getProductDetail } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
-import { AXIOSResponse, IProduct } from '@/types/interface';
+import { AXIOSResponse } from '@/types/interface';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
@@ -18,6 +18,13 @@ type Seller = {
   nickname: string;
 };
 
+type sellerProductInfos = {
+  id: number;
+  price: number;
+  thumbnail: string;
+  title: string;
+};
+
 type Product = {
   id: number;
   title: string;
@@ -28,6 +35,7 @@ type Product = {
   status: string;
   likes: number;
   seller: Seller;
+  sellerProductInfos: sellerProductInfos[];
 };
 
 export const ProductDetail = () => {
@@ -39,7 +47,6 @@ export const ProductDetail = () => {
     typeof id === 'string' ? parseInt(id, 10) : undefined;
 
   const [product, setProduct] = useState<Product | null>(null);
-  const [myProduct, setMyProduct] = useState<IProduct[]>([]);
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
@@ -75,23 +82,11 @@ export const ProductDetail = () => {
       }
     };
 
-    const fetchMyProductData = async () => {
-      const res2: AXIOSResponse<IProduct[]> = await getMyProduct(4);
-      try {
-        if (res2.statusCode === 200) {
-          setMyProduct(res2.data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
     fetchData();
-    fetchMyProductData();
 
     return () => {
       setProduct(null);
-      setMyProduct([]);
+      [];
     };
   }, [id]);
 
@@ -181,7 +176,7 @@ export const ProductDetail = () => {
               </div>
 
               <div className="more-product__grid">
-                {myProduct?.map((product, index) => {
+                {product?.sellerProductInfos.map((product, index) => {
                   return (
                     <div
                       onClick={() => router.push(`/product/${product.id}`)}
