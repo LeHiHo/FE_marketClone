@@ -5,8 +5,12 @@ const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
-export const getProducts = async () => {
-  const res = await client.get('/products');
+export const getProductDetail = async (id: number) => {
+  const res = await client.get(`/products/${id}`, {
+    params: {
+      productId: id,
+    },
+  });
   return res.data;
 };
 
@@ -37,6 +41,21 @@ export const postProducts = async (
   };
 
   const res = await client.post('/products', formData, config);
+  return res.data;
+};
+
+export const getProductCategory = async () => {
+  const res = await client.get(`/products/categories`);
+  return res.data;
+};
+
+export const getProducts = async (searchWord?: string, categoryId?: string) => {
+  const res = await client.get('/products', {
+    params: {
+      searchWord,
+      categoryIds: categoryId,
+    },
+  });
   return res.data;
 };
 
@@ -77,4 +96,10 @@ export const getMyInfo = async () => {
   const res = await client.get('/myInfo');
   console.log(res);
   return res;
+};
+
+// 내 판매 상품 리스트 조회
+export const getMyProduct = async () => {
+  const res = await client.get('/myPage/products');
+  return res.data;
 };

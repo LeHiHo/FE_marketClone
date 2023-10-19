@@ -1,7 +1,7 @@
 'use client';
 
 import '@/styles/templates/write/categoryModal.scss';
-import React, { KeyboardEvent, MouseEvent } from 'react';
+import React, { MouseEvent } from 'react';
 
 const category = [
   '디지털기기',
@@ -24,36 +24,35 @@ const category = [
 ];
 
 interface CategoryModalProps {
-  isOpen: boolean;
-  onClose: (
-    event: MouseEvent<HTMLSpanElement> | KeyboardEvent<HTMLSpanElement>,
-  ) => void;
-  onSelectCategory: (category: string) => void;
+  isModal: boolean;
+  onClose: () => void;
+  selectCategory: (category: string) => void;
 }
 
 export default function CategoryModal({
-  isOpen,
+  isModal,
   onClose,
-  onSelectCategory,
+  selectCategory,
 }: CategoryModalProps) {
-  if (!isOpen) return null;
+  if (!isModal) return null;
 
   const handleCategoryClick = (category: string) => {
-    onSelectCategory(category); // 선택한 카테고리를 전달
+    selectCategory(category); // 선택한 카테고리를 전달
     onClose();
   };
 
   const modalEscape = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      onClose(e);
+      onClose();
     }
   };
+
   return (
     <div className="modal" onClick={modalEscape}>
-      <div className="modal-content">
-        {category.sort().map((list) => (
-          <div key={list} onClick={() => handleCategoryClick(list)}>
-            {list}
+      <div className={`modal-content ${isModal ? 'active' : ''}`}>
+        {category.map((category) => (
+          <div key={category} onClick={() => handleCategoryClick(category)}>
+            {category}
           </div>
         ))}
       </div>

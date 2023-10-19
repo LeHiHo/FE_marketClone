@@ -6,30 +6,44 @@ import { useState } from 'react';
 import { postProducts } from '@/api/service';
 import { useRouter } from 'next/navigation';
 import CategoryModal from '@/templates/write/categoryModal';
+import { useHandleImg } from '@/templates/write/useHandleImg';
 import Btn from '@/components/btn';
 
-export default function WirtePage() {
-  const [title, setTitle] = useState('');
-  const [categoryId, setCategoryId] = useState<string>('');
-  const [content, setContent] = useState('');
-  const [price, setPrice] = useState(0);
+export default function WritePage() {
+  const [title, setTitle] = useState<string>('');
+  const [category, setCategory] = useState<string>('');
+  const [content, setContent] = useState<string>('');
+  const [price, setPrice] = useState<number>(0);
   const [images, setImages] = useState<FileList | null>(null);
+
+  const [isModal, setIsModal] = useState<boolean>(false);
+
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
+
+  const { imageArray, removeImage, handleImageChange } = useHandleImg();
 
   const toggleModal = () => {
-    setIsOpen(!isOpen);
+    setIsModal(!isModal);
+  };
+
+  const handleSelectCategory = (selectedCategory: string) => {
+    setCategory(selectedCategory);
   };
 
   const handleWrite = async () => {
     try {
-      if (images !== null) {
+      if (imageArray.length > 0) {
+        // 이미지 배열 -> file list로 변환
+        // const dataTransfer = new DataTransfer();
+        // imageArray.forEach((file) => dataTransfer.items.add(file));
+        // const images = dataTransfer.files;
+
         const response = await postProducts(
           title,
-          categoryId,
+          category,
           content,
           price,
-          images,
+          imageArray,
         );
         if (response.statusCode === 200) {
           router.push('/main');
@@ -48,8 +62,10 @@ export default function WirtePage() {
     }
   };
 
-  const handleCategorySelect = (selectedCategory: string) => {
-    setCategoryId(selectedCategory); // 선택된 카테고리로 상태 업데이트
+  const number = 2;
+
+  const generateUniqueId = (image, index) => {
+    return `${image.lastModified}-${image.name}-${index}`;
   };
 
   return (
@@ -59,15 +75,37 @@ export default function WirtePage() {
         title={'중고거래 글쓰기'}
         button={<div className="writePage__temporaryStorage">임시저장</div>}
       />
-      <div></div>
       <div className="writePage">
         <form className="writePage__input">
-          <input
-            type="file"
-            name="product_img"
-            onChange={(e) => setImages(e.target.files)}
-            multiple
-          />
+          <div className="previewImg">
+            {imageArray.map((image, index) => (
+              <div key={generateUniqueId(image, index)}>
+                <img
+                  src={URL.createObjectURL(image)}
+                  alt={`Uploaded ${index}`}
+                  width="50"
+                  height="50"
+                />
+                <button onClick={() => removeImage(index)}>Delete</button>
+              </div>
+            ))}
+          </div>
+          <div className="writePage__input-container">
+            <label htmlFor="fileInput" className="writePage__input-UploadBox">
+              <img src="/svg/camera.svg" alt="사진기" />
+              {`${number}/10`}
+              <input
+                className="writePage__input-fileUpload"
+                accept="image/*"
+                id="fileInput"
+                type="file"
+                name="product_img"
+                onChange={handleImageChange}
+                multiple
+              />
+            </label>
+          </div>
+
           <p>제목</p>
           <input
             type="text"
@@ -81,14 +119,15 @@ export default function WirtePage() {
             <input
               type="text"
               readOnly
-              value={categoryId}
+              name="product_category"
+              value={category}
               onClick={toggleModal}
               placeholder="카테고리를 선택해주세요"
             />
             <CategoryModal
-              isOpen={isOpen}
+              isModal={isModal}
               onClose={toggleModal}
-              onSelectCategory={handleCategorySelect}
+              selectCategory={handleSelectCategory}
             />
           </div>
           <p>가격</p>
@@ -112,7 +151,7 @@ export default function WirtePage() {
         <footer>
           <Btn
             type="button"
-            disabled={!title || !categoryId || !content || !price || !images}
+            disabled={!title || !category || !content || !price || !images}
             onClick={handleWrite}
             label="작성완료"
           />

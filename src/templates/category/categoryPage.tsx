@@ -1,22 +1,46 @@
-import Header from '@/components/header';
+'use client';
 
+import { getProductCategory, getProducts } from '@/api/service';
+import Header from '@/components/header';
 import '@/styles/templates/category/category.scss';
+import { AXIOSResponse } from '@/types/interface';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+type CategoryType = {
+  id: number;
+  name: string;
+};
 
 export default function CategoryPage() {
+  const [category, setCategory] = useState<CategoryType[]>([]);
+  const router = useRouter();
+  useEffect(() => {
+    const fetchData = async () => {
+      const res: AXIOSResponse<CategoryType[]> = await getProductCategory();
+      if (res.statusCode === 200) {
+        setCategory(res.data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const onClick = async (item: CategoryType) => {
+    router.push(`/main?category=${item.name}&categoryId=${item.id}`);
+  };
   return (
     <div id="categoryPage">
       <Header goBack={true} title={'카테고리'} border={true} />
       <div className="category__content">
-        <div>디지털기기</div>
-        <div>생활가전</div>
-        <div>가구/인테리어</div>
-        <div>유아동</div>
-        <div>생활/가공식품</div>
-        <div>유아도서</div>
-        <div>여성의류</div>
-        <div>남성패션/잡화</div>
-        <div>게임/취미</div>
-        <div>뷰티/미용</div>
+        {category.map((item: CategoryType) => (
+          <div
+            onClick={() => {
+              onClick(item);
+            }}>
+            {item.name}
+          </div>
+        ))}
       </div>
     </div>
   );

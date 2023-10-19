@@ -1,8 +1,10 @@
 'use client';
+import { getMyProduct, getProductDetail } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
-import Link from 'next/Link';
+import { AXIOSResponse, IProduct } from '@/types/interface';
+import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -10,7 +12,34 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
+type Seller = {
+  sellerId: number;
+  profileImage: string;
+  nickname: string;
+};
+
+type Product = {
+  id: number;
+  title: string;
+  price: number;
+  categoryId: number;
+  content: string;
+  images: string[];
+  status: string;
+  likes: number;
+  seller: Seller;
+};
+
 export const ProductDetail = () => {
+  const router = useRouter();
+  const id = usePathname().split('/')[2];
+
+  const productId: number | any =
+    typeof id === 'string' ? parseInt(id, 10) : undefined;
+
+  const [product, setProduct] = useState<Product | null>(null);
+  const [myProduct, setMyProduct] = useState<IProduct[]>([]);
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
 
@@ -33,6 +62,37 @@ export const ProductDetail = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res: AXIOSResponse<Product> = await getProductDetail(productId);
+      try {
+        if (res.statusCode === 200) {
+          setProduct(res.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const fetchMyProductData = async () => {
+      const res2: AXIOSResponse<IProduct[]> = await getMyProduct();
+      try {
+        if (res2.statusCode === 200) {
+          setMyProduct(res2.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+    fetchMyProductData();
+
+    return () => {
+      setProduct(null);
+    };
+  }, [id]);
+
   const settings = {
     dots: true, // 페이지 네비게이션(점) 표시
     infinite: true, // 무한 루프
@@ -42,18 +102,6 @@ export const ProductDetail = () => {
     autoplay: false, // 자동 재생
     arrows: false,
   };
-
-  const slides = [
-    <div className="product-detail__image" key={1}>
-      <img src="/svg/cat.jpg" />
-    </div>,
-    <div className="product-detail__image" key={2}>
-      <img src="/svg/default_profile.png" />
-    </div>,
-    <div className="product-detail__image" key={3}>
-      <img src="/svg/cat.jpg" />
-    </div>,
-  ];
 
   return (
     <div id="product-detail">
@@ -72,7 +120,9 @@ export const ProductDetail = () => {
               />
               {isMenuOpen && (
                 <ul ref={menuRef} className="product-detail__menu">
-                  <li>게시글 수정</li>
+                  <li onClick={() => router.push('/product/edit')}>
+                    게시글 수정
+                  </li>
                   <li>삭제</li>
                 </ul>
               )}
@@ -81,20 +131,26 @@ export const ProductDetail = () => {
         />
 
         <Slider className="product-detail__image-wrapper" {...settings}>
-          {slides}
+          {product?.images.map((image, index) => {
+            return (
+              <div className="product-detail__image" key={index}>
+                <img src={image} alt="" />
+              </div>
+            );
+          })}
         </Slider>
 
         <div className="product-detail__main">
           <div className="product-detail__profile">
-            <Link href={'/mypage'}>
+            <div onClick={() => router.push('/mypage')}>
               <img
-                src="/svg/default_profile.png"
+                src={product?.seller.profileImage}
                 alt="profile"
                 className="profile__image"
               />
-            </Link>
+            </div>
 
-            <p className="profile__name">닉네임</p>
+            <p className="profile__name">{product?.seller.nickname}</p>
           </div>
 
           <select>
@@ -104,54 +160,32 @@ export const ProductDetail = () => {
           </select>
 
           <div className="product-detail__content-wrapper">
-            <p className="product-detail__title">
-              2022 맥북에어 M2 256GB 판매합니다!
-            </p>
+            <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
-              <p className="product-detail__category">디지털기기</p>
+              <p className="product-detail__category">{product?.categoryId}</p>
               <p className="product-detail__time">⋅ 1일 전</p>
             </div>
 
-            <p className="product-detail__content">
-              2022 맥북에어 M2 256GB 판매합니다! <br />
-              사진에 관련된 업무를 하다보니 아이폰이랑 연동이 잘 되어서 1월에
-              구매하였는데 조심한다고 거의 들고 나가질 않았습니다! 퇴사하게되어
-              판매합니다! <br /> <br />
-              금액대가 있는 제품이라 마곡역에서 직거래했으면 좋겠습니다! <br />
-              <br />
-              ✔️ 기스 없음 <br />
-              ✔️ 풀박 <br />ㄴ 필요하시면 멀티포트 같이 드리겠습니다.
-            </p>
+            <p className="product-detail__content">{product?.content}</p>
           </div>
 
           <div className="product-detail__more-product">
             <div>
               <div className="more-product__title">
-                <p>닉네임님의 판매상품</p>
+                <p>{product?.seller.nickname}님의 판매상품</p>
                 <Btn type="button" href="products" label="모두보기" />
               </div>
 
               <div className="more-product__grid">
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다 고양이는 귀엽다 고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다 고양이는 귀엽다 고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
+                {myProduct?.slice(0, 4).map((product, index) => {
+                  return (
+                    <div className="more-product" key={index}>
+                      <img src={product.thumbnail} alt="sale image" />
+                      <p>{product.title}</p>
+                      <p>{product.price}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -165,9 +199,9 @@ export const ProductDetail = () => {
           <p>125만원</p>
         </div>
 
-        <Link href={'/chatList'}>
+        <div onClick={() => router.push('/chatList')}>
           <button className="product-detail__chat-button">관련 채팅보기</button>
-        </Link>
+        </div>
       </footer>
     </div>
   );
