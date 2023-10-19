@@ -42,6 +42,7 @@ type Product = {
   myProduct: boolean;
   seller: Seller;
   sellerProductInfos: sellerProductInfos[];
+  like: boolean;
 };
 
 export const ProductDetail = () => {
@@ -82,7 +83,7 @@ export const ProductDetail = () => {
       try {
         if (res.statusCode === 200) {
           setProduct(res.data);
-          setOnLike(res.data.like);
+          setOnLike(res.data?.like);
         }
       } catch (error) {
         console.error(error);
@@ -171,6 +172,7 @@ export const ProductDetail = () => {
             <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
               <p className="product-detail__category">
+                {' '}
                 {product?.categoryName}
               </p>
             </div>
