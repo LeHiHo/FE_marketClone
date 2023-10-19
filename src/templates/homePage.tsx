@@ -1,9 +1,11 @@
+'use client';
 import Btn from '@/components/btn';
 import '@/styles/templates/home.scss';
-import Link from 'next/link';
 import Header from '@/components/header';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
+  const router = useRouter();
   return (
     <>
       <Header />
@@ -18,7 +20,7 @@ export default function HomePage() {
           <Btn type="button" href="/signup" label="시작하기" />
           <div className="homePage__text--login">
             이미 계정이 있나요?
-            <Link href="/login">로그인</Link>
+            <div onClick={() => router.push('/login')}>로그인</div>
           </div>
         </footer>
       </div>

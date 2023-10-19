@@ -29,7 +29,7 @@
       position: relative;
       top: -3.125rem;
       > select {
-        margin: 1rem;
+        margin: 1rem 0 0 1rem;
         padding: 0.2rem 0.6rem;
       }
     }
@@ -79,7 +79,7 @@
 
     &__title {
       font-size: 1.2rem;
-      margin-bottom: 1.2rem;
+      margin: 1.2rem 0;
     }
     &__description {
       display: flex;
