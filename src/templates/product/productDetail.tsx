@@ -32,7 +32,8 @@ type Product = {
 
 export const ProductDetail = () => {
   const router = useRouter();
-  const id = usePathname().split('/')[2];
+  const path = usePathname();
+  const id = path.split('/')[2];
 
   const productId: number | any =
     typeof id === 'string' ? parseInt(id, 10) : undefined;
@@ -75,7 +76,7 @@ export const ProductDetail = () => {
     };
 
     const fetchMyProductData = async () => {
-      const res2: AXIOSResponse<IProduct[]> = await getMyProduct();
+      const res2: AXIOSResponse<IProduct[]> = await getMyProduct(4);
       try {
         if (res2.statusCode === 200) {
           setMyProduct(res2.data);
@@ -90,8 +91,10 @@ export const ProductDetail = () => {
 
     return () => {
       setProduct(null);
+      setMyProduct([]);
     };
   }, [id]);
+  console.log(myProduct);
 
   const settings = {
     dots: true, // 페이지 네비게이션(점) 표시
@@ -177,9 +180,12 @@ export const ProductDetail = () => {
               </div>
 
               <div className="more-product__grid">
-                {myProduct?.slice(0, 4).map((product, index) => {
+                {myProduct?.map((product, index) => {
                   return (
-                    <div className="more-product" key={index}>
+                    <div
+                      onClick={() => router.push(`/product/${product.id}`)}
+                      className="more-product"
+                      key={index}>
                       <img src={product.thumbnail} alt="sale image" />
                       <p>{product.title}</p>
                       <p>{product.price}</p>
@@ -199,7 +205,7 @@ export const ProductDetail = () => {
           <p>125만원</p>
         </div>
 
-        <div onClick={() => router.push('/chatList')}>
+        <div onClick={() => router.push(`/product/${id}/chats`)}>
           <button className="product-detail__chat-button">관련 채팅보기</button>
         </div>
       </footer>
