@@ -16,8 +16,7 @@ import { useSearchParams } from 'next/navigation';
 export default function MainPage() {
   const [data, setData] = useState<IProduct[]>([]);
   const categoryParams = useSearchParams();
-  const category = categoryParams.get('category') || '전체';
-  const categoryId = categoryParams.get('categoryId') || undefined;
+  const category = categoryParams.get('category') || undefined;
 
   const router = useRouter();
 
@@ -25,7 +24,7 @@ export default function MainPage() {
     const fetchData = async () => {
       const res: AXIOSResponse<IProduct[]> = await getProducts(
         undefined,
-        categoryId,
+        category,
       );
       if (res.statusCode === 200) {
         setData(res.data);
@@ -39,7 +38,7 @@ export default function MainPage() {
     <div id="mainPage">
       <header>
         <Header
-          title={category}
+          title={category ?? '전체'}
           border={true}
           button={
             <>
