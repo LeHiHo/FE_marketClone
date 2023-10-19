@@ -22,7 +22,7 @@ type Product = {
   id: number;
   title: string;
   price: number;
-  categoryId: number;
+  categoryName: string;
   content: string;
   images: string[];
   status: string;
@@ -164,7 +164,9 @@ export const ProductDetail = () => {
           <div className="product-detail__content-wrapper">
             <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
-              <p className="product-detail__category">{product?.categoryId}</p>
+              <p className="product-detail__category">
+                {product?.categoryName}
+              </p>
               <p className="product-detail__time">⋅ 1일 전</p>
             </div>
 
