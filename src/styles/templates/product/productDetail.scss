@@ -87,7 +87,7 @@
       color: #a5a5a5;
       font-size: 0.8rem;
       margin-bottom: 1.2rem;
-      > p:first-of-type {
+      > p {
         margin-right: 0.5rem;
         text-decoration: underline;
       }
@@ -116,7 +116,7 @@
         }
       }
       &-icon {
-        color : #ff0000;
+        color: #ff0000;
       }
     }
 

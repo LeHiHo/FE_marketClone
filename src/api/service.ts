@@ -129,3 +129,11 @@ export const deleteWishProduct = async (id: number) => {
   const res = await client.delete(`wish/${id}`);
   return res;
 };
+
+export const putEditProfile = async (nickname: string, profileImg: string) => {
+  const res = await client.put('/myPage/profile', {
+    nickname: nickname,
+    profileImg: profileImg,
+  });
+  return res;
+};

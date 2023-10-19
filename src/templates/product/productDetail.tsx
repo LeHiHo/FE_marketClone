@@ -1,5 +1,9 @@
 'use client';
-import { addWishProduct, deleteWishProduct, getProductDetail } from '@/api/service';
+import {
+  addWishProduct,
+  deleteWishProduct,
+  getProductDetail,
+} from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
@@ -33,6 +37,7 @@ type Product = {
   content: string;
   images: string[];
   status: string;
+  like: boolean;
   likes: number;
   myProduct: boolean;
   seller: Seller;
@@ -101,7 +106,7 @@ export const ProductDetail = () => {
     autoplay: false, // 자동 재생
     arrows: false,
   };
-  
+
   return (
     <div id="product-detail">
       <div className="product-detail">
@@ -168,33 +173,38 @@ export const ProductDetail = () => {
               <p className="product-detail__category">
                 {product?.categoryName}
               </p>
-              <p className="product-detail__time">⋅ 1일 전</p>
             </div>
 
             <p className="product-detail__content">{product?.content}</p>
           </div>
 
-          {!product?.myProduct && (
+          {product?.sellerProductInfos && (
             <div className="product-detail__more-product">
               <div>
                 <div className="more-product__title">
                   <p>{product?.seller.nickname}님의 판매상품</p>
-                  <Btn type="button" href="products" label="모두보기" />
+                  <Btn
+                    type="button"
+                    href={`products?id=${product?.seller.sellerId}`}
+                    label="모두보기"
+                  />
                 </div>
 
                 <div className="more-product__grid">
-                  {product?.sellerProductInfos.map((product, index) => {
-                    return (
-                      <div
-                        onClick={() => router.push(`/product/${product.id}`)}
-                        className="more-product"
-                        key={index}>
-                        <img src={product.thumbnail} alt="sale image" />
-                        <p>{product.title}</p>
-                        <p>{product.price}</p>
-                      </div>
-                    );
-                  })}
+                  {product?.sellerProductInfos
+                    .slice(0, 4)
+                    .map((product, index) => {
+                      return (
+                        <div
+                          onClick={() => router.push(`/product/${product.id}`)}
+                          className="more-product"
+                          key={index}>
+                          <img src={product.thumbnail} alt="sale image" />
+                          <p>{product.title}</p>
+                          <p>{product.price}</p>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>
@@ -210,7 +220,7 @@ export const ProductDetail = () => {
               className="product-detail__footer-icon"
               onClick={() => {
                 setOnLike((prev) => !prev);
-                addWishProduct(productId)
+                addWishProduct(productId);
               }}
             />
           ) : (
