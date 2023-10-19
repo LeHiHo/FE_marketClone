@@ -4,9 +4,10 @@
   .category {
     &__content {
       @include grid($gap: 0);
-      padding: 30px 20px 0;
+      padding: 0.8rem;
       div {
         @include flex($justify: center, $align: center);
+        white-space: nowrap;
         height: 68px;
         cursor: pointer;
       }

@@ -1,3 +1,5 @@
+'use client';
+
 import { getProducts } from '@/api/service';
 import Header from '@/components/header';
 import ProductList from '@/components/productList';
@@ -6,27 +8,47 @@ import '@/styles/templates/main/main.scss';
 import AddBtn from './addBtn';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import Link from 'next/link';
 import Navbar from '@/components/navbar';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
-export default async function MainPage() {
-  const res: AXIOSResponse<IProduct[]> = await getProducts();
-  const data = res.statusCode === 200 ? res.data : [];
-  
+export default function MainPage() {
+  const [data, setData] = useState<IProduct[]>([]);
+  const categoryParams = useSearchParams();
+  const category = categoryParams.get('category') || '전체';
+  const categoryId = categoryParams.get('categoryId') || undefined;
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res: AXIOSResponse<IProduct[]> = await getProducts(
+        undefined,
+        categoryId,
+      );
+      if (res.statusCode === 200) {
+        setData(res.data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div id="mainPage">
       <header>
         <Header
-          title={'개발자님'}
+          title={category}
           border={true}
           button={
             <>
-              <Link href="search">
+              <div onClick={() => router.push('/search')}>
                 <AiOutlineSearch className="header__btn" />
-              </Link>
-              <Link href="category">
+              </div>
+              <div onClick={() => router.push('/category')}>
                 <RxHamburgerMenu className="header__btn" />
-              </Link>
+              </div>
             </>
           }
         />

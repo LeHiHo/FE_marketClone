@@ -65,7 +65,7 @@ export default function WirtePage() {
           />
           <p>카테고리</p>
           <input
-            type="text"
+            type="number"
             name="product_category"
             value={categoryId}
             onChange={(e) => setCategoryId(Number(e.target.value))}

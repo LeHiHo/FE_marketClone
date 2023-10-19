@@ -9,6 +9,14 @@ export interface IProduct {
   thumbnail: string;
 }
 
+// 유저
+export interface IUser {
+  email: string;
+  nickname: string;
+  tel: string;
+  profileImage: string;
+}
+
 // axios
 export interface AXIOSResponse<T> {
   statusCode: number;
