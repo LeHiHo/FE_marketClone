@@ -173,7 +173,7 @@ export const ProductDetail = () => {
             <p className="product-detail__content">{product?.content}</p>
           </div>
 
-          {product?.myProduct && (
+          {!product?.myProduct && (
             <div className="product-detail__more-product">
               <div>
                 <div className="more-product__title">
