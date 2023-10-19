@@ -10,14 +10,16 @@ import { AXIOSResponse, IProduct } from '@/types/interface';
 
 export default function MypageSale() {
   const [data, setData] = useState<IProduct[]>([]);
-  const [productList, setProductList] = useState('completed');
+  const [productList, setProductList] = useState('all');
+  const handleChangeList = (state: string) => {
+    setProductList(state);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const res: AXIOSResponse<IProduct[]> = await getProducts();
       if (res.statusCode === 200) {
         setData(res.data);
-        setProductList('all');
       }
     };
 
@@ -29,7 +31,10 @@ export default function MypageSale() {
       return product;
     } else if (productList === 'completed' && product.status === '거래완료') {
       return product;
-    } else {
+    } else if (productList === 'sale' && product.status === '판매중') {
+      return product;
+    }
+     else {
       return;
     }
   });
@@ -37,7 +42,7 @@ export default function MypageSale() {
   return (
     <>
       <Header goBack={true} border={true} title={'판매내역'} />
-      <ProductStateList />
+      <ProductStateList onChangeList={handleChangeList} />
       <ul className="product-list">
         {test.map((product) => (
           <Fragment key={product.id}>
