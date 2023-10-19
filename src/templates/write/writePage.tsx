@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { postProducts } from '@/api/service';
 import { useRouter } from 'next/navigation';
 import CategoryModal from '@/templates/write/categoryModal';
-import { useHandleImg } from '@/templates/write/useHandleImg';
+import { useHandleImg } from './useHandleImg';
 import Btn from '@/components/btn';
 
 export default function WritePage() {
@@ -14,14 +14,13 @@ export default function WritePage() {
   const [category, setCategory] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
-  const [images, setImages] = useState<FileList | null>(null);
-
   const [isModal, setIsModal] = useState<boolean>(false);
 
   const router = useRouter();
 
-  const { imageArray, removeImage, handleImageChange } =
-    useHandleImg(setImages);
+  const generateUniqueId = (image: File, index: number): string => {
+    return `${image.lastModified}-${image.name}-${index}`;
+  };
 
   const toggleModal = () => {
     setIsModal(!isModal);
@@ -31,15 +30,11 @@ export default function WritePage() {
     setCategory(selectedCategory);
   };
 
+  const { imageArray, images, removeImage, handleImageChange } = useHandleImg();
+
   const handleWrite = async () => {
     try {
-      if (imageArray.length > 0) {
-        // 이미지 배열 -> file list로 변환
-        // const dataTransfer = new DataTransfer();
-        // imageArray.forEach((file) => dataTransfer.items.add(file));
-        // const convertImg = dataTransfer.files;
-        // setImages(convertImg);
-
+      if (images) {
         const response = await postProducts(
           title,
           category,
@@ -64,11 +59,7 @@ export default function WritePage() {
     }
   };
 
-  const number = 2;
-
-  const generateUniqueId = (image, index) => {
-    return `${image.lastModified}-${image.name}-${index}`;
-  };
+  const imgCount = imageArray?.length;
 
   return (
     <>
@@ -82,8 +73,10 @@ export default function WritePage() {
           <div className="writePage__input-container">
             <div className="previewImg">
               <label htmlFor="fileInput" className="writePage__input-UploadBox">
-                <img src="/svg/camera.svg" alt="사진기" />
-                {`${number}/10`}
+                <img src="/svg/camera.svg" alt="camera" />
+                <div>
+                  <span className="imgCount">{imgCount}</span>/10
+                </div>
                 <input
                   className="writePage__input-fileUpload"
                   accept="image/*"
@@ -101,8 +94,6 @@ export default function WritePage() {
                   <img
                     src={URL.createObjectURL(image)}
                     alt={`Uploaded ${index}`}
-                    width="50"
-                    height="50"
                   />
                   <div className="x_btn" onClick={() => removeImage(index)}>
                     <img src="/svg/x_btn.svg" alt="x_btn" />

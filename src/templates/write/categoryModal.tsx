@@ -37,7 +37,7 @@ export default function CategoryModal({
   if (!isModal) return null;
 
   const handleCategoryClick = (category: string) => {
-    selectCategory(category); // 선택한 카테고리를 전달
+    selectCategory(category);
     onClose();
   };
 

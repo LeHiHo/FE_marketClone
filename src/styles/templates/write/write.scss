@@ -74,11 +74,9 @@
   }
 
   .previewImg {
-    display: flex;
-  }
-
-  .writePage__input-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 3fr);
+    gap: 5px;
   }
 
   .previewImg-item {
@@ -92,13 +90,21 @@
       margin-right: 10px;
     }
 
+    .x_btn {
+      position: absolute;
+    }
+
     .x_btn img {
-      width: 25px;
-      height: 25px;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border-radius: 50%;
+      top: -5px;
+      left: 5px;
     }
   }
-}
-
-.writePage__input-UploadBox {
-  margin-right: 10px;
+  .imgCount {
+    color: red;
+  }
 }

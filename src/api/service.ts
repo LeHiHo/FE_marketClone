@@ -19,11 +19,11 @@ export const postProducts = async (
   categoryName: string,
   content: string,
   price: number,
-  images?: FileList,
+  images?: FileList | null,
 ) => {
   const formData = new FormData();
   formData.append('title', title);
-  formData.append('categoryName', categoryName); // 숫자를 문자열로 변환
+  formData.append('categoryName', categoryName);
   formData.append('content', content);
   formData.append('price', price.toString()); // 숫자를 문자열로 변환
 
@@ -94,12 +94,21 @@ export const updateProductState = async (
 
 export const getMyInfo = async () => {
   const res = await client.get('/myInfo');
-  console.log(res);
-  return res;
+  return res.data;
 };
 
 // 내 판매 상품 리스트 조회
 export const getMyProduct = async () => {
   const res = await client.get('/myPage/products');
+  return res.data;
+};
+
+export const getMyChatList = async () => {
+  const res = await client.get('/myPage/chats');
+  return res.data;
+};
+
+export const getProductChatList = async (id: number | null) => {
+  const res = await client.get(`/products/${id}/chats`);
   return res.data;
 };
