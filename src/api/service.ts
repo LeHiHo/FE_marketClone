@@ -49,11 +49,11 @@ export const getProductCategory = async () => {
   return res.data;
 };
 
-export const getProducts = async (searchWord?: string, categoryId?: string) => {
+export const getProducts = async (searchWord?: string, category?: string) => {
   const res = await client.get('/products', {
     params: {
       searchWord,
-      categoryIds: categoryId,
+      categoryNames: category,
     },
   });
   return res.data;
@@ -116,4 +116,16 @@ export const getProductChatList = async (id: number | null) => {
 export const getSellerProduct = async (id: number | null) => {
   const res = await client.get(`/products/${id}/list`);
   return res.data;
+};
+
+// 위시상품 추가 / 삭제
+
+export const addWishProduct = async (id: number) => {
+  const res = await client.post(`wish/${id}`);
+  return res;
+};
+
+export const deleteWishProduct = async (id: number) => {
+  const res = await client.delete(`wish/${id}`);
+  return res;
 };

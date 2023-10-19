@@ -1,12 +1,12 @@
 'use client';
-import { getProductDetail } from '@/api/service';
+import { addWishProduct, deleteWishProduct, getProductDetail } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
 import { AXIOSResponse } from '@/types/interface';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
@@ -48,7 +48,7 @@ export const ProductDetail = () => {
     typeof id === 'string' ? parseInt(id, 10) : undefined;
 
   const [product, setProduct] = useState<Product | null>(null);
-
+  const [onLike, setOnLike] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
 
@@ -77,6 +77,7 @@ export const ProductDetail = () => {
       try {
         if (res.statusCode === 200) {
           setProduct(res.data);
+          setOnLike(res.data.like);
         }
       } catch (error) {
         console.error(error);
@@ -100,7 +101,7 @@ export const ProductDetail = () => {
     autoplay: false, // 자동 재생
     arrows: false,
   };
-
+  
   return (
     <div id="product-detail">
       <div className="product-detail">
@@ -203,7 +204,25 @@ export const ProductDetail = () => {
 
       <footer className="product-detail__footer">
         <div className="product-detail__footer--wrapper">
-          <AiOutlineHeart size="28" className="product-detail__footer-icon" />
+          {!onLike ? (
+            <AiOutlineHeart
+              size="28"
+              className="product-detail__footer-icon"
+              onClick={() => {
+                setOnLike((prev) => !prev);
+                addWishProduct(productId)
+              }}
+            />
+          ) : (
+            <AiFillHeart
+              size="28"
+              className="product-detail__footer-icon"
+              onClick={() => {
+                setOnLike((prev) => !prev);
+                deleteWishProduct(productId);
+              }}
+            />
+          )}
           <span>|</span>
           <p>{product?.price}</p>
         </div>
