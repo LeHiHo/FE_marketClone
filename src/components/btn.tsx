@@ -4,7 +4,7 @@ import '@/styles/components/btn.scss';
 import { useRouter } from 'next/navigation';
 
 interface BtnProps {
-  type: 'button' | 'submit' | 'reset';
+  type?: 'button' | 'submit' | 'reset';
   href?: string; // href는 선택적인 프로퍼티로 변경
   label: string;
   disabled?: boolean;
@@ -20,20 +20,11 @@ export default function Btn({
 }: BtnProps) {
   const router = useRouter();
 
-  const buttonElement = (
-    <div id="button">
+  return (
+    <div id="button" onClick={() => href && router.push(href)}>
       <button type={type} onClick={onClick} disabled={disabled}>
         {label}
       </button>
     </div>
-  );
-
-  // href가 있을 때만 Link 컴포넌트로 감싼다.
-  return href ? (
-    <div id="button" onClick={() => router.push(href)}>
-      {buttonElement}
-    </div>
-  ) : (
-    buttonElement
   );
 }
