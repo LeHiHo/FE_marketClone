@@ -9,7 +9,7 @@ export default function ProductStateList({
     <>
       <div className="productStateList">
         <div className="productState active">
-          <div
+          <button
             onClick={(e) => {
               const productStates = document.querySelectorAll('.productState');
               onChangeList('all');
@@ -19,10 +19,10 @@ export default function ProductStateList({
               e.currentTarget.closest('.productState')?.classList.add('active');
             }}>
             전체
-          </div>
+          </button>
         </div>
         <div className="productState">
-          <div
+          <button
             onClick={(e) => {
               const productStates = document.querySelectorAll('.productState');
               onChangeList('sale');
@@ -32,10 +32,10 @@ export default function ProductStateList({
               e.currentTarget.closest('.productState')?.classList.add('active');
             }}>
             판매중
-          </div>
+          </button>
         </div>
         <div className="productState">
-          <div
+          <button
             onClick={(e) => {
               const productStates = document.querySelectorAll('.productState');
               onChangeList('completed');
@@ -45,7 +45,7 @@ export default function ProductStateList({
               e.currentTarget.closest('.productState')?.classList.add('active');
             }}>
             거래완료
-          </div>
+          </button>
         </div>
       </div>
     </>

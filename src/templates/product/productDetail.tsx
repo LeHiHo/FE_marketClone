@@ -7,6 +7,7 @@ import {
 } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
+import ProductBadge from '@/components/productBadge';
 import '@/styles/templates/product/productDetail.scss';
 import { AXIOSResponse } from '@/types/interface';
 import { useRouter, usePathname } from 'next/navigation';
@@ -205,6 +206,15 @@ export const ProductDetail = () => {
           )}
 
           <div className="product-detail__content-wrapper">
+            {!product?.myProduct && product?.status === '예약중' && (
+              <ProductBadge
+                productStatus={product?.status}
+                state={'reserved'}
+              />
+            )}
+            {!product?.myProduct && product?.status === '거래완료' && (
+              <ProductBadge productStatus={product?.status} state={'sold'} />
+            )}
             <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
               <p className="product-detail__category">
