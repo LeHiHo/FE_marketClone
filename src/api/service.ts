@@ -59,6 +59,11 @@ export const getProducts = async (searchWord?: string, category?: string) => {
   return res.data;
 };
 
+export const getUserProducts = async (id: number) => {
+  const res = await client.get(`/products/${id}/list`);
+  return res.data;
+};
+
 export const postSignUp = async (
   email: string,
   password: string,

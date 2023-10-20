@@ -184,7 +184,11 @@ export const ProductDetail = () => {
               <div>
                 <div className="more-product__title">
                   <p>{product?.seller.nickname}님의 판매상품</p>
-                  <Btn type="button" href="products" label="모두보기" />
+                  <Btn
+                    type="button"
+                    href={`products?id=${product?.seller.sellerId}`}
+                    label="모두보기"
+                  />
                 </div>
 
                 <div className="more-product__grid">
