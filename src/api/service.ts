@@ -50,6 +50,7 @@ export const getProductCategory = async () => {
   return res.data;
 };
 
+// 상품정보 불러오기
 export const getProducts = async (searchWord?: string, category?: string) => {
   const res = await client.get('/products', {
     params: {
@@ -58,6 +59,12 @@ export const getProducts = async (searchWord?: string, category?: string) => {
     },
   });
   return res.data;
+};
+
+// 상품수정
+export const putProducts = async (id: number) => {
+  const res = await client.put(`products/${id}`);
+  return res;
 };
 
 // 상품삭제
