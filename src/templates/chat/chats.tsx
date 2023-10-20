@@ -15,10 +15,14 @@ export default function Chats() {
   useEffect(() => {
     const fetchData = async () => {
       const res = id ? await getProductChatList(id) : await getMyChatList();
-      if (res.statusCode === 200) {
-        setChats(res.data);
-      } else {
-        console.log(res);
+      try {
+        if (res.statusCode === 200) {
+          setChats(res.data);
+        } else {
+          console.log(res);
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
 
@@ -29,7 +33,6 @@ export default function Chats() {
     };
   }, []);
 
-  console.log(chats);
   return (
     <>
       <header>

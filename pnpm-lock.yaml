@@ -6,10 +6,10 @@ settings:
 
 dependencies:
   '@types/cookie':
-    specifier: ^0.5.2
+    specifier: ^0.5.3
     version: 0.5.3
   '@types/js-cookie':
-    specifier: ^3.0.4
+    specifier: ^3.0.5
     version: 3.0.5
   axios:
     specifier: ^1.5.1
@@ -25,9 +25,9 @@ dependencies:
     version: 3.0.5
   next:
     specifier: 13.5.4
-    version: 13.5.4(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4)
+    version: 13.5.4(react-dom@18.2.0)(react@18.2.0)(sass@1.69.4)
   pnpm:
-    specifier: ^8.8.0
+    specifier: ^8.9.2
     version: 8.9.2
   react:
     specifier: ^18.2.0
@@ -42,7 +42,7 @@ dependencies:
     specifier: ^0.29.0
     version: 0.29.0(react-dom@18.2.0)(react@18.2.0)
   sass:
-    specifier: ^1.68.0
+    specifier: ^1.69.4
     version: 1.69.4
   slick-carousel:
     specifier: ^1.8.1
@@ -2194,7 +2194,7 @@ packages:
         integrity: sha512-ZiqdencANDZy6sWOWJ54LDvebuXFEhDlHtXU9FFipQR2BcYU2QJxZhvJPW6YK7cocibUiNn+YvDTbt1HtCIBVA==,
       }
     dependencies:
-      '@types/react': 18.2.24
+      '@types/react': 18.2.30
     dev: true
 
   /@types/react@18.2.24:
@@ -2207,13 +2207,19 @@ packages:
     dev: true
 
   /@types/react-slick@0.23.11:
-    resolution: {integrity: sha512-52AbNhYN7u0ATqAUvap2MXNG3znUsJslAWgebUHrovvnJ6EG6oic+TZyC82XiwwvijRMyL2V0C2wPJbzsSwllw==}
+    resolution:
+      {
+        integrity: sha512-52AbNhYN7u0ATqAUvap2MXNG3znUsJslAWgebUHrovvnJ6EG6oic+TZyC82XiwwvijRMyL2V0C2wPJbzsSwllw==,
+      }
     dependencies:
       '@types/react': 18.2.30
     dev: true
 
   /@types/react@18.2.30:
-    resolution: {integrity: sha512-OfqdJnDsSo4UNw0bqAjFCuBpLYQM7wvZidz0hVxHRjrEkzRlvZL1pJVyOSY55HMiKvRNEo9DUBRuEl7FNlJ/Vg==}
+    resolution:
+      {
+        integrity: sha512-OfqdJnDsSo4UNw0bqAjFCuBpLYQM7wvZidz0hVxHRjrEkzRlvZL1pJVyOSY55HMiKvRNEo9DUBRuEl7FNlJ/Vg==,
+      }
     dependencies:
       '@types/prop-types': 15.7.9
       '@types/scheduler': 0.16.5
@@ -2372,9 +2378,9 @@ packages:
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@8.50.0)
-      '@types/json-schema': 7.0.13
-      '@types/semver': 7.5.3
+      '@eslint-community/eslint-utils': 4.4.0(eslint@8.51.0)
+      '@types/json-schema': 7.0.14
+      '@types/semver': 7.5.4
       '@typescript-eslint/scope-manager': 6.8.0
       '@typescript-eslint/types': 6.8.0
       '@typescript-eslint/typescript-estree': 6.8.0(typescript@5.2.2)
@@ -4855,7 +4861,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       sass: 1.69.4
-      styled-jsx: 5.1.1(@babel/core@7.23.0)(react@18.2.0)
+      styled-jsx: 5.1.1(react@18.2.0)
       watchpack: 2.4.0
     optionalDependencies:
       '@next/swc-darwin-arm64': 13.5.4
@@ -5197,7 +5203,7 @@ packages:
       }
     engines: { node: '>=6.0.0' }
     dependencies:
-      fast-diff: 1.1.2
+      fast-diff: 1.3.0
     dev: true
 
   /prettier@3.0.3:
@@ -5553,8 +5559,11 @@ packages:
     dev: true
 
   /set-function-length@1.1.1:
-    resolution: {integrity: sha512-VoaqjbBJKiWtg4yRcKBQ7g7wnGnLV3M8oLvVWwOk2PdYY6PEFegR1vezXR0tw6fZGF9csVakIRjrJiy2veSBFQ==}
-    engines: {node: '>= 0.4'}
+    resolution:
+      {
+        integrity: sha512-VoaqjbBJKiWtg4yRcKBQ7g7wnGnLV3M8oLvVWwOk2PdYY6PEFegR1vezXR0tw6fZGF9csVakIRjrJiy2veSBFQ==,
+      }
+    engines: { node: '>= 0.4' }
     dependencies:
       define-data-property: 1.1.1
       get-intrinsic: 1.2.1

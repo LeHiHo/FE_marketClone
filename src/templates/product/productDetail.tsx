@@ -41,26 +41,32 @@ type Product = {
   content: string;
   images: string[];
   status: string;
+  like: boolean;
   likes: number;
   myProduct: boolean;
   seller: Seller;
   sellerProductInfos: sellerProductInfos[];
-  like: boolean;
 };
 
 export const ProductDetail = () => {
   const router = useRouter();
   const path = usePathname();
   const id = path.split('/')[2];
-  const productId: number | any =
+
+  const productId: number | undefined =
     typeof id === 'string' ? parseInt(id, 10) : undefined;
 
   const [product, setProduct] = useState<Product | null>(null);
   const [onLike, setOnLike] = useState<boolean>(false);
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const menuRef = useRef<HTMLUListElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
   const [selectedValue, setSelectedValue] = useState('1');
   const selectRef = useRef<HTMLSelectElement | null>(null);
+
+  const [isBooking, setIsBooking] = useState<boolean>(false);
+
   const handleSelectChange = () => {
     if (selectRef.current) {
       const selectedOption = selectRef.current.value;
@@ -68,6 +74,14 @@ export const ProductDetail = () => {
       updateProductState(productId, parseInt(selectedOption, 10));
     }
   };
+
+  useEffect(() => {
+    if (selectedValue === '1') {
+      setIsBooking(false);
+    } else {
+      setIsBooking(true);
+    }
+  }, [selectedValue]);
 
   const [isModal, setIsModal] = useState<boolean>(false);
 
@@ -120,7 +134,7 @@ export const ProductDetail = () => {
       setProduct(null);
       [];
     };
-  }, [id]);
+  }, [productId]);
 
   const settings = {
     dots: true, // 페이지 네비게이션(점) 표시
@@ -221,13 +235,12 @@ export const ProductDetail = () => {
                 {' '}
                 {product?.categoryName}
               </p>
-              <p className="product-detail__time">⋅ 1일 전</p>
             </div>
 
             <p className="product-detail__content">{product?.content}</p>
           </div>
 
-          {!product?.myProduct && (
+          {product?.sellerProductInfos && (
             <div className="product-detail__more-product">
               <div>
                 <div className="more-product__title">
@@ -240,18 +253,20 @@ export const ProductDetail = () => {
                 </div>
 
                 <div className="more-product__grid">
-                  {product?.sellerProductInfos.map((product, index) => {
-                    return (
-                      <div
-                        onClick={() => router.push(`/product/${product.id}`)}
-                        className="more-product"
-                        key={index}>
-                        <img src={product.thumbnail} alt="sale image" />
-                        <p>{product.title}</p>
-                        <p>{product.price}</p>
-                      </div>
-                    );
-                  })}
+                  {product?.sellerProductInfos
+                    .slice(0, 4)
+                    .map((product, index) => {
+                      return (
+                        <div
+                          onClick={() => router.push(`/product/${product.id}`)}
+                          className="more-product"
+                          key={index}>
+                          <img src={product.thumbnail} alt="sale" />
+                          <p>{product.title}</p>
+                          <p>{`${product.price}원`}</p>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>
@@ -281,12 +296,24 @@ export const ProductDetail = () => {
             />
           )}
           <span>|</span>
-          <p>125만원</p>
+          <p>{`${product?.price}원`}</p>
         </div>
 
-        <div onClick={() => router.push(`/product/${id}/chats`)}>
-          <button className="product-detail__chat-button">관련 채팅보기</button>
-        </div>
+        {product?.myProduct ? (
+          <div onClick={() => router.push(`/product/${id}/chats`)}>
+            <button className="product-detail__chat-button">
+              관련 채팅보기
+            </button>
+          </div>
+        ) : (
+          <div onClick={() => router.push(`/product/${id}/chats`)}>
+            <button
+              className="product-detail__chat-button"
+              disabled={isBooking ? true : false}>
+              채팅하기
+            </button>
+          </div>
+        )}
       </footer>
     </div>
   );
