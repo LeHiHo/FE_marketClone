@@ -130,7 +130,7 @@ export const ProductDetail = () => {
     autoplay: false, // 자동 재생
     arrows: false,
   };
-
+  console.log(product);
   return (
     <div id="product-detail">
       <div className="product-detail">
@@ -222,7 +222,11 @@ export const ProductDetail = () => {
               <div>
                 <div className="more-product__title">
                   <p>{product?.seller.nickname}님의 판매상품</p>
-                  <Btn type="button" href="products" label="모두보기" />
+                  <Btn
+                    type="button"
+                    href={`products?id=${id}`}
+                    label="모두보기"
+                  />
                 </div>
 
                 <div className="more-product__grid">
