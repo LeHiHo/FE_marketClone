@@ -42,7 +42,6 @@ export default function ProductShowAll() {
     };
     fetchData();
   }, [filter]);
-  console.log(products);
 
   return (
     <>
