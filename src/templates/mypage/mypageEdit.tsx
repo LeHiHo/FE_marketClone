@@ -11,7 +11,6 @@ import { BsCamera } from 'react-icons/bs';
 export default function MypageEditPage() {
   const router = useRouter();
 
-  const [isEditImg, setIsEditImg] = useState<boolean>(false);
   const [user, setUser] = useState<IUser>({
     email: '',
     nickname: '',
@@ -19,6 +18,9 @@ export default function MypageEditPage() {
     profileImage: '',
   });
 
+  const [name, setName] = useState<string>(user.nickname);
+  const [previewImg, setPreviewImg] = useState<string | null>(null);
+  const [profileImage, setProfileImage] = useState<File>();
   useEffect(() => {
     const fetchData = async () => {
       const res: AXIOSResponse<IUser> = await getMyInfo();
@@ -27,26 +29,53 @@ export default function MypageEditPage() {
       }
     };
     fetchData();
+    convertURLtoFile(user.profileImage);
   }, []);
 
-  const [name, setName] = useState<string>(user.nickname);
-  const [img, setImg] = useState<string>(user.profileImage);
+  const convertURLtoFile = async (imageUrl: string) => {
+    fetch(imageUrl)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const filename = 'image.jpg';
+        const file = new File([blob], filename, { type: 'image/*' });
+        const formData = new FormData();
+        formData.append('imageFile', file);
+        return file;
+      })
+      .catch((error) => {
+        console.error('Error fetching or converting the image:', error);
+      });
+  };
 
-  const handleOnClick = async () => {
+  const handleEditProfile = async () => {
     try {
-      const res = await putEditProfile(name, img);
-      if (res.status === 200) {
-        alert('프로필 수정이 완료되었습니다.');
-        router.push('/mypage');
+      if (profileImage) {
+        const res = await putEditProfile(name || user.nickname, profileImage);
+        if (res.status === 200) {
+          alert('프로필 수정이 완료되었습니다.');
+          router.push('/mypage');
+          router.refresh();
+        }
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleImgOnClick = () => {
-    // 배경 색 바뀌고, img가 input으로 바뀌어야 함. 미리보기도 떠야 함. footer도 변해야 함.
-    console.log('click');
+  const handleImgOnClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target;
+    if (input.files) {
+      setProfileImage(input.files && input.files[0]);
+    }
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        setPreviewImg(e.target?.result as string); // Set the selected image URL
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
   };
 
   return (
@@ -55,10 +84,19 @@ export default function MypageEditPage() {
 
       <div className="mypage-edit__main">
         <div className="mypage-edit__image">
-          <img src={user.profileImage} alt="profile" />
-          <div onClick={handleImgOnClick} className="mypage-edit__icon">
-            <BsCamera size="28" />
-          </div>
+          <img src={previewImg || user.profileImage} alt="profile" />
+          <label htmlFor="imgInput">
+            <div className="mypage-edit__icon">
+              <BsCamera size="28" />
+              <input
+                id="imgInput"
+                className="mypage-edit__file-input"
+                type="file"
+                accept="image/*"
+                onChange={handleImgOnClick}
+              />
+            </div>
+          </label>
         </div>
         <div className="mypage-edit__input">
           <input
@@ -71,7 +109,7 @@ export default function MypageEditPage() {
       </div>
 
       <footer className="mypage-edit__footer">
-        <Btn label="완료" onClick={handleOnClick} />
+        <Btn label="완료" onClick={handleEditProfile} />
       </footer>
     </div>
   );

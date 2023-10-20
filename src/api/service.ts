@@ -5,6 +5,12 @@ const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+};
+
 export const getProductDetail = async (id: number | undefined) => {
   const res = await client.get(`/products/${id}`, {
     params: {
@@ -33,12 +39,6 @@ export const postProducts = async (
       formData.append('images', images[i]);
     }
   }
-
-  const config = {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  };
 
   const res = await client.post('/products', formData, config);
   return res.data;
@@ -130,10 +130,11 @@ export const deleteWishProduct = async (id: number | undefined) => {
   return res;
 };
 
-export const putEditProfile = async (nickname: string, profileImg: string) => {
-  const res = await client.put('/myPage/profile', {
-    nickname: nickname,
-    profileImg: profileImg,
-  });
+export const putEditProfile = async (nickname: string, profileImg: File) => {
+  const profileFormData = new FormData();
+  profileFormData.append('nickname', nickname);
+  profileFormData.append('profileImg', profileImg);
+
+  const res = await client.put('/myPage/profile', profileFormData, config);
   return res;
 };

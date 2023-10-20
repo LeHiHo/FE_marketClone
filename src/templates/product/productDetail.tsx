@@ -238,7 +238,7 @@ export const ProductDetail = () => {
                           key={index}>
                           <img src={product.thumbnail} alt="sale" />
                           <p>{product.title}</p>
-                          <p>{product.price}</p>
+                          <p>{`${product.price}원`}</p>
                         </div>
                       );
                     })}
@@ -271,7 +271,7 @@ export const ProductDetail = () => {
             />
           )}
           <span>|</span>
-          <p>{product?.price}</p>
+          <p>{`${product?.price}원`}</p>
         </div>
 
         {product?.myProduct ? (
