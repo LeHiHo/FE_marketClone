@@ -16,6 +16,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
+import ProductDelete from './productDelete';
+
 type Seller = {
   sellerId: number;
   profileImage: string;
@@ -56,6 +58,12 @@ export const ProductDetail = () => {
   const [onLike, setOnLike] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
+
+  const [isModal, setIsModal] = useState<boolean>(false);
+
+  const toggleModal = () => {
+    setIsModal(!isModal);
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -110,6 +118,13 @@ export const ProductDetail = () => {
   return (
     <div id="product-detail">
       <div className="product-detail">
+        {isModal && (
+          <ProductDelete
+            isModal={isModal}
+            onClose={toggleModal}
+            productID={productId}
+          />
+        )}
         <Header
           goBack={true}
           border={false}
@@ -124,12 +139,15 @@ export const ProductDetail = () => {
                   onClick={toggleMenu}
                 />
                 {isMenuOpen && (
-                  <ul ref={menuRef} className="product-detail__menu">
-                    <li onClick={() => router.push('/product/edit')}>
+                  <div
+                    role="button"
+                    ref={menuRef}
+                    className="product-detail__menu">
+                    <div onClick={() => router.push('/product/edit')}>
                       게시글 수정
-                    </li>
-                    <li>삭제</li>
-                  </ul>
+                    </div>
+                    <div onClick={toggleModal}>삭제</div>
+                  </div>
                 )}
               </>
             )

@@ -27,9 +27,13 @@ export default function LoginPage() {
       } else {
         console.error('Login failed:', response.data);
       }
-    } catch (error) {
-      const errorData = error.response?.data;
-      console.error('Login failed:', errorData || error);
+    } catch (error: any) {
+      if (error.response) {
+        const errorData = error.response?.data;
+        console.error('Login failed:', errorData);
+      } else {
+        console.error('An unexpected error occurred:', error);
+      }
     }
   };
 

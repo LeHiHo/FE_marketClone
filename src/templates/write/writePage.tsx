@@ -13,7 +13,7 @@ export default function WritePage() {
   const [title, setTitle] = useState<string>('');
   const [category, setCategory] = useState<string>('');
   const [content, setContent] = useState<string>('');
-  const [price, setPrice] = useState<number>(0);
+  const [price, setPrice] = useState<string>('');
   const [isModal, setIsModal] = useState<boolean>(false);
 
   const router = useRouter();
@@ -42,7 +42,7 @@ export default function WritePage() {
           price,
           images,
         );
-        if (response.statusCode === 200) {
+        if (response.data.statusCode === 200) {
           router.push('/main');
           console.log('Post success', response);
         } else {
@@ -51,7 +51,7 @@ export default function WritePage() {
       }
     } catch (error: any) {
       if (error.response) {
-        const errorData = error.response.data;
+        const errorData = error.response?.data;
         console.error('Post failed:', errorData);
       } else {
         console.error('An unexpected error occurred:', error);

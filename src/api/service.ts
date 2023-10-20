@@ -42,7 +42,7 @@ export const postProducts = async (
   };
 
   const res = await client.post('/products', formData, config);
-  return res.data;
+  return res;
 };
 
 export const getProductCategory = async () => {
@@ -58,6 +58,12 @@ export const getProducts = async (searchWord?: string, category?: string) => {
     },
   });
   return res.data;
+};
+
+// 상품삭제
+export const deleteProducts = async (id: number) => {
+  const res = await client.delete(`products/${id}`);
+  return res;
 };
 
 export const postSignUp = async (
