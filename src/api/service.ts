@@ -122,6 +122,11 @@ export const getMyChatList = async () => {
   return res.data;
 };
 
+export const getMyWishList = async () => {
+  const res = await client.get('/wish');
+  return res.data;
+};
+
 export const getProductChatList = async (id: number | null) => {
   const res = await client.get(`/products/${id}/chats`);
   return res.data;
