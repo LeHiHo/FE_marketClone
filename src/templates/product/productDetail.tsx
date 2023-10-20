@@ -1,12 +1,16 @@
 'use client';
-import { getProductDetail } from '@/api/service';
+import {
+  addWishProduct,
+  deleteWishProduct,
+  getProductDetail,
+} from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/product/productDetail.scss';
 import { AXIOSResponse } from '@/types/interface';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
@@ -37,6 +41,7 @@ type Product = {
   myProduct: boolean;
   seller: Seller;
   sellerProductInfos: sellerProductInfos[];
+  like: boolean;
 };
 
 export const ProductDetail = () => {
@@ -48,7 +53,7 @@ export const ProductDetail = () => {
     typeof id === 'string' ? parseInt(id, 10) : undefined;
 
   const [product, setProduct] = useState<Product | null>(null);
-
+  const [onLike, setOnLike] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
 
@@ -77,6 +82,7 @@ export const ProductDetail = () => {
       try {
         if (res.statusCode === 200) {
           setProduct(res.data);
+          setOnLike(res.data?.like);
         }
       } catch (error) {
         console.error(error);
@@ -142,7 +148,7 @@ export const ProductDetail = () => {
 
         <div className="product-detail__main">
           <div className="product-detail__profile">
-            <div onClick={() => router.push('/mypage')}>
+            <div onClick={() => product?.myProduct && router.push('/mypage')}>
               <img
                 src={product?.seller.profileImage}
                 alt="profile"
@@ -165,6 +171,7 @@ export const ProductDetail = () => {
             <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
               <p className="product-detail__category">
+                {' '}
                 {product?.categoryName}
               </p>
               <p className="product-detail__time">⋅ 1일 전</p>
@@ -203,7 +210,25 @@ export const ProductDetail = () => {
 
       <footer className="product-detail__footer">
         <div className="product-detail__footer--wrapper">
-          <AiOutlineHeart size="28" className="product-detail__footer-icon" />
+          {!onLike ? (
+            <AiOutlineHeart
+              size="28"
+              className="product-detail__footer-icon"
+              onClick={() => {
+                setOnLike((prev) => !prev);
+                addWishProduct(productId);
+              }}
+            />
+          ) : (
+            <AiFillHeart
+              size="28"
+              className="product-detail__footer-icon"
+              onClick={() => {
+                setOnLike((prev) => !prev);
+                deleteWishProduct(productId);
+              }}
+            />
+          )}
           <span>|</span>
           <p>125만원</p>
         </div>

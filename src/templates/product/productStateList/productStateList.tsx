@@ -3,7 +3,7 @@ import 'src/styles/templates/product/productStateList.scss';
 export default function ProductStateList({
   onChangeList,
 }: {
-  onChangeList: React.Dispatch<React.SetStateAction<S>>;
+  onChangeList: React.Dispatch<React.SetStateAction<string>>;
 }) {
   
   return (

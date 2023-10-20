@@ -16,14 +16,14 @@ export const getProductDetail = async (id: number) => {
 
 export const postProducts = async (
   title: string,
-  categoryId: number,
+  categoryName: string,
   content: string,
   price: number,
-  images?: FileList,
+  images?: FileList | null,
 ) => {
   const formData = new FormData();
   formData.append('title', title);
-  formData.append('categoryId', categoryId.toString()); // 숫자를 문자열로 변환
+  formData.append('categoryName', categoryName);
   formData.append('content', content);
   formData.append('price', price.toString()); // 숫자를 문자열로 변환
 
@@ -49,11 +49,11 @@ export const getProductCategory = async () => {
   return res.data;
 };
 
-export const getProducts = async (searchWord?: string, categoryId?: string) => {
+export const getProducts = async (searchWord?: string, category?: string) => {
   const res = await client.get('/products', {
     params: {
       searchWord,
-      categoryIds: categoryId,
+      categoryNames: category,
     },
   });
   return res.data;
@@ -75,20 +75,16 @@ export const postSignUp = async (
 };
 
 export const postAuth = async (email: string, password: string) => {
-  const res = await client.post('/login', {
-    email: email,
-    password: password,
-  });
-  return res;
-};
-
-export const updateProductState = async (
-  productStateId: number,
-  changeStateCode: number,
-) => {
-  const res = await client.put(`/products/${productStateId}/status`, {
-    status: changeStateCode,
-  });
+  const res = await client.post(
+    '/login',
+    {
+      email: email,
+      password: password,
+    },
+    {
+      withCredentials: true,
+    },
+  );
   return res;
 };
 

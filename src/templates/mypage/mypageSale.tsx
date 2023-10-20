@@ -1,19 +1,16 @@
 'use client';
-import 'src/styles/templates/mypage/mypageSales.scss';
-import { useEffect, useState, Fragment } from 'react';
 import { getMyProduct } from '@/api/service';
 import Header from '@/components/header';
 import ProductItem from '@/components/productItem';
 import ProductState from '@/components/productState';
 import ProductStateList from '@/templates/product/productStateList/productStateList';
 import { AXIOSResponse, IProduct } from '@/types/interface';
-
+import { useState,useEffect,Fragment } from 'react';
 export default function MypageSale() {
-  const [data, setData] = useState<IProduct[]>([]);
   const [productList, setProductList] = useState<string>('all');
   const [reLoad, setReLoad] = useState<boolean>(false);
   const [myProducts, setMyProducts] = useState<IProduct[]>([]);
-  const handleChangeList = (state: string) => {
+  const handleChangeList: React.Dispatch<React.SetStateAction<string>> = (state) => {
     setProductList(state);
   };
   useEffect(() => {
