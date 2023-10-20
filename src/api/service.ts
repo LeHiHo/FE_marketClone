@@ -75,16 +75,20 @@ export const postSignUp = async (
 };
 
 export const postAuth = async (email: string, password: string) => {
-  const res = await client.post(
-    '/login',
-    {
-      email: email,
-      password: password,
-    },
-    {
-      withCredentials: true,
-    },
-  );
+  const res = await client.post('/login', {
+    email: email,
+    password: password,
+  });
+  return res;
+};
+
+export const updateProductState = async (
+  productStateId: number,
+  changeStateCode: number,
+) => {
+  const res = await client.put(`/products/${productStateId}/status`, {
+    status: changeStateCode,
+  });
   return res;
 };
 
@@ -95,11 +99,9 @@ export const getMyInfo = async () => {
 
 // 내 판매 상품 리스트 조회
 export const getMyProduct = async () => {
-  const res = await client.get(`/myPage/products`);
+  const res = await client.get('/myPage/products');
   return res.data;
 };
-
-// 판매자의
 
 export const getMyChatList = async () => {
   const res = await client.get('/myPage/chats');
@@ -109,4 +111,16 @@ export const getMyChatList = async () => {
 export const getProductChatList = async (id: number | null) => {
   const res = await client.get(`/products/${id}/chats`);
   return res.data;
+};
+
+// 위시상품 추가 / 삭제
+
+export const addWishProduct = async (id: number) => {
+  const res = await client.post(`wish/${id}`);
+  return res;
+};
+
+export const deleteWishProduct = async (id: number) => {
+  const res = await client.delete(`wish/${id}`);
+  return res;
 };
