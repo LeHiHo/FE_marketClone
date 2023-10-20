@@ -113,7 +113,7 @@ export default function SignupPage() {
           formData.nickname,
         );
         console.log(res.data);
-        alert('회원가입 성공!');
+        alert('회원가입 성공!!');
         router.push('/login');
       } catch (error: any) {
         if (error.response.data.statusCode === 401) {
