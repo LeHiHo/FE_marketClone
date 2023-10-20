@@ -6,7 +6,7 @@ export default function ProductState({
   setReLoad,
 }: {
   product: IProduct;
-  setReLoad: React.Dispatch<React.SetStateAction<B>>;
+  setReLoad: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
     <>
