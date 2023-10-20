@@ -25,7 +25,7 @@ export const postProducts = async (
   title: string,
   categoryName: string,
   content: string,
-  price: number,
+  price: string,
   images?: FileList | null,
 ) => {
   const formData = new FormData();
@@ -148,7 +148,11 @@ export const putEditProfile = async (
 ) => {
   const profileFormData = new FormData();
   profileFormData.append('nickname', nickname);
-  profileFormData.append('profileImg', profileImg);
+
+  if (profileImg !== undefined) {
+    // undefined 체크
+    profileFormData.append('profileImg', profileImg);
+  }
 
   const res = await client.put('/myPage/profile', profileFormData, config);
   return res;
