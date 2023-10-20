@@ -21,6 +21,33 @@
   &__input {
     margin-bottom: 10rem;
 
+    &-container {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      margin-left: 0.5rem;
+    }
+
+    &-UploadBox {
+      display: inline-block;
+      border: 1px solid black;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      flex-direction: column;
+
+      img {
+        width: 30px;
+      }
+    }
+
+    &-fileUpload {
+      display: none;
+    }
+
     input,
     textarea {
       width: 16rem;
@@ -44,5 +71,40 @@
     height: 7rem;
     resize: none;
     outline: none;
+  }
+
+  .previewImg {
+    display: grid;
+    grid-template-columns: repeat(4, 3fr);
+    gap: 5px;
+  }
+
+  .previewImg-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .x_btn {
+      position: absolute;
+    }
+
+    .x_btn img {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: white;
+      border-radius: 50%;
+      top: -5px;
+      left: 5px;
+    }
+  }
+  .imgCount {
+    color: red;
   }
 }

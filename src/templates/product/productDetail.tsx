@@ -171,6 +171,7 @@ export const ProductDetail = () => {
             <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
               <p className="product-detail__category">
+                {' '}
                 {product?.categoryName}
               </p>
               <p className="product-detail__time">⋅ 1일 전</p>
