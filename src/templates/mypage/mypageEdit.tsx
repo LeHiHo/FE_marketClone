@@ -4,6 +4,8 @@ import Btn from '@/components/btn';
 import Header from '@/components/header';
 import '@/styles/templates/mypage/mypageEdit.scss';
 import { AXIOSResponse, IUser } from '@/types/interface';
+
+// 2. useRouter 가져오는 경로 수정
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BsCamera } from 'react-icons/bs';
@@ -18,46 +20,52 @@ export default function MypageEditPage() {
     profileImage: '',
   });
 
-  const [name, setName] = useState<string>(user.nickname);
+  const [name, setName] = useState<string>('');
+
   const [previewImg, setPreviewImg] = useState<string | null>(null);
   const [profileImage, setProfileImage] = useState<File>();
+
   useEffect(() => {
     const fetchData = async () => {
       const res: AXIOSResponse<IUser> = await getMyInfo();
       if (res.statusCode === 200) {
         setUser(res.data);
+
+        // 3. useEffect 내에서 setName을 사용하여 user.nickname 설정
+        setName(res.data.nickname);
+      } else {
+        console.log('실패');
       }
     };
     fetchData();
-    convertURLtoFile(user.profileImage);
   }, []);
 
-  const convertURLtoFile = async (imageUrl: string) => {
-    fetch(imageUrl)
-      .then((response) => response.blob())
-      .then((blob) => {
-        const filename = 'image.jpg';
-        const file = new File([blob], filename, { type: 'image/*' });
-        const formData = new FormData();
-        formData.append('imageFile', file);
-        return file;
-      })
-      .catch((error) => {
-        console.error('Error fetching or converting the image:', error);
-      });
+  const convertURLtoFile = async (imageUrl: string, filename: string) => {
+    console.log('변환 시작');
+    const response = await fetch(imageUrl);
+    console.log('fetch 완료');
+    const blob = await response.blob();
+    console.log('변환 완료');
+    return new File([blob], filename, { type: blob.type });
   };
 
   const handleEditProfile = async () => {
+    // 4. convertURLtoFile 함수 호출 시 await 사용
+    const file = await convertURLtoFile(user.profileImage, 'image.png');
+
     try {
-      if (profileImage) {
-        const res = await putEditProfile(name || user.nickname, profileImage);
-        if (res.status === 200) {
-          alert('프로필 수정이 완료되었습니다.');
-          router.push('/mypage');
-          router.refresh();
-        }
+      const res = await putEditProfile(
+        name || user.nickname,
+        profileImage || file,
+      );
+      if (res.status === 200) {
+        alert('프로필 수정이 완료되었습니다.');
+        router.push('/mypage');
+        router.refresh();
       }
     } catch (error) {
+      // 6. 에러 처리 개선
+      alert('프로필 수정 중 오류가 발생했습니다. 다시 시도해 주세요.');
       console.log(error);
     }
   };
