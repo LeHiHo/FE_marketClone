@@ -66,12 +66,12 @@ devDependencies:
     version: 0.23.10
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.7.5
-    version: 6.8.0(@typescript-eslint/parser@6.8.0)(eslint@8.50.0)(typescript@5.2.2)
+    version: 6.7.5(@typescript-eslint/parser@6.7.5)(eslint@8.50.0)(typescript@5.2.2)
   '@typescript-eslint/parser':
     specifier: ^6.7.5
-    version: 6.8.0(eslint@8.50.0)(typescript@5.2.2)
+    version: 6.7.5(eslint@8.50.0)(typescript@5.2.2)
   eslint:
-    specifier: ^8.50.0
+    specifier: ^8
     version: 8.50.0
   eslint-config-next:
     specifier: 13.5.4
