@@ -12,24 +12,24 @@ export default function ProductState({
     <>
       <div className="product__state">
         <div className="product__state__change-box">
-          <p
+          <div
             onClick={async () => {
               await updateProductState(product.id, 1);
               setReLoad((prev: boolean) => !prev);
             }}
             className="product__state__btn--reserve">
             판매중 변경
-          </p>
+          </div>
         </div>
         <div className="product__state__change-box">
-          <p
+          <div
             onClick={async () => {
               await updateProductState(product.id, 3);
               setReLoad((prev: boolean) => !prev);
             }}
             className="product__state__btn--complete">
             거래완료 변경
-          </p>
+          </div>
         </div>
       </div>
     </>
