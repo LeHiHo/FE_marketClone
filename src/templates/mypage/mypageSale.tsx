@@ -3,6 +3,7 @@ import { getMyProduct } from '@/api/service';
 import Header from '@/components/header';
 import ProductItem from '@/components/productItem';
 import ProductState from '@/components/productState';
+import 'src/styles/templates/mypage/mypageSales.scss';
 import ProductStateList from '@/templates/product/productStateList/productStateList';
 import { AXIOSResponse, IProduct } from '@/types/interface';
 import { useState, useEffect, Fragment } from 'react';
