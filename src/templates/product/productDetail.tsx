@@ -3,6 +3,7 @@ import {
   addWishProduct,
   deleteWishProduct,
   getProductDetail,
+  updateProductState,
 } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
@@ -48,7 +49,6 @@ export const ProductDetail = () => {
   const router = useRouter();
   const path = usePathname();
   const id = path.split('/')[2];
-
   const productId: number | any =
     typeof id === 'string' ? parseInt(id, 10) : undefined;
 
@@ -56,6 +56,15 @@ export const ProductDetail = () => {
   const [onLike, setOnLike] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLUListElement | null>(null);
+  const [selectedValue, setSelectedValue] = useState('1');
+  const selectRef = useRef<HTMLSelectElement | null>(null);
+  const handleSelectChange = () => {
+    if (selectRef.current) {
+      const selectedOption = selectRef.current.value;
+      setSelectedValue(selectedOption);
+      updateProductState(productId, parseInt(selectedOption, 10));
+    }
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -83,14 +92,21 @@ export const ProductDetail = () => {
         if (res.statusCode === 200) {
           setProduct(res.data);
           setOnLike(res.data?.like);
+          if (res.data.status === '판매중') {
+            setSelectedValue('1');
+          } else if (res.data.status === '예약중') {
+            setSelectedValue('2');
+          } else if (res.data.status === '거래완료') {
+            setSelectedValue('3');
+          } else {
+            return;
+          }
         }
       } catch (error) {
         console.error(error);
       }
     };
-
     fetchData();
-
     return () => {
       setProduct(null);
       [];
@@ -160,10 +176,13 @@ export const ProductDetail = () => {
           </div>
 
           {product?.myProduct && (
-            <select>
-              <option>판매중</option>
-              <option>예약중</option>
-              <option>거래완료</option>
+            <select
+              ref={selectRef}
+              value={selectedValue}
+              onChange={handleSelectChange}>
+              <option value="1">판매중</option>
+              <option value="2">예약중</option>
+              <option value="3">거래완료</option>
             </select>
           )}
 
