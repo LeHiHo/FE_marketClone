@@ -134,6 +134,9 @@
       &:hover {
         background-color: $sub-color;
       }
+      &:disabled {
+        background-color: #d1d2d3;
+      }
     }
   }
 }

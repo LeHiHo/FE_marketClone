@@ -55,10 +55,15 @@ export const ProductDetail = () => {
 
   const [product, setProduct] = useState<Product | null>(null);
   const [onLike, setOnLike] = useState<boolean>(false);
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+
   const [selectedValue, setSelectedValue] = useState('1');
   const selectRef = useRef<HTMLSelectElement | null>(null);
+
+  const [isBooking, setIsBooking] = useState<boolean>(false);
+
   const handleSelectChange = () => {
     if (selectRef.current) {
       const selectedOption = selectRef.current.value;
@@ -66,6 +71,14 @@ export const ProductDetail = () => {
       updateProductState(productId, parseInt(selectedOption, 10));
     }
   };
+
+  useEffect(() => {
+    if (selectedValue === '1') {
+      setIsBooking(false);
+    } else {
+      setIsBooking(true);
+    }
+  }, [selectedValue]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -261,9 +274,21 @@ export const ProductDetail = () => {
           <p>{product?.price}</p>
         </div>
 
-        <div onClick={() => router.push(`/product/${id}/chats`)}>
-          <button className="product-detail__chat-button">관련 채팅보기</button>
-        </div>
+        {product?.myProduct ? (
+          <div onClick={() => router.push(`/product/${id}/chats`)}>
+            <button className="product-detail__chat-button">
+              관련 채팅보기
+            </button>
+          </div>
+        ) : (
+          <div onClick={() => router.push(`/product/${id}/chats`)}>
+            <button
+              className="product-detail__chat-button"
+              disabled={isBooking ? true : false}>
+              채팅하기
+            </button>
+          </div>
+        )}
       </footer>
     </div>
   );
