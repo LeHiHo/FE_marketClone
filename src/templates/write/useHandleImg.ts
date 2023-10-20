@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
-export const useHandleImg = () => {
-  const [imageArray, setImageArray] = useState<File[]>([]);
+export const useHandleImg = (initialFiles?: File[]) => {
+  // const [imageArray, setImageArray] = useState<File[]>([]);
+  const [imageArray, setImageArray] = useState<File[]>(initialFiles || []);
   const [images, setImages] = useState<FileList | null>(null);
 
   useEffect(() => {

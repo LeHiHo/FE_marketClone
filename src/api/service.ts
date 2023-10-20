@@ -19,14 +19,14 @@ export const postProducts = async (
   title: string,
   categoryName: string,
   content: string,
-  price: number,
+  price: string,
   images?: FileList | null,
 ) => {
   const formData = new FormData();
   formData.append('title', title);
   formData.append('categoryName', categoryName);
   formData.append('content', content);
-  formData.append('price', price.toString());
+  formData.append('price', price);
 
   // 여러 이미지를 처리하는 경우
   if (images) {
@@ -45,6 +45,18 @@ export const postProducts = async (
   return res;
 };
 
+// 상품삭제
+export const deleteProducts = async (id: number) => {
+  const res = await client.delete(`products/${id}`);
+  return res;
+};
+
+// 상품수정
+export const putProducts = async (id: number) => {
+  const res = await client.put(`products/${id}`);
+  return res;
+};
+
 export const getProductCategory = async () => {
   const res = await client.get(`/products/categories`);
   return res.data;
@@ -56,21 +68,15 @@ export const getProducts = async (searchWord?: string, category?: string) => {
     params: {
       searchWord,
       categoryNames: category,
+      pageSize: 300, // 추후 수정 예정입니다.
     },
   });
   return res.data;
 };
 
-// 상품수정
-export const putProducts = async (id: number) => {
-  const res = await client.put(`products/${id}`);
-  return res;
-};
-
-// 상품삭제
-export const deleteProducts = async (id: number) => {
-  const res = await client.delete(`products/${id}`);
-  return res;
+export const getUserProducts = async (id: string) => {
+  const res = await client.get(`/products/${id}/list`);
+  return res.data;
 };
 
 export const postSignUp = async (

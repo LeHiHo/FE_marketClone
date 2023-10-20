@@ -18,6 +18,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
 import ProductDelete from './productDelete';
+import ProductPut from './productPut';
 
 type Seller = {
   sellerId: number;
@@ -130,7 +131,7 @@ export const ProductDetail = () => {
     autoplay: false, // 자동 재생
     arrows: false,
   };
-
+  console.log(product);
   return (
     <div id="product-detail">
       <div className="product-detail">
@@ -159,9 +160,10 @@ export const ProductDetail = () => {
                     role="button"
                     ref={menuRef}
                     className="product-detail__menu">
-                    <div onClick={() => router.push('/product/edit')}>
+                    <div onClick={() => router.push(`/product/${id}/edit`)}>
                       게시글 수정
                     </div>
+
                     <div onClick={toggleModal}>삭제</div>
                   </div>
                 )}
@@ -222,7 +224,11 @@ export const ProductDetail = () => {
               <div>
                 <div className="more-product__title">
                   <p>{product?.seller.nickname}님의 판매상품</p>
-                  <Btn type="button" href="products" label="모두보기" />
+                  <Btn
+                    type="button"
+                    href={`products?id=${id}`}
+                    label="모두보기"
+                  />
                 </div>
 
                 <div className="more-product__grid">
@@ -232,7 +238,7 @@ export const ProductDetail = () => {
                         onClick={() => router.push(`/product/${product.id}`)}
                         className="more-product"
                         key={index}>
-                        <img src={product.thumbnail} alt="sale image" />
+                        <img src={product.thumbnail} alt="saleImage" />
                         <p>{product.title}</p>
                         <p>{product.price}</p>
                       </div>

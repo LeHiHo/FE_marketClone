@@ -35,6 +35,7 @@ export default function CategoryPage() {
       <div className="category__content">
         {category.map((item: CategoryType) => (
           <div
+            key={item.id}
             onClick={() => {
               onClick(item);
             }}>
