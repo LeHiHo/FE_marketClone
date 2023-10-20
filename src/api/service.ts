@@ -54,12 +54,13 @@ export const getProducts = async (searchWord?: string, category?: string) => {
     params: {
       searchWord,
       categoryNames: category,
+      pageSize: 300, // 추후 수정 예정입니다.
     },
   });
   return res.data;
 };
 
-export const getUserProducts = async (id: number) => {
+export const getUserProducts = async (id: string) => {
   const res = await client.get(`/products/${id}/list`);
   return res.data;
 };
