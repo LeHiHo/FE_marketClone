@@ -7,6 +7,7 @@ import 'src/styles/templates/mypage/mypageSales.scss';
 import ProductStateList from '@/templates/product/productStateList/productStateList';
 import { AXIOSResponse, IProduct } from '@/types/interface';
 import { useState, useEffect, Fragment } from 'react';
+
 export default function MypageSale() {
   const [productList, setProductList] = useState<string>('all');
   const [reLoad, setReLoad] = useState<boolean>(false);
@@ -41,7 +42,7 @@ export default function MypageSale() {
     fetchData();
   }, [productList, reLoad]);
   return (
-    <>
+    <div className="saleList">
       <Header goBack={true} border={true} title={'판매내역'} />
       <ProductStateList onChangeList={handleChangeList} />
       <ul className="product-list">
@@ -52,6 +53,6 @@ export default function MypageSale() {
           </Fragment>
         ))}
       </ul>
-    </>
+    </div>
   );
 }

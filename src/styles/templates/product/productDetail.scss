@@ -59,12 +59,12 @@
       z-index: 99;
       background-color: #fff;
       border-radius: 6px;
-      > li {
+      > div {
         text-align: center;
         padding: 1rem 1.3rem;
         white-space: nowrap;
       }
-      > li:first-of-type {
+      > div:first-of-type {
         border-bottom: 1px solid #d1d2d3;
       }
     }
@@ -115,7 +115,7 @@
         }
       }
       &-icon {
-        color : #ff0000;
+        color: #ff0000;
       }
     }
 
@@ -193,4 +193,8 @@
   position: absolute;
   top: -1.875rem;
   z-index: 9;
+}
+
+.badge {
+  display: inline-block !important;
 }
