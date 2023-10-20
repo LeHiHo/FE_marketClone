@@ -58,25 +58,3 @@
     border-right: 2px solid #a5a5a5;
   }
 }
-
-
-.badge {
-  display: inline-block;
-  padding : 0.3rem;
-  border-radius: 5px;
-  font-size: 0.5rem;
-  font-weight: bold;
-  
-}
-
-.reserved {
-  background-color: $sub-color;
-  color: white;
-  max-width : 2.4rem;
-}
-
-.sold {
-  background-color: darkgrey;
-  color: white; 
-  max-width : 3rem;
-}
