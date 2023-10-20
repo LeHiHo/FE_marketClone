@@ -83,7 +83,7 @@ export const postAuth = async (email: string, password: string) => {
 };
 
 export const updateProductState = async (
-  productStateId: number,
+  productStateId: number | undefined,
   changeStateCode: number,
 ) => {
   const res = await client.put(`/products/${productStateId}/status`, {

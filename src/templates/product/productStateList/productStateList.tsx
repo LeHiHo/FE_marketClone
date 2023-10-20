@@ -3,13 +3,13 @@ import 'src/styles/templates/product/productStateList.scss';
 export default function ProductStateList({
   onChangeList,
 }: {
-  onChangeList: React.Dispatch<React.SetStateAction<S>>;
+  onChangeList: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
     <>
       <div className="productStateList">
         <div className="productState active">
-          <p
+          <div
             onClick={(e) => {
               const productStates = document.querySelectorAll('.productState');
               onChangeList('all');
@@ -19,10 +19,10 @@ export default function ProductStateList({
               e.currentTarget.closest('.productState')?.classList.add('active');
             }}>
             전체
-          </p>
+          </div>
         </div>
         <div className="productState">
-          <p
+          <div
             onClick={(e) => {
               const productStates = document.querySelectorAll('.productState');
               onChangeList('sale');
@@ -32,10 +32,10 @@ export default function ProductStateList({
               e.currentTarget.closest('.productState')?.classList.add('active');
             }}>
             판매중
-          </p>
+          </div>
         </div>
         <div className="productState">
-          <p
+          <div
             onClick={(e) => {
               const productStates = document.querySelectorAll('.productState');
               onChangeList('completed');
@@ -45,7 +45,7 @@ export default function ProductStateList({
               e.currentTarget.closest('.productState')?.classList.add('active');
             }}>
             거래완료
-          </p>
+          </div>
         </div>
       </div>
     </>
