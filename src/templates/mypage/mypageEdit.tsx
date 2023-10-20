@@ -41,11 +41,8 @@ export default function MypageEditPage() {
   }, []);
 
   const convertURLtoFile = async (imageUrl: string, filename: string) => {
-    console.log('변환 시작');
-    const response = await fetch(imageUrl);
-    console.log('fetch 완료');
+    const response = await fetch(imageUrl, { mode: 'no-cors' });
     const blob = await response.blob();
-    console.log('변환 완료');
     return new File([blob], filename, { type: blob.type });
   };
 
