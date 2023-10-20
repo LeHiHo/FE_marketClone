@@ -18,6 +18,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
+import ProductDelete from './productDelete';
+
 type Seller = {
   sellerId: number;
   profileImage: string;
@@ -65,6 +67,12 @@ export const ProductDetail = () => {
       setSelectedValue(selectedOption);
       updateProductState(productId, parseInt(selectedOption, 10));
     }
+  };
+
+  const [isModal, setIsModal] = useState<boolean>(false);
+
+  const toggleModal = () => {
+    setIsModal(!isModal);
   };
 
   const toggleMenu = () => {
@@ -123,10 +131,17 @@ export const ProductDetail = () => {
     autoplay: false, // 자동 재생
     arrows: false,
   };
-
+  console.log(product);
   return (
     <div id="product-detail">
       <div className="product-detail">
+        {isModal && (
+          <ProductDelete
+            isModal={isModal}
+            onClose={toggleModal}
+            productID={productId}
+          />
+        )}
         <Header
           goBack={true}
           border={false}
@@ -141,12 +156,15 @@ export const ProductDetail = () => {
                   onClick={toggleMenu}
                 />
                 {isMenuOpen && (
-                  <ul ref={menuRef} className="product-detail__menu">
-                    <li onClick={() => router.push('/product/edit')}>
+                  <div
+                    role="button"
+                    ref={menuRef}
+                    className="product-detail__menu">
+                    <div onClick={() => router.push('/product/edit')}>
                       게시글 수정
-                    </li>
-                    <li>삭제</li>
-                  </ul>
+                    </div>
+                    <div onClick={toggleModal}>삭제</div>
+                  </div>
                 )}
               </>
             )
@@ -195,10 +213,7 @@ export const ProductDetail = () => {
               />
             )}
             {!product?.myProduct && product?.status === '거래완료' && (
-              <ProductBadge
-                productStatus={product?.status}
-                state={'sold'}
-              />
+              <ProductBadge productStatus={product?.status} state={'sold'} />
             )}
             <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
@@ -217,7 +232,11 @@ export const ProductDetail = () => {
               <div>
                 <div className="more-product__title">
                   <p>{product?.seller.nickname}님의 판매상품</p>
-                  <Btn type="button" href="products" label="모두보기" />
+                  <Btn
+                    type="button"
+                    href={`products?id=${id}`}
+                    label="모두보기"
+                  />
                 </div>
 
                 <div className="more-product__grid">

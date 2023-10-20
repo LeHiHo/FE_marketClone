@@ -11,9 +11,9 @@ export default function ProductItem({ product }: { product: IProduct }) {
   };
 
   return (
-    <li className="product" onClick={onClick}>
+    <div className="product" onClick={onClick}>
       <div className="product__img">
-        <img src={product.thumbnail} />
+        <img src={product.thumbnail} alt="" />
       </div>
       <div className="product__content">
         <div className="title">{product.title}</div>
@@ -31,6 +31,6 @@ export default function ProductItem({ product }: { product: IProduct }) {
           </p>
         </div>
       </div>
-    </li>
+    </div>
   );
 }
