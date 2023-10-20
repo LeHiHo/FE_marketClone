@@ -42,7 +42,6 @@ type Product = {
   myProduct: boolean;
   seller: Seller;
   sellerProductInfos: sellerProductInfos[];
-  like: boolean;
 };
 
 export const ProductDetail = () => {
@@ -50,13 +49,13 @@ export const ProductDetail = () => {
   const path = usePathname();
   const id = path.split('/')[2];
 
-  const productId: number | any =
+  const productId: number | undefined =
     typeof id === 'string' ? parseInt(id, 10) : undefined;
 
   const [product, setProduct] = useState<Product | null>(null);
   const [onLike, setOnLike] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const menuRef = useRef<HTMLUListElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -96,7 +95,7 @@ export const ProductDetail = () => {
       setProduct(null);
       [];
     };
-  }, [id]);
+  }, [productId]);
 
   const settings = {
     dots: true, // 페이지 네비게이션(점) 표시
@@ -125,12 +124,15 @@ export const ProductDetail = () => {
                   onClick={toggleMenu}
                 />
                 {isMenuOpen && (
-                  <ul ref={menuRef} className="product-detail__menu">
-                    <li onClick={() => router.push('/product/edit')}>
+                  <div
+                    role="button"
+                    ref={menuRef}
+                    className="product-detail__menu">
+                    <div onClick={() => router.push('/product/edit')}>
                       게시글 수정
-                    </li>
-                    <li>삭제</li>
-                  </ul>
+                    </div>
+                    <div>삭제</div>
+                  </div>
                 )}
               </>
             )
@@ -201,7 +203,7 @@ export const ProductDetail = () => {
                           onClick={() => router.push(`/product/${product.id}`)}
                           className="more-product"
                           key={index}>
-                          <img src={product.thumbnail} alt="sale image" />
+                          <img src={product.thumbnail} alt="sale" />
                           <p>{product.title}</p>
                           <p>{product.price}</p>
                         </div>

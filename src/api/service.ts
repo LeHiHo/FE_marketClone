@@ -5,7 +5,7 @@ const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
-export const getProductDetail = async (id: number) => {
+export const getProductDetail = async (id: number | undefined) => {
   const res = await client.get(`/products/${id}`, {
     params: {
       productId: id,
@@ -50,7 +50,7 @@ export const getProductCategory = async () => {
 };
 
 export const getProducts = async (searchWord?: string, category?: string) => {
-  const res = await client.get('/products', {
+  const res = await client.get('/products?pageSize=100', {
     params: {
       searchWord,
       categoryNames: category,
@@ -120,12 +120,12 @@ export const getSellerProduct = async (id: number | null) => {
 
 // 위시상품 추가 / 삭제
 
-export const addWishProduct = async (id: number) => {
+export const addWishProduct = async (id: number | undefined) => {
   const res = await client.post(`wish/${id}`);
   return res;
 };
 
-export const deleteWishProduct = async (id: number) => {
+export const deleteWishProduct = async (id: number | undefined) => {
   const res = await client.delete(`wish/${id}`);
   return res;
 };

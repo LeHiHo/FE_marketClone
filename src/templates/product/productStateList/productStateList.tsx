@@ -5,7 +5,6 @@ export default function ProductStateList({
 }: {
   onChangeList: React.Dispatch<React.SetStateAction<S>>;
 }) {
-  
   return (
     <>
       <div className="productStateList">
