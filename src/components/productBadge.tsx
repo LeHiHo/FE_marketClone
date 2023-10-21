@@ -7,5 +7,5 @@ export default function ProductBadge({
   productStatus: string | undefined;
   state: string;
 }) {
-  return <div className={`badge ${state}`}>{productStatus}</div>;
+  return <p className={`badge ${state}`}>{productStatus}</p>;
 }
