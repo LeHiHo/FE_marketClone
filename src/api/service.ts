@@ -142,14 +142,11 @@ export const deleteWishProduct = async (id: number | undefined) => {
   return res;
 };
 
-export const putEditProfile = async (
-  nickname: string,
-  profileImg: File | undefined,
-) => {
+export const putEditProfile = async (nickname: string, profileImg: File) => {
   const profileFormData = new FormData();
   profileFormData.append('nickname', nickname);
   profileFormData.append('profileImg', profileImg);
-
+  console.log(nickname, profileImg);
   const res = await client.put('/myPage/profile', profileFormData, config);
   return res;
 };
