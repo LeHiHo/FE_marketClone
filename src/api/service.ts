@@ -149,18 +149,10 @@ export const deleteWishProduct = async (id: number | undefined) => {
   return res;
 };
 
-export const putEditProfile = async (
-  nickname: string,
-  profileImg: File | undefined,
-) => {
+export const putEditProfile = async (nickname: string, profileImg: File) => {
   const profileFormData = new FormData();
   profileFormData.append('nickname', nickname);
-
-  if (profileImg !== undefined) {
-    // undefined 체크
-    profileFormData.append('profileImg', profileImg);
-  }
-
+  profileFormData.append('profileImg', profileImg);
   const res = await client.put('/myPage/profile', profileFormData, config);
   return res;
 };
