@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 
 export default function Chats() {
   const [chats, setChats] = useState([]);
+  console.log(chats);
 
   const path = usePathname();
   const id: number | null = parseInt(path.split('/')[2]) || null;
@@ -15,10 +16,14 @@ export default function Chats() {
   useEffect(() => {
     const fetchData = async () => {
       const res = id ? await getProductChatList(id) : await getMyChatList();
-      if (res.statusCode === 200) {
-        setChats(res.data);
-      } else {
-        console.log(res);
+      try {
+        if (res.statusCode === 200) {
+          setChats(res.data);
+        } else {
+          console.log(res);
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
 
@@ -29,7 +34,6 @@ export default function Chats() {
     };
   }, []);
 
-  console.log(chats);
   return (
     <>
       <header>

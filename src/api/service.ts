@@ -5,7 +5,13 @@ const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
-export const getProductDetail = async (id: number) => {
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+};
+
+export const getProductDetail = async (id: number | undefined) => {
   const res = await client.get(`/products/${id}`, {
     params: {
       productId: id,
@@ -19,7 +25,7 @@ export const postProducts = async (
   title: string,
   categoryName: string,
   content: string,
-  price: number,
+  price: string,
   images?: FileList | null,
 ) => {
   const formData = new FormData();
@@ -34,12 +40,6 @@ export const postProducts = async (
       formData.append('images', images[i]);
     }
   }
-
-  const config = {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  };
 
   const res = await client.post('/products', formData, config);
   return res;
@@ -57,7 +57,7 @@ export const getProductCategory = async () => {
 };
 
 export const getProducts = async (searchWord?: string, category?: string) => {
-  const res = await client.get('/products', {
+  const res = await client.get('/products?pageSize=100', {
     params: {
       searchWord,
       categoryNames: category,
@@ -97,7 +97,7 @@ export const postAuth = async (email: string, password: string) => {
 };
 
 export const updateProductState = async (
-  productStateId: number,
+  productStateId: number | undefined,
   changeStateCode: number,
 ) => {
   const res = await client.put(`/products/${productStateId}/status`, {
@@ -132,14 +132,35 @@ export const getProductChatList = async (id: number | null) => {
   return res.data;
 };
 
+export const getSellerProduct = async (id: number | null) => {
+  const res = await client.get(`/products/${id}/list`);
+  return res.data;
+};
+
 // 위시상품 추가 / 삭제
 
-export const addWishProduct = async (id: number) => {
+export const addWishProduct = async (id: number | undefined) => {
   const res = await client.post(`wish/${id}`);
   return res;
 };
 
-export const deleteWishProduct = async (id: number) => {
+export const deleteWishProduct = async (id: number | undefined) => {
   const res = await client.delete(`wish/${id}`);
+  return res;
+};
+
+export const putEditProfile = async (
+  nickname: string,
+  profileImg: File | undefined,
+) => {
+  const profileFormData = new FormData();
+  profileFormData.append('nickname', nickname);
+
+  if (profileImg !== undefined) {
+    // undefined 체크
+    profileFormData.append('profileImg', profileImg);
+  }
+
+  const res = await client.put('/myPage/profile', profileFormData, config);
   return res;
 };
