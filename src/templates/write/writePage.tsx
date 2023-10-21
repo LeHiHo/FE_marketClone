@@ -73,7 +73,7 @@ export default function WritePage() {
           <div className="writePage__input-container">
             <div className="previewImg">
               <label htmlFor="fileInput" className="writePage__input-UploadBox">
-                <img src={'/svg/camera.svg'} alt="camera" />
+                <img src="/svg/camera.svg" alt="camera" />
                 <div>
                   <span className="imgCount">{imgCount}</span>/10
                 </div>

@@ -25,7 +25,7 @@ export const postProducts = async (
   title: string,
   categoryName: string,
   content: string,
-  price: number,
+  price: string,
   images?: FileList | null,
 ) => {
   const formData = new FormData();

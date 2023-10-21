@@ -53,8 +53,7 @@ export const ProductDetail = () => {
   const path = usePathname();
   const id = path.split('/')[2];
 
-  const productId: number | undefined =
-    typeof id === 'string' ? parseInt(id, 10) : undefined;
+  const productId: number = typeof id === 'string' ? parseInt(id, 10) : 0; // 또는 다른 기본값
 
   const [product, setProduct] = useState<Product | null>(null);
   const [onLike, setOnLike] = useState<boolean>(false);

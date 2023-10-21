@@ -8,6 +8,7 @@ import { usePathname } from 'next/navigation';
 
 export default function Chats() {
   const [chats, setChats] = useState([]);
+  console.log(chats);
 
   const path = usePathname();
   const id: number | null = parseInt(path.split('/')[2]) || null;
