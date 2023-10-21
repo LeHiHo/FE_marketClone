@@ -10,10 +10,6 @@ import { postAuth } from '@/api/service';
 export default function LoginPage() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [errors, setErrors] = useState<{ email: string; password: string }>({
-    email: '',
-    password: '',
-  });
   const [isLogin, setIsLogin] = useState(false);
 
   const router = useRouter();
