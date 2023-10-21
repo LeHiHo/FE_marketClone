@@ -2,22 +2,34 @@
 
 .productStateList {
   display: flex;
-}
+  position: sticky;
 
-.productState {
-  width: 50%;
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: grey;
-}
+  .productState {
+    position: relative;
+    width: 50%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #444;
 
-.active {
-  color: $main-color;
-  border-bottom: 2px solid $main-color;
-}
+    &.active {
+      color: $main-color;
+      border-bottom: 2px solid $main-color;
+    }
 
-.productState:nth-child(3){
-  border-right: none;
-};
+    &::after {
+      content: '';
+      border: 1px solid #999;
+      height: 8%;
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .productState:nth-child(3) {
+    &::after {
+      display: none;
+    }
+  }
+}

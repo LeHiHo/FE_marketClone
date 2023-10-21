@@ -66,10 +66,12 @@ export const getProducts = async (searchWord?: string, category?: string) => {
   });
   return res.data;
 };
+
 export const getUserProducts = async (id: string) => {
   const res = await client.get(`/products/${id}/list`);
   return res.data;
 };
+
 export const postSignUp = async (
   email: string,
   password: string,
@@ -117,6 +119,11 @@ export const getMyProduct = async () => {
 
 export const getMyChatList = async () => {
   const res = await client.get('/myPage/chats');
+  return res.data;
+};
+
+export const getMyWishList = async () => {
+  const res = await client.get('/wish');
   return res.data;
 };
 

@@ -1,17 +1,15 @@
 'use client';
 import Header from '@/components/header';
-import ProductStateList from './productStateList/productStateList';
+
 import { useState, useEffect, SetStateAction } from 'react';
 import { AXIOSResponse, IProduct } from '@/types/interface';
-import { useSearchParams } from 'next/navigation';
-import { getUserProducts } from '@/api/service';
+import { getMyWishList } from '@/api/service';
 import ProductList from '@/components/productList';
+import ProductStateList from '../product/productStateList/productStateList';
 
-export default function ProductShowAll() {
+export default function MypageWish() {
   const [filter, setFilter] = useState<string>('all');
   const [products, setProducts] = useState<IProduct[]>([]);
-  const idParams = useSearchParams();
-  const id = idParams.get('id') || '';
   const handleChangeList: React.Dispatch<React.SetStateAction<string>> = (
     value: SetStateAction<string>,
   ) => {
@@ -19,7 +17,7 @@ export default function ProductShowAll() {
   };
   useEffect(() => {
     const fetchData = async () => {
-      const res: AXIOSResponse<IProduct[]> = await getUserProducts(id);
+      const res: AXIOSResponse<IProduct[]> = await getMyWishList();
       console.log(res);
       if (res.statusCode === 200) {
         setProducts(() => {
@@ -43,6 +41,7 @@ export default function ProductShowAll() {
     fetchData();
   }, [filter]);
 
+  console.log(products);
   return (
     <>
       <Header goBack={true} title="판매상품 보기" />
