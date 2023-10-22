@@ -10,7 +10,7 @@ import Btn from '@/components/btn';
 import Header from '@/components/header';
 import ProductBadge from '@/components/productBadge';
 import '@/styles/templates/product/productDetail.scss';
-import { AXIOSResponse } from '@/types/interface';
+import { AXIOSResponse, Product } from '@/types/interface';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
@@ -19,34 +19,6 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import ProductDelete from './productDelete';
-
-type Seller = {
-  sellerId: number;
-  profileImage: string;
-  nickname: string;
-};
-
-type sellerProductInfos = {
-  id: number;
-  price: number;
-  thumbnail: string;
-  title: string;
-};
-
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  categoryName: string;
-  content: string;
-  images: string[];
-  status: string;
-  like: boolean;
-  likes: number;
-  myProduct: boolean;
-  seller: Seller;
-  sellerProductInfos: sellerProductInfos[];
-};
 
 export const ProductDetail = () => {
   const router = useRouter();
@@ -70,7 +42,7 @@ export const ProductDetail = () => {
   const handleClick = async () => {
     const res = await createNewChat(productId);
     const roomId = res.data.chatRoomId;
-    router.push(`/chat/${roomId}`);
+    router.push(`/chat/${roomId}?productId=${productId}`);
   };
 
   const handleSelectChange = () => {

@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { getChatContents } from '@/api/service';
 import { AXIOSResponse } from '@/types/interface';
 import * as StompJs from '@stomp/stompjs';
+import { useSearchParams, usePathname } from 'next/navigation';
 
 interface ChatContents {
   roomId: number | null;
@@ -18,6 +19,11 @@ interface ChatContents {
 }
 
 export default function ChatDetail() {
+  const idParams = useSearchParams();
+  const strId = idParams.get('productId') || '';
+  const productId = parseInt(strId);
+  const path = usePathname();
+  const roomId = path.split('/')[2];
   const [chatContents, setchatContents] = useState<ChatContents>({
     roomId: null,
     userId: null,
@@ -28,7 +34,7 @@ export default function ChatDetail() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res: AXIOSResponse<ChatContents> = await getChatContents(1);
+      const res: AXIOSResponse<ChatContents> = await getChatContents(roomId);
       if (res.statusCode === 200) {
         setchatContents(res.data);
       } else {
@@ -47,30 +53,39 @@ export default function ChatDetail() {
 
   const client = new StompJs.Client({
     brokerURL: process.env.NEXT_PUBLIC_BROKER_URL,
+    onConnect: () => {
+      setConnected(true);
+    },
   });
-
-  const showGreeting = (message: any) => {
-    console.log('Received:', message);
-  };
-
-  client.onConnect = (frame) => {
-    setConnected(true);
-    console.log('Connected: ' + frame);
-    client.subscribe('/topic/greetings', (greeting) => {
-      showGreeting(JSON.parse(greeting.body).content);
-    });
-  };
 
   const connect = () => {
     client.activate();
-    console.log('연결됨');
+    const callback = function () {
+      console.log('콜백함수임');
+    };
+    client.subscribe(`/sub/room/${roomId}`, callback);
   };
 
   const disconnect = () => {
     if (client) {
       client.deactivate();
       setConnected(false);
-      console.log('연결해제됨');
+    }
+  };
+
+  const sendMessage = () => {
+    console.log('메시지보내기');
+    console.log(client, connected);
+    if (client && connected) {
+      console.log('if문 들어옴');
+      client.publish({
+        destination: `/pub/room/${roomId}`,
+        body: 'hi',
+      });
+      console.log('메시지 보냄');
+    } else {
+      console.error('클라이언트가 연결되지 않았습니다.');
+      setMessage('');
     }
   };
 
@@ -79,7 +94,7 @@ export default function ChatDetail() {
       <Header goBack={true} title="닉네임" border={true} />
 
       <div className="chat-detail">
-        <ChatItem />
+        <ChatItem productId={productId} />
       </div>
       <div className="chat-detail__main">{chatContents.content}</div>
       <footer className="chat-detail__footer">
@@ -91,7 +106,7 @@ export default function ChatDetail() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <TbSend size="25" />
+          <TbSend onClick={sendMessage} size="25" />
         </div>
       </footer>
     </div>

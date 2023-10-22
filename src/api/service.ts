@@ -163,7 +163,7 @@ export const createNewChat = async (id: number) => {
   return res.data;
 };
 
-export const getChatContents = async (chatRoomId: number) => {
+export const getChatContents = async (chatRoomId: string) => {
   const res = await client.get(`/chatContents/${chatRoomId}`);
   return res.data;
 };

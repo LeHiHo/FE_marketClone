@@ -34,6 +34,8 @@ export default function Chats() {
     };
   }, []);
 
+  console.log(chats);
+
   return (
     <>
       <header>
