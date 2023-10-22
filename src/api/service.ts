@@ -156,3 +156,14 @@ export const putEditProfile = async (nickname: string, profileImg: File) => {
   const res = await client.put('/myPage/profile', profileFormData, config);
   return res;
 };
+
+// 채팅 관련 api
+export const createNewChat = async (id: number) => {
+  const res = await client.post(`/products/${id}/chats`);
+  return res.data;
+};
+
+export const getChatContents = async (chatRoomId: number) => {
+  const res = await client.get(`/chatContents/${chatRoomId}`);
+  return res.data;
+};
