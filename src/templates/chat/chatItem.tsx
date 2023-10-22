@@ -3,13 +3,26 @@ import { useEffect, useState } from 'react';
 import { AXIOSResponse, Product } from '@/types/interface';
 import { getProductDetail } from '@/api/service';
 
+type SimpleProduct = {
+  images: string[];
+  status: string;
+  title: string;
+  price: number;
+};
+
 export default function ChatItem({ productId }: { productId: number }) {
-  const [product, setProduct] = useState<Product>(null);
+  const [product, setProduct] = useState<SimpleProduct>({
+    images: [],
+    status: '',
+    title: '',
+    price: 0,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       const res: AXIOSResponse<Product> = await getProductDetail(productId);
-      setProduct(res.data);
+      const { images, status, title, price } = res.data;
+      setProduct({ images, status, title, price });
     };
     fetchData();
   }, []);
