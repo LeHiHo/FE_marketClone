@@ -42,7 +42,11 @@ export const ProductDetail = () => {
   const handleClick = async () => {
     const res = await createNewChat(productId);
     const roomId = res.data.chatRoomId;
-    router.push(`/chat/${roomId}?productId=${productId}`);
+    if (product) {
+      router.push(
+        `/chat/${roomId}?productId=${productId}&userId=${product.seller.sellerId}`,
+      );
+    }
   };
 
   const handleSelectChange = () => {

@@ -22,9 +22,10 @@ export default function ChatDetail() {
   const idParams = useSearchParams();
   const strId = idParams.get('productId') || '';
   const productId = parseInt(strId);
+  const userId = idParams.get('userId');
   const path = usePathname();
   const roomId = path.split('/')[2];
-  const [chatContents, setchatContents] = useState<ChatContents>({
+  const [chatContents, setChatContents] = useState<ChatContents>({
     roomId: null,
     userId: null,
     nickName: '',
@@ -36,7 +37,7 @@ export default function ChatDetail() {
     const fetchData = async () => {
       const res: AXIOSResponse<ChatContents> = await getChatContents(roomId);
       if (res.statusCode === 200) {
-        setchatContents(res.data);
+        setChatContents(res.data);
       } else {
         console.log('실패');
       }
@@ -47,27 +48,12 @@ export default function ChatDetail() {
       disconnect();
     };
   }, []);
-
   const [connected, setConnected] = useState(false);
   const [message, setMessage] = useState('');
 
-  const client = new StompJs.Client({
-    brokerURL: process.env.NEXT_PUBLIC_BROKER_URL,
-    onConnect: () => {
-      setConnected(true);
-      // client.subscribe(`/pub/room/${roomId}`, (message) => {
-      //   console.log(`Received: ${message.body}`);
-      // });
-      //   client.publish({
-      //     destination: `/pub/room/${roomId}`,
-      //     body: JSON.stringify({ userId: 54, content: 'First Message' }),
-      //   });
-      //   setConnected(true);
-    },
-  });
-
   const connect = () => {
     client.activate();
+    setConnected(true);
   };
 
   const disconnect = () => {
@@ -77,28 +63,24 @@ export default function ChatDetail() {
     }
   };
 
-  // const onMessageReceived = (message: any) => {
-  //   const body = JSON.parse(message.content);
-  //   console.log('Received message:', body);
-  //   console.log(message);
-  // };
+  const client = new StompJs.Client({
+    brokerURL: process.env.NEXT_PUBLIC_BROKER_URL,
+  });
 
   const sendMessage = () => {
-    console.log('메시지보내기');
-    console.log(client, connected);
-    if (client && connected) {
-      console.log('if문 들어옴');
+    console.log('메시지보내기', connected, client);
+    if (connected) {
       (client.onConnect = () => {
-        client.subscribe(`/pub/room/${roomId}`, (message) => {
-          console.log(`Received: ${message.body}`);
-        });
+        client.subscribe(`/sub/room/${roomId}`, (message) =>
+          console.log(`Received: ${message.body}`),
+        );
         client.publish({
-          destination: `/sub/room/${roomId}`,
-          body: JSON.stringify({ userId: 54, content: 'First Message' }),
+          destination: `/pub/room/${roomId}`,
+          body: JSON.stringify({ userId: userId, content: message }),
         });
-        setConnected(true);
       }),
-        console.log('메시지 보냄');
+        setMessage('');
+      console.log(client);
     } else {
       console.error('클라이언트가 연결되지 않았습니다.');
       setMessage('');
