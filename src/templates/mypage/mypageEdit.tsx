@@ -37,15 +37,16 @@ export default function MypageEditPage() {
 
   const handleEditProfile = async () => {
     try {
-      if (profileImage) {
-        const res = await putEditProfile(name, profileImage);
-        if (res.status === 200) {
-          console.log(res.data);
-          alert('프로필 수정이 완료되었습니다.');
-          router.push('/mypage');
-        } else {
-          console.log(res);
-        }
+      const res = await putEditProfile(
+        name || undefined,
+        profileImage || undefined,
+      );
+      if (res.status === 200) {
+        console.log(res.data);
+        alert('프로필 수정이 완료되었습니다.');
+        router.push('/mypage');
+      } else {
+        console.log(res);
       }
     } catch (error) {
       alert('프로필 수정 중 오류가 발생했습니다. 다시 시도해 주세요.');
