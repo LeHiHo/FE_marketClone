@@ -7,6 +7,7 @@ import {
 } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
+import ProductBadge from '@/components/productBadge';
 import '@/styles/templates/product/productDetail.scss';
 import { AXIOSResponse } from '@/types/interface';
 import { useRouter, usePathname } from 'next/navigation';
@@ -16,6 +17,8 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+
+import ProductDelete from './productDelete';
 
 type Seller = {
   sellerId: number;
@@ -38,32 +41,51 @@ type Product = {
   content: string;
   images: string[];
   status: string;
+  like: boolean;
   likes: number;
   myProduct: boolean;
   seller: Seller;
   sellerProductInfos: sellerProductInfos[];
-  like: boolean;
 };
 
 export const ProductDetail = () => {
   const router = useRouter();
   const path = usePathname();
   const id = path.split('/')[2];
-  const productId: number | any =
-    typeof id === 'string' ? parseInt(id, 10) : undefined;
+
+  const productId: number = typeof id === 'string' ? parseInt(id, 10) : 0; // 또는 다른 기본값
 
   const [product, setProduct] = useState<Product | null>(null);
   const [onLike, setOnLike] = useState<boolean>(false);
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const menuRef = useRef<HTMLUListElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
   const [selectedValue, setSelectedValue] = useState('1');
   const selectRef = useRef<HTMLSelectElement | null>(null);
+
+  const [isBooking, setIsBooking] = useState<boolean>(false);
+
   const handleSelectChange = () => {
     if (selectRef.current) {
       const selectedOption = selectRef.current.value;
       setSelectedValue(selectedOption);
       updateProductState(productId, parseInt(selectedOption, 10));
     }
+  };
+
+  useEffect(() => {
+    if (selectedValue === '1') {
+      setIsBooking(false);
+    } else {
+      setIsBooking(true);
+    }
+  }, [selectedValue]);
+
+  const [isModal, setIsModal] = useState<boolean>(false);
+
+  const toggleModal = () => {
+    setIsModal(!isModal);
   };
 
   const toggleMenu = () => {
@@ -111,7 +133,7 @@ export const ProductDetail = () => {
       setProduct(null);
       [];
     };
-  }, [id]);
+  }, [productId]);
 
   const settings = {
     dots: true, // 페이지 네비게이션(점) 표시
@@ -126,6 +148,13 @@ export const ProductDetail = () => {
   return (
     <div id="product-detail">
       <div className="product-detail">
+        {isModal && (
+          <ProductDelete
+            isModal={isModal}
+            onClose={toggleModal}
+            productID={productId}
+          />
+        )}
         <Header
           goBack={true}
           border={false}
@@ -140,12 +169,15 @@ export const ProductDetail = () => {
                   onClick={toggleMenu}
                 />
                 {isMenuOpen && (
-                  <ul ref={menuRef} className="product-detail__menu">
-                    <li onClick={() => router.push('/product/edit')}>
+                  <div
+                    role="button"
+                    ref={menuRef}
+                    className="product-detail__menu">
+                    <div onClick={() => router.push('/product/edit')}>
                       게시글 수정
-                    </li>
-                    <li>삭제</li>
-                  </ul>
+                    </div>
+                    <div onClick={toggleModal}>삭제</div>
+                  </div>
                 )}
               </>
             )
@@ -187,39 +219,53 @@ export const ProductDetail = () => {
           )}
 
           <div className="product-detail__content-wrapper">
+            {!product?.myProduct && product?.status === '예약중' && (
+              <ProductBadge
+                productStatus={product?.status}
+                state={'reserved'}
+              />
+            )}
+            {!product?.myProduct && product?.status === '거래완료' && (
+              <ProductBadge productStatus={product?.status} state={'sold'} />
+            )}
             <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
               <p className="product-detail__category">
                 {' '}
                 {product?.categoryName}
               </p>
-              <p className="product-detail__time">⋅ 1일 전</p>
             </div>
 
             <p className="product-detail__content">{product?.content}</p>
           </div>
 
-          {!product?.myProduct && (
+          {product?.sellerProductInfos && (
             <div className="product-detail__more-product">
               <div>
                 <div className="more-product__title">
                   <p>{product?.seller.nickname}님의 판매상품</p>
-                  <Btn type="button" href="products" label="모두보기" />
+                  <Btn
+                    type="button"
+                    href={`products?id=${id}`}
+                    label="모두보기"
+                  />
                 </div>
 
                 <div className="more-product__grid">
-                  {product?.sellerProductInfos.map((product, index) => {
-                    return (
-                      <div
-                        onClick={() => router.push(`/product/${product.id}`)}
-                        className="more-product"
-                        key={index}>
-                        <img src={product.thumbnail} alt="sale image" />
-                        <p>{product.title}</p>
-                        <p>{product.price}</p>
-                      </div>
-                    );
-                  })}
+                  {product?.sellerProductInfos
+                    .slice(0, 4)
+                    .map((product, index) => {
+                      return (
+                        <div
+                          onClick={() => router.push(`/product/${product.id}`)}
+                          className="more-product"
+                          key={index}>
+                          <img src={product.thumbnail} alt="sale" />
+                          <p>{product.title}</p>
+                          <p>{`${product.price}원`}</p>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>
@@ -249,12 +295,24 @@ export const ProductDetail = () => {
             />
           )}
           <span>|</span>
-          <p>125만원</p>
+          <p>{`${product?.price}원`}</p>
         </div>
 
-        <div onClick={() => router.push(`/product/${id}/chats`)}>
-          <button className="product-detail__chat-button">관련 채팅보기</button>
-        </div>
+        {product?.myProduct ? (
+          <div onClick={() => router.push(`/product/${id}/chats`)}>
+            <button className="product-detail__chat-button">
+              관련 채팅보기
+            </button>
+          </div>
+        ) : (
+          <div onClick={() => router.push(`/product/${id}/chats`)}>
+            <button
+              className="product-detail__chat-button"
+              disabled={isBooking ? true : false}>
+              채팅하기
+            </button>
+          </div>
+        )}
       </footer>
     </div>
   );

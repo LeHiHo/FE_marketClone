@@ -8,9 +8,10 @@ import { useRouter } from 'next/navigation';
 import { postAuth } from '@/api/service';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [isLogin, setIsLogin] = useState(false);
+
   const router = useRouter();
 
   const handleLogin = async () => {
@@ -19,13 +20,12 @@ export default function LoginPage() {
       if (response.data.statusCode === 200) {
         setIsLogin(!isLogin);
         router.push('/main');
-        console.log(response);
       } else {
         console.error('Login failed:', response.data);
       }
     } catch (error: any) {
       if (error.response) {
-        const errorData = error.response.data;
+        const errorData = error.response?.data;
         console.error('Login failed:', errorData);
       } else {
         console.error('An unexpected error occurred:', error);

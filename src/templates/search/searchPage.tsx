@@ -5,7 +5,7 @@ import Header from '@/components/header';
 import ProductList from '@/components/productList';
 import '@/styles/templates/search/search.scss';
 import { AXIOSResponse, IProduct } from '@/types/interface';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function SearchPage() {
   const [keyword, setKeyword] = useState<string>('');

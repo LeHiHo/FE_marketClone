@@ -1,6 +1,6 @@
 import MainPage from '@/templates/main/mainPage';
 
-export default async function Main() {
+export default function Main() {
   return (
     <>
       <MainPage />

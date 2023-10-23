@@ -5,7 +5,13 @@ const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
-export const getProductDetail = async (id: number) => {
+const config = {
+  headers: {
+    'Content-Type': 'multipart/form-data',
+  },
+};
+
+export const getProductDetail = async (id: number | undefined) => {
   const res = await client.get(`/products/${id}`, {
     params: {
       productId: id,
@@ -14,18 +20,19 @@ export const getProductDetail = async (id: number) => {
   return res.data;
 };
 
+// 상품등록
 export const postProducts = async (
   title: string,
   categoryName: string,
   content: string,
-  price: number,
+  price: string,
   images?: FileList | null,
 ) => {
   const formData = new FormData();
   formData.append('title', title);
   formData.append('categoryName', categoryName);
   formData.append('content', content);
-  formData.append('price', price.toString()); // 숫자를 문자열로 변환
+  formData.append('price', price.toString());
 
   // 여러 이미지를 처리하는 경우
   if (images) {
@@ -34,14 +41,14 @@ export const postProducts = async (
     }
   }
 
-  const config = {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  };
-
   const res = await client.post('/products', formData, config);
-  return res.data;
+  return res;
+};
+
+// 상품삭제
+export const deleteProducts = async (id: number) => {
+  const res = await client.delete(`products/${id}`);
+  return res;
 };
 
 export const getProductCategory = async () => {
@@ -50,12 +57,18 @@ export const getProductCategory = async () => {
 };
 
 export const getProducts = async (searchWord?: string, category?: string) => {
-  const res = await client.get('/products', {
+  const res = await client.get('/products?pageSize=100', {
     params: {
       searchWord,
       categoryNames: category,
+      pageSize: 300, // 추후 수정 예정입니다.
     },
   });
+  return res.data;
+};
+
+export const getUserProducts = async (id: string) => {
+  const res = await client.get(`/products/${id}/list`);
   return res.data;
 };
 
@@ -74,6 +87,7 @@ export const postSignUp = async (
   return res;
 };
 
+//로그인
 export const postAuth = async (email: string, password: string) => {
   const res = await client.post('/login', {
     email: email,
@@ -83,7 +97,7 @@ export const postAuth = async (email: string, password: string) => {
 };
 
 export const updateProductState = async (
-  productStateId: number,
+  productStateId: number | undefined,
   changeStateCode: number,
 ) => {
   const res = await client.put(`/products/${productStateId}/status`, {
@@ -108,19 +122,37 @@ export const getMyChatList = async () => {
   return res.data;
 };
 
+export const getMyWishList = async () => {
+  const res = await client.get('/wish');
+  return res.data;
+};
+
 export const getProductChatList = async (id: number | null) => {
   const res = await client.get(`/products/${id}/chats`);
   return res.data;
 };
 
+export const getSellerProduct = async (id: number | null) => {
+  const res = await client.get(`/products/${id}/list`);
+  return res.data;
+};
+
 // 위시상품 추가 / 삭제
 
-export const addWishProduct = async (id: number) => {
+export const addWishProduct = async (id: number | undefined) => {
   const res = await client.post(`wish/${id}`);
   return res;
 };
 
-export const deleteWishProduct = async (id: number) => {
+export const deleteWishProduct = async (id: number | undefined) => {
   const res = await client.delete(`wish/${id}`);
+  return res;
+};
+
+export const putEditProfile = async (nickname: string, profileImg: File) => {
+  const profileFormData = new FormData();
+  profileFormData.append('nickname', nickname);
+  profileFormData.append('profileImg', profileImg);
+  const res = await client.put('/myPage/profile', profileFormData, config);
   return res;
 };

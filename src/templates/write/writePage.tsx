@@ -13,7 +13,7 @@ export default function WritePage() {
   const [title, setTitle] = useState<string>('');
   const [category, setCategory] = useState<string>('');
   const [content, setContent] = useState<string>('');
-  const [price, setPrice] = useState<number>(0);
+  const [price, setPrice] = useState<string>('');
   const [isModal, setIsModal] = useState<boolean>(false);
 
   const router = useRouter();
@@ -42,7 +42,7 @@ export default function WritePage() {
           price,
           images,
         );
-        if (response.statusCode === 200) {
+        if (response.data.statusCode === 200) {
           router.push('/main');
           console.log('Post success', response);
         } else {
@@ -51,7 +51,7 @@ export default function WritePage() {
       }
     } catch (error: any) {
       if (error.response) {
-        const errorData = error.response.data;
+        const errorData = error.response?.data;
         console.error('Post failed:', errorData);
       } else {
         console.error('An unexpected error occurred:', error);
@@ -129,13 +129,18 @@ export default function WritePage() {
           </div>
           <p>가격</p>
           <input
-            type="number"
-            name="product_price"
+            type="text" // 'number' 대신 'text'를 사용
             value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            onChange={(e) => {
+              const newValue = e.target.value;
+              // 숫자 또는 빈 문자열만 허용
+              const isNumeric = /^[0-9]*$/.test(newValue);
+              if (isNumeric) {
+                setPrice(newValue);
+              }
+            }}
             placeholder="가격을 입력해주세요"
           />
-
           <p>자세한 설명</p>
           <textarea
             name="product_content"
