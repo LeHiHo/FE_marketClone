@@ -44,7 +44,7 @@ export const ProductDetail = () => {
     const roomId = res.data.chatRoomId;
     if (product) {
       router.push(
-        `/chat/${roomId}?productId=${productId}&userId=${product.seller.sellerId}`,
+        `/chat/${roomId}?productId=${productId}&userId=${product.seller.sellerId}`, //
       );
     }
   };
