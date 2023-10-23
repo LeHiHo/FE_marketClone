@@ -29,7 +29,7 @@
       position: relative;
       top: -3.125rem;
       > select {
-        margin: 1rem;
+        margin: 1rem 0 0 1rem;
         padding: 0.2rem 0.6rem;
       }
     }
@@ -45,6 +45,7 @@
         width: 3.125rem;
         height: 3.125rem;
         margin: 0 0.8rem;
+        object-fit: cover;
       }
     }
     &__icon {
@@ -59,12 +60,12 @@
       z-index: 99;
       background-color: #fff;
       border-radius: 6px;
-      > li {
+      > div {
         text-align: center;
         padding: 1rem 1.3rem;
         white-space: nowrap;
       }
-      > li:first-of-type {
+      > div:first-of-type {
         border-bottom: 1px solid #d1d2d3;
       }
     }
@@ -79,14 +80,14 @@
 
     &__title {
       font-size: 1.2rem;
-      margin-bottom: 1.2rem;
+      margin: 1.2rem 0;
     }
     &__description {
       display: flex;
       color: #a5a5a5;
       font-size: 0.8rem;
       margin-bottom: 1.2rem;
-      > p:first-of-type {
+      > p {
         margin-right: 0.5rem;
         text-decoration: underline;
       }
@@ -114,6 +115,9 @@
           margin: 0 0.5rem;
         }
       }
+      &-icon {
+        color: #ff0000;
+      }
     }
 
     &__chat-button {
@@ -129,6 +133,9 @@
       margin-left: auto;
       &:hover {
         background-color: $sub-color;
+      }
+      &:disabled {
+        background-color: #d1d2d3;
       }
     }
   }
@@ -190,4 +197,8 @@
   position: absolute;
   top: -1.875rem;
   z-index: 9;
+}
+
+.badge {
+  display: inline-block !important;
 }

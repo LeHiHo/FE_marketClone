@@ -1,18 +1,92 @@
 'use client';
+import {
+  addWishProduct,
+  deleteWishProduct,
+  getProductDetail,
+  updateProductState,
+} from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
+import ProductBadge from '@/components/productBadge';
 import '@/styles/templates/product/productDetail.scss';
-import Link from 'next/link';
+import { AXIOSResponse } from '@/types/interface';
+import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
+import ProductDelete from './productDelete';
+
+type Seller = {
+  sellerId: number;
+  profileImage: string;
+  nickname: string;
+};
+
+type sellerProductInfos = {
+  id: number;
+  price: number;
+  thumbnail: string;
+  title: string;
+};
+
+type Product = {
+  id: number;
+  title: string;
+  price: number;
+  categoryName: string;
+  content: string;
+  images: string[];
+  status: string;
+  like: boolean;
+  likes: number;
+  myProduct: boolean;
+  seller: Seller;
+  sellerProductInfos: sellerProductInfos[];
+};
+
 export const ProductDetail = () => {
+  const router = useRouter();
+  const path = usePathname();
+  const id = path.split('/')[2];
+
+  const productId: number = typeof id === 'string' ? parseInt(id, 10) : 0; // 또는 다른 기본값
+
+  const [product, setProduct] = useState<Product | null>(null);
+  const [onLike, setOnLike] = useState<boolean>(false);
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const menuRef = useRef<HTMLUListElement | null>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+
+  const [selectedValue, setSelectedValue] = useState('1');
+  const selectRef = useRef<HTMLSelectElement | null>(null);
+
+  const [isBooking, setIsBooking] = useState<boolean>(false);
+
+  const handleSelectChange = () => {
+    if (selectRef.current) {
+      const selectedOption = selectRef.current.value;
+      setSelectedValue(selectedOption);
+      updateProductState(productId, parseInt(selectedOption, 10));
+    }
+  };
+
+  useEffect(() => {
+    if (selectedValue === '1') {
+      setIsBooking(false);
+    } else {
+      setIsBooking(true);
+    }
+  }, [selectedValue]);
+
+  const [isModal, setIsModal] = useState<boolean>(false);
+
+  const toggleModal = () => {
+    setIsModal(!isModal);
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -33,6 +107,34 @@ export const ProductDetail = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res: AXIOSResponse<Product> = await getProductDetail(productId);
+      try {
+        if (res.statusCode === 200) {
+          setProduct(res.data);
+          setOnLike(res.data?.like);
+          if (res.data.status === '판매중') {
+            setSelectedValue('1');
+          } else if (res.data.status === '예약중') {
+            setSelectedValue('2');
+          } else if (res.data.status === '거래완료') {
+            setSelectedValue('3');
+          } else {
+            return;
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+    return () => {
+      setProduct(null);
+      [];
+    };
+  }, [productId]);
+
   const settings = {
     dots: true, // 페이지 네비게이션(점) 표시
     infinite: true, // 무한 루프
@@ -43,131 +145,174 @@ export const ProductDetail = () => {
     arrows: false,
   };
 
-  const slides = [
-    <div className="product-detail__image" key={1}>
-      <img src="/svg/cat.jpg" />
-    </div>,
-    <div className="product-detail__image" key={2}>
-      <img src="/svg/default_profile.png" />
-    </div>,
-    <div className="product-detail__image" key={3}>
-      <img src="/svg/cat.jpg" />
-    </div>,
-  ];
-
   return (
     <div id="product-detail">
       <div className="product-detail">
+        {isModal && (
+          <ProductDelete
+            isModal={isModal}
+            onClose={toggleModal}
+            productID={productId}
+          />
+        )}
         <Header
           goBack={true}
           border={false}
           title=""
           button={
-            <>
-              <BsThreeDotsVertical
-                size="30"
-                background="#ccc"
-                className="product-detail__icon"
-                onClick={toggleMenu}
-              />
-              {isMenuOpen && (
-                <ul ref={menuRef} className="product-detail__menu">
-                  <li>게시글 수정</li>
-                  <li>삭제</li>
-                </ul>
-              )}
-            </>
+            product?.myProduct && (
+              <>
+                <BsThreeDotsVertical
+                  size="30"
+                  background="#ccc"
+                  className="product-detail__icon"
+                  onClick={toggleMenu}
+                />
+                {isMenuOpen && (
+                  <div
+                    role="button"
+                    ref={menuRef}
+                    className="product-detail__menu">
+                    <div onClick={() => router.push('/product/edit')}>
+                      게시글 수정
+                    </div>
+                    <div onClick={toggleModal}>삭제</div>
+                  </div>
+                )}
+              </>
+            )
           }
         />
 
         <Slider className="product-detail__image-wrapper" {...settings}>
-          {slides}
+          {product?.images.map((image, index) => {
+            return (
+              <div className="product-detail__image" key={index}>
+                <img src={image} alt="" />
+              </div>
+            );
+          })}
         </Slider>
 
         <div className="product-detail__main">
           <div className="product-detail__profile">
-            <Link href={'/mypage'}>
+            <div onClick={() => product?.myProduct && router.push('/mypage')}>
               <img
-                src="/svg/default_profile.png"
+                src={product?.seller.profileImage}
                 alt="profile"
                 className="profile__image"
               />
-            </Link>
+            </div>
 
-            <p className="profile__name">닉네임</p>
+            <p className="profile__name">{product?.seller.nickname}</p>
           </div>
 
-          <select>
-            <option>판매중</option>
-            <option>예약중</option>
-            <option>거래완료</option>
-          </select>
+          {product?.myProduct && (
+            <select
+              ref={selectRef}
+              value={selectedValue}
+              onChange={handleSelectChange}>
+              <option value="1">판매중</option>
+              <option value="2">예약중</option>
+              <option value="3">거래완료</option>
+            </select>
+          )}
 
           <div className="product-detail__content-wrapper">
-            <p className="product-detail__title">
-              2022 맥북에어 M2 256GB 판매합니다!
-            </p>
+            {!product?.myProduct && product?.status === '예약중' && (
+              <ProductBadge
+                productStatus={product?.status}
+                state={'reserved'}
+              />
+            )}
+            {!product?.myProduct && product?.status === '거래완료' && (
+              <ProductBadge productStatus={product?.status} state={'sold'} />
+            )}
+            <p className="product-detail__title">{product?.title}</p>
             <div className="product-detail__description">
-              <p className="product-detail__category">디지털기기</p>
-              <p className="product-detail__time">⋅ 1일 전</p>
+              <p className="product-detail__category">
+                {' '}
+                {product?.categoryName}
+              </p>
             </div>
 
-            <p className="product-detail__content">
-              2022 맥북에어 M2 256GB 판매합니다! <br />
-              사진에 관련된 업무를 하다보니 아이폰이랑 연동이 잘 되어서 1월에
-              구매하였는데 조심한다고 거의 들고 나가질 않았습니다! 퇴사하게되어
-              판매합니다! <br /> <br />
-              금액대가 있는 제품이라 마곡역에서 직거래했으면 좋겠습니다! <br />
-              <br />
-              ✔️ 기스 없음 <br />
-              ✔️ 풀박 <br />ㄴ 필요하시면 멀티포트 같이 드리겠습니다.
-            </p>
+            <p className="product-detail__content">{product?.content}</p>
           </div>
 
-          <div className="product-detail__more-product">
-            <div>
-              <div className="more-product__title">
-                <p>닉네임님의 판매상품</p>
-                <Btn type="button" href="products" label="모두보기" />
-              </div>
+          {product?.sellerProductInfos && (
+            <div className="product-detail__more-product">
+              <div>
+                <div className="more-product__title">
+                  <p>{product?.seller.nickname}님의 판매상품</p>
+                  <Btn
+                    type="button"
+                    href={`products?id=${id}`}
+                    label="모두보기"
+                  />
+                </div>
 
-              <div className="more-product__grid">
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다 고양이는 귀엽다 고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다 고양이는 귀엽다 고양이는 귀엽다</p>
-                  <p>가격</p>
-                </div>
-                <div className="more-product">
-                  <img src="/svg/cat.jpg" alt="cat" />
-                  <p>고양이는 귀엽다</p>
-                  <p>가격</p>
+                <div className="more-product__grid">
+                  {product?.sellerProductInfos
+                    .slice(0, 4)
+                    .map((product, index) => {
+                      return (
+                        <div
+                          onClick={() => router.push(`/product/${product.id}`)}
+                          className="more-product"
+                          key={index}>
+                          <img src={product.thumbnail} alt="sale" />
+                          <p>{product.title}</p>
+                          <p>{`${product.price}원`}</p>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
       <footer className="product-detail__footer">
         <div className="product-detail__footer--wrapper">
-          <AiOutlineHeart size="28" className="product-detail__footer-icon" />
+          {!onLike ? (
+            <AiOutlineHeart
+              size="28"
+              className="product-detail__footer-icon"
+              onClick={() => {
+                setOnLike((prev) => !prev);
+                addWishProduct(productId);
+              }}
+            />
+          ) : (
+            <AiFillHeart
+              size="28"
+              className="product-detail__footer-icon"
+              onClick={() => {
+                setOnLike((prev) => !prev);
+                deleteWishProduct(productId);
+              }}
+            />
+          )}
           <span>|</span>
-          <p>125만원</p>
+          <p>{`${product?.price}원`}</p>
         </div>
 
-        <Link href={'/chatList'}>
-          <button className="product-detail__chat-button">관련 채팅보기</button>
-        </Link>
+        {product?.myProduct ? (
+          <div onClick={() => router.push(`/product/${id}/chats`)}>
+            <button className="product-detail__chat-button">
+              관련 채팅보기
+            </button>
+          </div>
+        ) : (
+          <div onClick={() => router.push(`/product/${id}/chats`)}>
+            <button
+              className="product-detail__chat-button"
+              disabled={isBooking ? true : false}>
+              채팅하기
+            </button>
+          </div>
+        )}
       </footer>
     </div>
   );

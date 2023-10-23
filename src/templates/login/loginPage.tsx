@@ -2,16 +2,16 @@
 
 import Btn from '@/components/btn';
 import '@/styles/templates/login/login.scss';
-import Link from 'next/link';
 import Header from '@/components/header';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { postAuth } from '@/api/service';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [isLogin, setIsLogin] = useState(false);
+
   const router = useRouter();
 
   const handleLogin = async () => {
@@ -20,13 +20,12 @@ export default function LoginPage() {
       if (response.data.statusCode === 200) {
         setIsLogin(!isLogin);
         router.push('/main');
-        console.log(response);
       } else {
         console.error('Login failed:', response.data);
       }
     } catch (error: any) {
       if (error.response) {
-        const errorData = error.response.data;
+        const errorData = error.response?.data;
         console.error('Login failed:', errorData);
       } else {
         console.error('An unexpected error occurred:', error);
@@ -64,7 +63,7 @@ export default function LoginPage() {
           />
           <div className="loginPage__text-pw">
             <p>비밀번호를 잊어버리셨나요?</p>
-            <Link href="/login">비밀번호 찾기</Link>
+            <div onClick={() => router.push('/login')}>비밀번호 찾기</div>
           </div>
         </footer>
       </div>

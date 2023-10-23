@@ -105,19 +105,30 @@ export default function SignupPage() {
 
   const handleButtonClick = async () => {
     if (validateForm()) {
-      const res = await postSignUp(
-        formData.email,
-        formData.password,
-        formData.phone,
-        formData.nickname,
-      );
-      console.log(res);
-      if (res.data.statusCode === 200) {
-        alert('회원가입 성공!');
-        router.push('/login');
-      } else {
-        console.log(res.data.status);
-        alert('회원가입 실패');
+      try {
+        const res = await postSignUp(
+          formData.email,
+          formData.password,
+          formData.phone,
+          formData.nickname,
+        );
+        if (res.data.statusCode === 200) {
+          alert('회원가입 성공!');
+          router.push('/login');
+        } else {
+          console.log(res);
+        }
+      } catch (error: any) {
+        if (error.response.data.statusCode === 401) {
+          alert('이미 가입된 이메일이 있습니다.');
+        } else if (error.response.data.statusCode === 402) {
+          alert('이미 가입된 휴대폰 번호가 있습니다.');
+        } else if (error.response.data.statusCode === 403) {
+          alert('이미 가입된 닉네임이 있습니다.');
+        } else {
+          console.log(error.response);
+          alert('회원가입 실패');
+        }
       }
     } else {
       alert('유효하지 않은 값을 입력하셨습니다.');
