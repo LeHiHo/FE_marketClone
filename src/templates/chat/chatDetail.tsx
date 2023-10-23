@@ -55,15 +55,19 @@ export default function ChatDetail() {
     brokerURL: process.env.NEXT_PUBLIC_BROKER_URL,
     onConnect: () => {
       setConnected(true);
+      // client.subscribe(`/pub/room/${roomId}`, (message) => {
+      //   console.log(`Received: ${message.body}`);
+      // });
+      //   client.publish({
+      //     destination: `/pub/room/${roomId}`,
+      //     body: JSON.stringify({ userId: 54, content: 'First Message' }),
+      //   });
+      //   setConnected(true);
     },
   });
 
   const connect = () => {
     client.activate();
-    const callback = function () {
-      console.log('콜백함수임');
-    };
-    client.subscribe(`/sub/room/${roomId}`, callback);
   };
 
   const disconnect = () => {
@@ -73,16 +77,28 @@ export default function ChatDetail() {
     }
   };
 
+  // const onMessageReceived = (message: any) => {
+  //   const body = JSON.parse(message.content);
+  //   console.log('Received message:', body);
+  //   console.log(message);
+  // };
+
   const sendMessage = () => {
     console.log('메시지보내기');
     console.log(client, connected);
     if (client && connected) {
       console.log('if문 들어옴');
-      client.publish({
-        destination: `/pub/room/${roomId}`,
-        body: 'hi',
-      });
-      console.log('메시지 보냄');
+      (client.onConnect = () => {
+        client.subscribe(`/pub/room/${roomId}`, (message) => {
+          console.log(`Received: ${message.body}`);
+        });
+        client.publish({
+          destination: `/sub/room/${roomId}`,
+          body: JSON.stringify({ userId: 54, content: 'First Message' }),
+        });
+        setConnected(true);
+      }),
+        console.log('메시지 보냄');
     } else {
       console.error('클라이언트가 연결되지 않았습니다.');
       setMessage('');
@@ -91,7 +107,7 @@ export default function ChatDetail() {
 
   return (
     <div id="chat-detail">
-      <Header goBack={true} title="닉네임" border={true} />
+      <Header goBack={true} title={chatContents.nickName} border={true} />
 
       <div className="chat-detail">
         <ChatItem productId={productId} />
