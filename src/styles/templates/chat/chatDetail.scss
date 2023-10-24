@@ -41,7 +41,9 @@
 
     &__main {
       width: 90%;
+      height: 410px;
       margin: 1rem auto 0 auto;
+      overflow-y: scroll;
     }
 
     &__footer {
