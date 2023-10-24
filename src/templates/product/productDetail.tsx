@@ -19,6 +19,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
 import ProductDelete from './productDelete';
+import ProductPut from './productPut';
 
 type Seller = {
   sellerId: number;
@@ -173,9 +174,10 @@ export const ProductDetail = () => {
                     role="button"
                     ref={menuRef}
                     className="product-detail__menu">
-                    <div onClick={() => router.push('/product/edit')}>
+                    <div onClick={() => router.push(`/product/${id}/edit`)}>
                       게시글 수정
                     </div>
+
                     <div onClick={toggleModal}>삭제</div>
                   </div>
                 )}
