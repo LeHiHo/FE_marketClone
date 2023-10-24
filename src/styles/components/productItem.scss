@@ -50,11 +50,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 2px solid #a5a5a5;
+    border-bottom: 1px solid #a5a5a5;
     color: black;
     cursor: pointer;
   }
   &__change-box:nth-child(1) {
-    border-right: 2px solid #a5a5a5;
+    border-right: 1px solid #a5a5a5;
   }
 }
