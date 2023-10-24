@@ -1,6 +1,6 @@
 'use client';
 
-import { getMyChatList, getProductChatList } from '@/api/service';
+import { getMyChatList, getProductChatList, getMyInfo } from '@/api/service';
 import Header from '@/components/header';
 import '@/styles/templates/chat/chats.scss';
 import { useEffect, useState } from 'react';
@@ -32,9 +32,7 @@ type MyChatList = {
 
 export default function Chats() {
   const router = useRouter();
-
   const [isMyChats, setIsMyChats] = useState<boolean>(false);
-
   const [chats, setChats] = useState<ChatList>([
     {
       chatRoomId: 0,
@@ -61,26 +59,38 @@ export default function Chats() {
       lastChattedAt: '',
     },
   ]);
-
+  const [myId, setMyId] = useState<number>();
   const path = usePathname();
   const id: number | null = parseInt(path.split('/')[2]) || null;
   useEffect(() => {
     const fetchData = async () => {
+      const my = await getMyInfo();
+      setMyId(my.data.id);
       try {
         if (id) {
           const res: AXIOSResponse<ChatList> = await getProductChatList(id);
           if (res.statusCode === 200) {
-            setChats(res.data.reverse());
-            console.log(res.data);
+            setChats(
+              res.data.sort(
+                (a, b) =>
+                  new Date(b.lastCreatedAt).getTime() -
+                  new Date(a.lastCreatedAt).getTime(),
+              ),
+            );
           } else {
             console.log(res);
           }
         } else {
           const res: AXIOSResponse<MyChatList> = await getMyChatList();
           if (res.statusCode === 200) {
-            setMyChats(res.data.reverse());
+            setMyChats(
+              res.data.sort(
+                (a, b) =>
+                  new Date(b.lastChattedAt).getTime() -
+                  new Date(a.lastChattedAt).getTime(),
+              ),
+            );
             setIsMyChats(true);
-            console.log(res.data);
           } else {
             console.log(res);
           }
@@ -115,7 +125,7 @@ export default function Chats() {
               <div
                 onClick={() =>
                   router.push(
-                    `/chat/${chat.chatRoomId}?productId=${chat.productId}&userId=${chat.personId}`,
+                    `/chat/${chat.chatRoomId}?productId=${chat.productId}&userId=${myId}&nickName=${chat.personNickname}`,
                   )
                 }
                 key={index}
@@ -148,7 +158,7 @@ export default function Chats() {
             <div
               onClick={() =>
                 router.push(
-                  `/chat/${chat.chatRoomId}?productId=${chat.productId}&userId=${chat.buyerId}`,
+                  `/chat/${chat.chatRoomId}?productId=${chat.productId}&userId=${myId}&nickName=${chat.nickName}`,
                 )
               }
               key={index}

@@ -95,7 +95,6 @@ export default function ProductPut() {
     setCategory(selectedCategory);
   };
 
-  // console.log('imgFiles', imgFiles);
   const { imageArray, images, removeImage, handleImageChange } =
     useHandleImg(imgFiles);
 

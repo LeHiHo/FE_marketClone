@@ -187,7 +187,6 @@ export const deleteWishProduct = async (id: number | undefined) => {
 
 export const putEditProfile = async (nickname?: string, profileImg?: File) => {
   const profileFormData = new FormData();
-  console.log(nickname, File);
   if (nickname) {
     profileFormData.append('nickname', nickname);
   }

@@ -8,11 +8,9 @@ import { useEffect, useMemo, useState, useRef } from 'react';
 import { getChatContents } from '@/api/service';
 import { AXIOSResponse, ChatContent } from '@/types/interface';
 import * as StompJs from '@stomp/stompjs';
-import { useSearchParams, usePathname } from 'next/navigation';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import ChatSend from './chatSend';
 import ChatRecive from './chatReceive';
-
-// type ChatContents = ChatContent[]
 
 export default function ChatDetail() {
   const idParams = useSearchParams();
@@ -20,9 +18,12 @@ export default function ChatDetail() {
   const productId = parseInt(strId);
   const strUserId = idParams.get('userId') || '';
   const userId = parseInt(strUserId);
+  const nickName = idParams.get('nickName') || '';
   const path = usePathname();
   const roomId = path.split('/')[2];
   const [chatContents, setChatContents] = useState<ChatContent[]>([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,9 +72,7 @@ export default function ChatDetail() {
   const connect = () => {
     client.onConnect = () => {
       client.subscribe(`/sub/room/${roomId}`, (message) => {
-        console.log(`Received: ${message.body}`);
         const newMessage = JSON.parse(message.body);
-
         const dateObj = new Date(newMessage.dateTime);
         if (!isNaN(dateObj.getTime())) {
           newMessage.createAt = dateObj.toLocaleTimeString('en-US', {
@@ -84,7 +83,6 @@ export default function ChatDetail() {
           console.error('Invalid createAt value:', newMessage.createAt);
           newMessage.createAt = 'Invalid Date';
         }
-
         setChatContents((prevChatContents) => [
           ...prevChatContents,
           newMessage,
@@ -102,19 +100,17 @@ export default function ChatDetail() {
     }
   };
 
-  // useEffect(() => {
-  //   messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  // }, [chatContents]);
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatContents]);
 
   const sendMessage = () => {
-    if (connected) {
+    if (connected && message) {
       client.publish({
         destination: `/pub/room/${roomId}`,
         body: JSON.stringify({ userId: userId, content: message }),
       });
       setMessage('');
-      console.log(messageEndRef.current);
-      // messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     } else {
       console.error('클라이언트가 연결되지 않았습니다.');
       setMessage('');
@@ -123,9 +119,11 @@ export default function ChatDetail() {
 
   return (
     <div id="chat-detail">
-      <Header goBack={true} title={chatContents[0]?.nickName} border={true} />
+      <Header goBack={true} title={nickName} border={true} />
 
-      <div className="chat-detail">
+      <div
+        onClick={() => router.push(`/product/${productId}`)}
+        className="chat-detail">
         <ChatItem productId={productId} />
       </div>
       <div className="chat-detail__main">

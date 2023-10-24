@@ -20,14 +20,13 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import ProductDelete from './productDelete';
-import ProductPut from './productPut';
 
 export const ProductDetail = () => {
   const router = useRouter();
   const path = usePathname();
   const id = path.split('/')[2];
 
-  const productId: number = typeof id === 'string' ? parseInt(id, 10) : 0; // 또는 다른 기본값
+  const productId: number = typeof id === 'string' ? parseInt(id, 10) : 0;
 
   const [product, setProduct] = useState<Product | null>(null);
   const [onLike, setOnLike] = useState<boolean>(false);

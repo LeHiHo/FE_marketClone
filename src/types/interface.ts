@@ -39,6 +39,7 @@ type sellerProductInfos = {
 
 // 유저
 export interface IUser {
+  id?: number;
   email: string;
   nickname: string;
   tel: string;

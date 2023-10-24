@@ -41,7 +41,6 @@ export default function MypageWish() {
     fetchData();
   }, [filter]);
 
-  console.log(products);
   return (
     <>
       <Header goBack={true} title="판매상품 보기" />
