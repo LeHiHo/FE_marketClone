@@ -45,6 +45,7 @@
         width: 3.125rem;
         height: 3.125rem;
         margin: 0 0.8rem;
+        object-fit: cover;
       }
     }
     &__icon {
@@ -86,7 +87,7 @@
       color: #a5a5a5;
       font-size: 0.8rem;
       margin-bottom: 1.2rem;
-      > p:first-of-type {
+      > p {
         margin-right: 0.5rem;
         text-decoration: underline;
       }
@@ -132,6 +133,9 @@
       margin-left: auto;
       &:hover {
         background-color: $sub-color;
+      }
+      &:disabled {
+        background-color: #d1d2d3;
       }
     }
   }
@@ -193,4 +197,12 @@
   position: absolute;
   top: -1.875rem;
   z-index: 9;
+}
+
+.badge {
+  display: inline-block !important;
+}
+
+.product-detail__footer {
+  position : absolute;
 }
