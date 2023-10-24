@@ -45,10 +45,10 @@ export const ProductDetail = () => {
     const chat = await createNewChat(productId);
     const roomId = chat.data.chatRoomId;
     const my = await getMyInfo();
-    console.log(my); // 아직 반영 X
+    const myId = my.data.id;
     if (product) {
       router.push(
-        `/chat/${roomId}?productId=${productId}&userId=${product.seller.sellerId}`, //
+        `/chat/${roomId}?productId=${productId}&userId=${myId}`, //
       );
     }
   };
