@@ -51,3 +51,13 @@ export interface AXIOSResponse<T> {
   message: string;
   data: T;
 }
+
+// 채팅
+export type ChatContent = {
+  roomId: number | null;
+  userId: number | null;
+  nickName: string;
+  profileImage: string;
+  content: string;
+  createAt: string;
+};

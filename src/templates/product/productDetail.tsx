@@ -5,6 +5,7 @@ import {
   getProductDetail,
   updateProductState,
   createNewChat,
+  getMyInfo,
 } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
@@ -41,8 +42,10 @@ export const ProductDetail = () => {
 
   // 새로운 채팅
   const handleClick = async () => {
-    const res = await createNewChat(productId);
-    const roomId = res.data.chatRoomId;
+    const chat = await createNewChat(productId);
+    const roomId = chat.data.chatRoomId;
+    const my = await getMyInfo();
+    console.log(my); // 아직 반영 X
     if (product) {
       router.push(
         `/chat/${roomId}?productId=${productId}&userId=${product.seller.sellerId}`, //

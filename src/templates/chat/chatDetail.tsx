@@ -6,39 +6,28 @@ import { BiPlus } from 'react-icons/bi';
 import { TbSend } from 'react-icons/tb';
 import { useEffect, useMemo, useState } from 'react';
 import { getChatContents } from '@/api/service';
-import { AXIOSResponse } from '@/types/interface';
+import { AXIOSResponse, ChatContent } from '@/types/interface';
 import * as StompJs from '@stomp/stompjs';
 import { useSearchParams, usePathname } from 'next/navigation';
+import ChatSend from './chatSend';
+import ChatRecive from './chatReceive';
 
-type ChatContents = {
-  roomId: number | null;
-  userId: number | null;
-  nickName: string;
-  content: string;
-  createAt: string;
-}[];
+// type ChatContents = ChatContent[]
 
 export default function ChatDetail() {
   const idParams = useSearchParams();
   const strId = idParams.get('productId') || '';
   const productId = parseInt(strId);
-  const userId = idParams.get('userId');
+  const strUserId = idParams.get('userId') || '';
+  const userId = parseInt(strUserId);
   const path = usePathname();
   const roomId = path.split('/')[2];
-  const [chatContents, setChatContents] = useState<ChatContents>([
-    {
-      roomId: null,
-      userId: null,
-      nickName: '',
-      content: '',
-      createAt: '',
-    },
-  ]);
+  const [chatContents, setChatContents] = useState<ChatContent[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res: AXIOSResponse<ChatContents> = await getChatContents(roomId);
+        const res: AXIOSResponse<ChatContent[]> = await getChatContents(roomId);
         console.log(res.data);
         setChatContents(res.data);
       } catch (error) {
@@ -95,15 +84,19 @@ export default function ChatDetail() {
 
   return (
     <div id="chat-detail">
-      <Header goBack={true} title={chatContents[0].nickName} border={true} />
+      <Header goBack={true} title={chatContents[0]?.nickName} border={true} />
 
       <div className="chat-detail">
         <ChatItem productId={productId} />
       </div>
       <div className="chat-detail__main">
-        {chatContents.map((chat, index) => {
-          return <div key={index}>{chat.content}</div>;
-        })}
+        {chatContents.map((chatContent, index) =>
+          chatContent.userId === userId ? (
+            <ChatSend key={index} chatContent={chatContent} />
+          ) : (
+            <ChatRecive key={index} chatContent={chatContent} />
+          ),
+        )}
       </div>
       <footer className="chat-detail__footer">
         <div>

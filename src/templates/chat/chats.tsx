@@ -9,30 +9,56 @@ import { AXIOSResponse } from '@/types/interface';
 
 type ChatList = {
   chatRoomId: number;
-  lastChattedAt: string;
+  buyerId: number;
+  nickName: string;
+  buyerProfileImg: string;
+  productId: number;
+  productImage: string;
   lastMessage: string;
-  personId: number;
-  personNickname: string;
-  personProfileImage: string;
+  lastCreatedAt: string;
+}[];
+
+type MyChatList = {
+  chatRoomId: number;
   productId: number;
   productImage: string;
   productStatus: string;
+  personId: number;
+  personNickname: string;
+  personProfileImage: string;
+  lastMessage: string;
+  lastChattedAt: string;
 }[];
 
 export default function Chats() {
   const router = useRouter();
 
+  const [isMyChats, setIsMyChats] = useState<boolean>(false);
+
   const [chats, setChats] = useState<ChatList>([
     {
       chatRoomId: 0,
-      lastChattedAt: '',
+      buyerId: 0,
+      nickName: '',
+      buyerProfileImg: '',
+      productId: 0,
+      productImage: '',
       lastMessage: '',
-      personId: 0,
-      personNickname: '',
-      personProfileImage: '',
+      lastCreatedAt: '',
+    },
+  ]);
+
+  const [myChats, setMyChats] = useState<MyChatList>([
+    {
+      chatRoomId: 0,
       productId: 0,
       productImage: '',
       productStatus: '',
+      personId: 0,
+      personNickname: '',
+      personProfileImage: '',
+      lastMessage: '',
+      lastChattedAt: '',
     },
   ]);
 
@@ -40,14 +66,24 @@ export default function Chats() {
   const id: number | null = parseInt(path.split('/')[2]) || null;
   useEffect(() => {
     const fetchData = async () => {
-      const res: AXIOSResponse<ChatList> = id
-        ? await getProductChatList(id)
-        : await getMyChatList();
       try {
-        if (res.statusCode === 200) {
-          setChats(res.data);
+        if (id) {
+          const res: AXIOSResponse<ChatList> = await getProductChatList(id);
+          if (res.statusCode === 200) {
+            setChats(res.data);
+            console.log(res.data);
+          } else {
+            console.log(res);
+          }
         } else {
-          console.log(res);
+          const res: AXIOSResponse<MyChatList> = await getMyChatList();
+          if (res.statusCode === 200) {
+            setMyChats(res.data);
+            setIsMyChats(true);
+            console.log(res.data);
+          } else {
+            console.log(res);
+          }
         }
       } catch (error) {
         console.log(error);
@@ -58,6 +94,8 @@ export default function Chats() {
 
     return () => {
       setChats([]);
+      setMyChats([]);
+      setIsMyChats(false);
     };
   }, []);
 
@@ -71,37 +109,71 @@ export default function Chats() {
         />
       </header>
 
-      {chats.map((chat, index) => (
-        <div
-          onClick={() =>
-            router.push(
-              `/chat/${chat.chatRoomId}?productId=${chat.productId}&userId=${chat.personId}`,
-            )
-          }
-          key={index}
-          id="chat-list">
-          <div className="chat-list">
-            <div>
-              <img
-                className="chat-list__profile"
-                src={chat.personProfileImage}
-                alt="profile"
-              />
-            </div>
-            <div className="chat-list__content">
-              <div className="chat-list__desc">
-                <span>{chat.personNickname}</span>
-                <span> | </span>
-                <span>장소</span>
+      {isMyChats
+        ? myChats.map((chat, index) => {
+            return (
+              <div
+                onClick={() =>
+                  router.push(
+                    `/chat/${chat.chatRoomId}?productId=${chat.productId}&userId=${chat.personId}`,
+                  )
+                }
+                key={index}
+                id="chat-list">
+                <div className="chat-list">
+                  <div>
+                    <img
+                      className="chat-list__profile"
+                      src={chat.personProfileImage}
+                      alt="profile"
+                    />
+                  </div>
+                  <div className="chat-list__content">
+                    <div className="chat-list__desc">
+                      <span>{chat.personNickname}</span>
+                      <span> | </span>
+                      <span>장소</span>
+                    </div>
+                    <p>{chat.lastMessage}</p>
+                  </div>
+                  <div className="chat-list__thumnail">
+                    <img src={chat.productImage} alt="thumnail" />
+                  </div>
+                </div>
               </div>
-              <p>{chat.lastMessage}</p>
+            );
+          })
+        : chats.map((chat, index) => (
+            <div
+              onClick={() =>
+                router.push(
+                  `/chat/${chat.chatRoomId}?productId=${chat.productId}&userId=${chat.buyerId}`,
+                )
+              }
+              key={index}
+              id="chat-list">
+              <div className="chat-list">
+                <div>
+                  <img
+                    className="chat-list__profile"
+                    src={chat.buyerProfileImg}
+                    alt="profile"
+                  />
+                </div>
+                <div className="chat-list__content">
+                  <div className="chat-list__desc">
+                    <span>{chat.nickName}</span>
+                    <span> | </span>
+                    <span>장소</span>
+                  </div>
+                  <p>{chat.lastMessage}</p>
+                </div>
+                <div className="chat-list__thumnail">
+                  <img src={chat.productImage} alt="thumnail" />
+                </div>
+              </div>
             </div>
-            <div className="chat-list__thumnail">
-              <img src={chat.productImage} alt="thumnail" />
-            </div>
-          </div>
-        </div>
-      ))}
+          ))}
     </>
   );
 }
