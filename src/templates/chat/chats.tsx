@@ -122,20 +122,21 @@ export default function Chats() {
                 id="chat-list">
                 <div className="chat-list">
                   <div>
-                    <img
-                      className="chat-list__profile"
-                      src={chat.personProfileImage}
-                      alt="profile"
-                    />
-                  </div>
-                  <div className="chat-list__content">
-                    <div className="chat-list__desc">
-                      <span>{chat.personNickname}</span>
-                      <span> | </span>
-                      <span>장소</span>
+                    <div>
+                      <img
+                        className="chat-list__profile"
+                        src={chat.personProfileImage}
+                        alt="profile"
+                      />
                     </div>
-                    <p>{chat.lastMessage}</p>
+                    <div className="chat-list__content">
+                      <div className="chat-list__desc">
+                        <span>{chat.personNickname}</span>
+                      </div>
+                      <p>{chat.lastMessage}</p>
+                    </div>
                   </div>
+
                   <div className="chat-list__thumnail">
                     <img src={chat.productImage} alt="thumnail" />
                   </div>
@@ -154,20 +155,21 @@ export default function Chats() {
               id="chat-list">
               <div className="chat-list">
                 <div>
-                  <img
-                    className="chat-list__profile"
-                    src={chat.buyerProfileImg}
-                    alt="profile"
-                  />
-                </div>
-                <div className="chat-list__content">
-                  <div className="chat-list__desc">
-                    <span>{chat.nickName}</span>
-                    <span> | </span>
-                    <span>장소</span>
+                  <div>
+                    <img
+                      className="chat-list__profile"
+                      src={chat.buyerProfileImg}
+                      alt="profile"
+                    />
                   </div>
-                  <p>{chat.lastMessage}</p>
+                  <div className="chat-list__content">
+                    <div className="chat-list__desc">
+                      <span>{chat.nickName}</span>
+                    </div>
+                    <p>{chat.lastMessage}</p>
+                  </div>
                 </div>
+
                 <div className="chat-list__thumnail">
                   <img src={chat.productImage} alt="thumnail" />
                 </div>

@@ -28,7 +28,6 @@ export default function ChatDetail() {
     const fetchData = async () => {
       try {
         const res: AXIOSResponse<ChatContent[]> = await getChatContents(roomId);
-        console.log(res.data);
         setChatContents(res.data);
       } catch (error) {
         console.log('실패', error);
@@ -43,7 +42,21 @@ export default function ChatDetail() {
   const [connected, setConnected] = useState(false);
   const [message, setMessage] = useState('');
 
+  const client = useMemo(
+    () =>
+      new StompJs.Client({
+        brokerURL: process.env.NEXT_PUBLIC_BROKER_URL,
+      }),
+    [],
+  );
+
   const connect = () => {
+    client.onConnect = () => {
+      client.subscribe(`/sub/room/${roomId}`, (message) =>
+        console.log(`Received: ${message.body}`),
+      );
+    };
+    client.activate();
     setConnected(true);
   };
 
@@ -54,27 +67,12 @@ export default function ChatDetail() {
     }
   };
 
-  const client = useMemo(
-    () =>
-      new StompJs.Client({
-        brokerURL: process.env.NEXT_PUBLIC_BROKER_URL,
-      }),
-    [],
-  );
-
   const sendMessage = () => {
     if (connected) {
-      console.log(message);
-      client.onConnect = () => {
-        client.subscribe(`/sub/room/${roomId}`, (message) =>
-          console.log(`Received: ${message.body}`),
-        );
-        client.publish({
-          destination: `/pub/room/${roomId}`,
-          body: JSON.stringify({ userId: userId, content: message }),
-        });
-      };
-      client.activate();
+      client.publish({
+        destination: `/pub/room/${roomId}`,
+        body: JSON.stringify({ userId: userId, content: message }),
+      });
       setMessage('');
     } else {
       console.error('클라이언트가 연결되지 않았습니다.');
