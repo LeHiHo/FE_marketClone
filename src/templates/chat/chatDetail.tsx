@@ -4,7 +4,7 @@ import Header from '@/components/header';
 import ChatItem from './chatItem';
 import { BiPlus } from 'react-icons/bi';
 import { TbSend } from 'react-icons/tb';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import { getChatContents } from '@/api/service';
 import { AXIOSResponse, ChatContent } from '@/types/interface';
 import * as StompJs from '@stomp/stompjs';
@@ -28,19 +28,37 @@ export default function ChatDetail() {
     const fetchData = async () => {
       try {
         const res: AXIOSResponse<ChatContent[]> = await getChatContents(roomId);
-        setChatContents(res.data);
+
+        const convertedChatContents = res.data.map((chatContent) => {
+          const dateObj = new Date(chatContent.createAt);
+          if (!isNaN(dateObj.getTime())) {
+            chatContent.createAt = dateObj.toLocaleTimeString('en-US', {
+              hour: '2-digit',
+              minute: '2-digit',
+            });
+          } else {
+            console.error('Invalid createAt value:', chatContent.createAt);
+            chatContent.createAt = 'Invalid Date';
+          }
+          return chatContent;
+        });
+
+        setChatContents(convertedChatContents);
       } catch (error) {
         console.log('실패', error);
       }
     };
+
     fetchData();
     connect();
     return () => {
       disconnect();
     };
   }, []);
+
   const [connected, setConnected] = useState(false);
   const [message, setMessage] = useState('');
+  const messageEndRef = useRef<HTMLDivElement | null>(null);
 
   const client = useMemo(
     () =>
@@ -52,9 +70,26 @@ export default function ChatDetail() {
 
   const connect = () => {
     client.onConnect = () => {
-      client.subscribe(`/sub/room/${roomId}`, (message) =>
-        console.log(`Received: ${message.body}`),
-      );
+      client.subscribe(`/sub/room/${roomId}`, (message) => {
+        console.log(`Received: ${message.body}`);
+        const newMessage = JSON.parse(message.body);
+
+        const dateObj = new Date(newMessage.dateTime);
+        if (!isNaN(dateObj.getTime())) {
+          newMessage.createAt = dateObj.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+        } else {
+          console.error('Invalid createAt value:', newMessage.createAt);
+          newMessage.createAt = 'Invalid Date';
+        }
+
+        setChatContents((prevChatContents) => [
+          ...prevChatContents,
+          newMessage,
+        ]);
+      });
     };
     client.activate();
     setConnected(true);
@@ -67,6 +102,10 @@ export default function ChatDetail() {
     }
   };
 
+  // useEffect(() => {
+  //   messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  // }, [chatContents]);
+
   const sendMessage = () => {
     if (connected) {
       client.publish({
@@ -74,6 +113,8 @@ export default function ChatDetail() {
         body: JSON.stringify({ userId: userId, content: message }),
       });
       setMessage('');
+      console.log(messageEndRef.current);
+      // messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     } else {
       console.error('클라이언트가 연결되지 않았습니다.');
       setMessage('');
@@ -95,6 +136,7 @@ export default function ChatDetail() {
             <ChatRecive key={index} chatContent={chatContent} />
           ),
         )}
+        <div ref={messageEndRef}></div>
       </div>
       <footer className="chat-detail__footer">
         <div>

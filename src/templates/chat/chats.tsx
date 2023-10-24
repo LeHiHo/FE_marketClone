@@ -70,7 +70,7 @@ export default function Chats() {
         if (id) {
           const res: AXIOSResponse<ChatList> = await getProductChatList(id);
           if (res.statusCode === 200) {
-            setChats(res.data);
+            setChats(res.data.reverse());
             console.log(res.data);
           } else {
             console.log(res);
@@ -78,7 +78,7 @@ export default function Chats() {
         } else {
           const res: AXIOSResponse<MyChatList> = await getMyChatList();
           if (res.statusCode === 200) {
-            setMyChats(res.data);
+            setMyChats(res.data.reverse());
             setIsMyChats(true);
             console.log(res.data);
           } else {

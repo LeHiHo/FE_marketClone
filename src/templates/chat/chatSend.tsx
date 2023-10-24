@@ -5,9 +5,11 @@ export default function ChatSend({
 }: {
   chatContent: ChatContent;
 }) {
-  const { content } = chatContent;
+  const { content, createAt } = chatContent;
+
   return (
-    <div className="chat-content">
+    <div className="chat-content send">
+      <div className="chat-time">{createAt}</div>
       <div className="chat-bubble sender">{content}</div>
     </div>
   );
