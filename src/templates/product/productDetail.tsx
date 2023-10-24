@@ -144,7 +144,7 @@ export const ProductDetail = () => {
     autoplay: false, // 자동 재생
     arrows: false,
   };
-  console.log(product);
+
   return (
     <div id="product-detail">
       <div className="product-detail">

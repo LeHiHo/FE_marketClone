@@ -19,6 +19,8 @@ export default function MypagePage() {
     tel: '',
     profileImage: '',
   });
+  const [imageSrc, setImageSrc] = useState(user.profileImage);
+
   const router = useRouter();
 
   const onClick = (option: string) => {
@@ -35,12 +37,16 @@ export default function MypagePage() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    setImageSrc(user.profileImage + '?' + Date.now());
+  }, [user.profileImage]);
+
   return (
     <div id="mypagePage">
       <Header title={'마이페이지'} border={true} />
       <div className="mypage-container">
         <div className="user__info">
-          <img src={user.profileImage} alt="유저 이미지" />
+          <img src={imageSrc} alt="유저 이미지" />
           <span>{user.nickname}</span>
           <Btn type="button" href="/mypage/edit" label="프로필수정" />
         </div>

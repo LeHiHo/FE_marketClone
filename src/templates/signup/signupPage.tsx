@@ -112,9 +112,12 @@ export default function SignupPage() {
           formData.phone,
           formData.nickname,
         );
-        console.log(res.data);
-        alert('회원가입 성공!');
-        router.push('/login');
+        if (res.data.statusCode === 200) {
+          alert('회원가입 성공!');
+          router.push('/login');
+        } else {
+          console.log(res);
+        }
       } catch (error: any) {
         if (error.response.data.statusCode === 401) {
           alert('이미 가입된 이메일이 있습니다.');
