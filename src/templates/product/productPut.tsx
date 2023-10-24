@@ -3,12 +3,11 @@
 import '@/styles/templates/write/write.scss';
 import Header from '@/components/header';
 import { useState, useEffect } from 'react';
-import { postProducts } from '@/api/service';
+import { putProducts, getProductDetail } from '@/api/service';
 import CategoryModal from '@/templates/write/categoryModal';
 import { useHandleImg } from '@/templates/write/useHandleImg';
 import Btn from '@/components/btn';
 import { useRouter, usePathname } from 'next/navigation';
-import { getProductDetail } from '@/api/service';
 import { AXIOSResponse } from '@/types/interface';
 
 export default function ProductPut() {
@@ -17,13 +16,12 @@ export default function ProductPut() {
   const [content, setContent] = useState<string>('');
   const [price, setPrice] = useState<string>('');
   const [isModal, setIsModal] = useState<boolean>(false);
-  const [product, setProduct] = useState<Product | null>(null);
-  const [initialFiles, setInitialFiles] = useState<File[]>([]);
+  const [imgFiles, setImgFiles] = useState<File[] | string[]>([]);
 
   type Product = {
     id: number;
     title: string;
-    price: number;
+    price: string;
     categoryName: string;
     content: string;
     images: string[];
@@ -36,56 +34,54 @@ export default function ProductPut() {
   };
 
   const router = useRouter();
-
   const id = parseInt(usePathname().split('/')[2]);
-  console.log(id);
 
-  const urlToFile = async (
-    url: string,
-    filename: string,
-    mimeType: string,
-  ): Promise<File> => {
-    const res = await fetch(url);
-    const blob = await res.blob();
-    return new File([blob], filename, { type: mimeType });
-  };
-
-  const handleEdit = async () => {
-    try {
-      const res: AXIOSResponse<Product> = await getProductDetail(id);
-      if (res.statusCode === 200) {
-        setProduct(res.data);
-        const imageUrls = res.data.images;
-        console.log(imageUrls);
-        const files = await Promise.all(
-          imageUrls.map((url) => urlToFile(url, 'filename', 'image/*')), // filename과 mimeType은 적절하게 설정
-        );
-        setInitialFiles(files);
-      } else {
-        console.error('get failed:', res);
-      }
-    } catch (error: any) {
-      if (error.res) {
-        const errorData = error.res?.data;
-        console.error('get failed:', errorData);
-      } else {
-        console.error('An unexpected error occurred:', error);
-      }
-    }
-  };
+  // const urlToFile = async (
+  //   url: string,
+  //   filename: string,
+  //   mimeType: string,
+  // ): Promise<File> => {
+  //   const res = await fetch(url, { mode: 'no-cors' });
+  //   const blob = await res.blob();
+  //   return new File([blob], filename, { type: mimeType });
+  // };
 
   useEffect(() => {
-    handleEdit();
-  }, []);
+    const fetchData = async () => {
+      try {
+        const res: AXIOSResponse<Product> = await getProductDetail(id);
+        if (res.statusCode === 200) {
+          const {
+            title = '',
+            categoryName = '',
+            content = '',
+            price = '',
+          } = res.data;
 
-  useEffect(() => {
-    if (product) {
-      setTitle(product.title || '');
-      setCategory(product.categoryName || '');
-      setContent(product.content || '');
-      setPrice(product.price ? String(product.price) : '');
-    }
-  }, [product]);
+          setTitle(title);
+          setCategory(categoryName);
+          setContent(content);
+          setPrice(price);
+          const imageUrls = res.data.images; // 먼저 images를 가져온다
+          setImgFiles(imageUrls);
+          // if (imageUrls) {
+          //   const files = await Promise.all(
+          //     imageUrls.map((url) => urlToFile(url, 'filename', 'image/*')), // filename과 mimeType은 적절하게 설정
+          //   );
+          //   setImgFiles(files);
+          // }
+        }
+      } catch (error: any) {
+        if (error.res) {
+          const errorData = error.res?.data;
+          console.error('get failed:', errorData);
+        } else {
+          console.error('An unexpected error occurred:', error);
+        }
+      }
+    };
+    fetchData();
+  }, [id]);
 
   const generateUniqueId = (image: File, index: number): string => {
     return `${image.lastModified}-${image.name}-${index}`;
@@ -99,24 +95,26 @@ export default function ProductPut() {
     setCategory(selectedCategory);
   };
 
+  // console.log('imgFiles', imgFiles);
   const { imageArray, images, removeImage, handleImageChange } =
-    useHandleImg(initialFiles);
+    useHandleImg(imgFiles);
 
-  const handleWrite = async () => {
+  const handleEdit = async () => {
     try {
       if (images) {
-        const response = await postProducts(
+        const res = await putProducts(
+          id,
           title,
           category,
           content,
           price,
           images,
         );
-        if (response.data.statusCode === 200) {
+        if (res.data.statusCode === 200) {
           router.push('/main');
-          console.log('Post success', response);
+          console.log('수정완료');
         } else {
-          console.error('Post failed:', response);
+          console.error('Post failed:', res);
         }
       }
     } catch (error: any) {
@@ -157,12 +155,16 @@ export default function ProductPut() {
                   multiple
                 />
               </label>
-              {imageArray.map((image, index) => (
+              {imageArray.map((image: any, index: number) => (
                 <div
                   className="previewImg-item"
                   key={generateUniqueId(image, index)}>
                   <img
-                    src={URL.createObjectURL(image)}
+                    src={
+                      image instanceof Blob || image instanceof File
+                        ? URL.createObjectURL(image)
+                        : image
+                    }
                     alt={`Uploaded ${index}`}
                   />
                   <div className="x_btn" onClick={() => removeImage(index)}>
@@ -224,7 +226,7 @@ export default function ProductPut() {
           <Btn
             type="button"
             disabled={!title || !category || !content || !price || !images}
-            onClick={handleWrite}
+            onClick={handleEdit}
             label="작성완료"
           />
         </footer>

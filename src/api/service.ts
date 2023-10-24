@@ -52,8 +52,37 @@ export const deleteProducts = async (id: number) => {
 };
 
 // 상품수정
-export const putProducts = async (id: number) => {
-  const res = await client.put(`products/${id}`);
+export const putProducts = async (
+  id: number,
+  title: string,
+  categoryName: string,
+  content: string,
+  price: string,
+  images?: FileList | string[] | null,
+) => {
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('categoryName', categoryName);
+  formData.append('content', content);
+  formData.append('price', price);
+
+  // 여러 이미지를 처리하는 경우
+  if (images) {
+    for (let i = 0; i < images.length; i++) {
+      formData.append('images', images[i]);
+    }
+  }
+
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+    params: {
+      productId: id,
+    },
+  };
+
+  const res = await client.put(`products/${id}`, formData, config);
   return res;
 };
 
