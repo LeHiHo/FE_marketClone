@@ -20,6 +20,7 @@ export default function LoginPage() {
       const response = await postAuth(email, password);
       if (response.data.statusCode === 200) {
         setIsLogin(!isLogin);
+        alert('로그인되었습니다.');
         router.push('/main');
       } else if (response.data.message === 'Invalid Username Or Password') {
         alert('이메일 또는 비밀번호가 일치하지 않습니다.');
