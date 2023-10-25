@@ -16,7 +16,9 @@ export default function Navbar() {
   };
   return (
     <nav id="navbar">
-      <div className="home" onClick={onClickHome}>
+      <div
+        className={pathname === '/mypage' ? 'home' : 'home active'}
+        onClick={onClickHome}>
         {pathname === '/mypage' ? (
           <AiOutlineHome className="icon" />
         ) : (
@@ -24,7 +26,9 @@ export default function Navbar() {
         )}
         <p>홈</p>
       </div>
-      <div className="my" onClick={onClickMy}>
+      <div
+        className={pathname === '/mypage' ? 'my active' : 'my'}
+        onClick={onClickMy}>
         {pathname === '/mypage' ? (
           <FaUser className="icon" />
         ) : (
