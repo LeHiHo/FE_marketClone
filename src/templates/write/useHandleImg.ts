@@ -20,10 +20,8 @@ async function urlToFile(
 //   return new File([blob], filename, { type: mimeType });
 // };
 
-export const useHandleImg = (initialFiles?: (File | string)[]) => {
-  const [imageArray, setImageArray] = useState<(File | string)[]>(
-    initialFiles || [],
-  );
+export const useHandleImg = (initialFiles?: File[]) => {
+  const [imageArray, setImageArray] = useState<File[]>(initialFiles || []);
   const [images, setImages] = useState<FileList | null>(null);
 
   useEffect(() => {

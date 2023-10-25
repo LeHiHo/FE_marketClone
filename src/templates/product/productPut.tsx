@@ -95,8 +95,9 @@ export default function ProductPut() {
     setCategory(selectedCategory);
   };
 
-  const { imageArray, images, removeImage, handleImageChange } =
-    useHandleImg(imgFiles);
+  const { imageArray, images, removeImage, handleImageChange } = useHandleImg(
+    imgFiles as File[],
+  );
 
   const handleEdit = async () => {
     try {
