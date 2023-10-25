@@ -8,7 +8,7 @@
 </div>
 <br>
 
-### 0️⃣ Git convention
+### 0️⃣ Git convention!
 
 ### ✅ Work Flow
 
