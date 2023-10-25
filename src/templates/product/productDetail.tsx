@@ -47,7 +47,7 @@ export const ProductDetail = () => {
     const myId = my.data.id;
     if (product) {
       router.push(
-        `/chat/${roomId}?productId=${productId}&userId=${myId}`, //
+        `/chat/${roomId}?productId=${productId}&userId=${myId}&nickName=${product.seller.nickname}`, //
       );
     }
   };

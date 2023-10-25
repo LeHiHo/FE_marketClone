@@ -24,13 +24,13 @@ export type Product = {
   sellerProductInfos: sellerProductInfos[];
 };
 
-type Seller = {
+export type Seller = {
   sellerId: number;
   profileImage: string;
   nickname: string;
 };
 
-type sellerProductInfos = {
+export type sellerProductInfos = {
   id: number;
   price: number;
   thumbnail: string;

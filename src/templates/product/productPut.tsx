@@ -8,7 +8,7 @@ import CategoryModal from '@/templates/write/categoryModal';
 import { useHandleImg } from '@/templates/write/useHandleImg';
 import Btn from '@/components/btn';
 import { useRouter, usePathname } from 'next/navigation';
-import { AXIOSResponse } from '@/types/interface';
+import { AXIOSResponse, Seller, sellerProductInfos } from '@/types/interface';
 
 export default function ProductPut() {
   const [title, setTitle] = useState<string>('');

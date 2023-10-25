@@ -2,7 +2,6 @@
 import '@/styles/templates/chat/chatDetail.scss';
 import Header from '@/components/header';
 import ChatItem from './chatItem';
-import { BiPlus } from 'react-icons/bi';
 import { TbSend } from 'react-icons/tb';
 import { useEffect, useMemo, useState, useRef } from 'react';
 import { getChatContents } from '@/api/service';
@@ -104,7 +103,8 @@ export default function ChatDetail() {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatContents]);
 
-  const sendMessage = () => {
+  const sendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
     if (connected && message) {
       client.publish({
         destination: `/pub/room/${roomId}`,
@@ -120,7 +120,6 @@ export default function ChatDetail() {
   return (
     <div id="chat-detail">
       <Header goBack={true} title={nickName} border={true} />
-
       <div
         onClick={() => router.push(`/product/${productId}`)}
         className="chat-detail">
@@ -137,16 +136,17 @@ export default function ChatDetail() {
         <div ref={messageEndRef}></div>
       </div>
       <footer className="chat-detail__footer">
-        <div>
-          <BiPlus size="30" />
+        <form onSubmit={sendMessage}>
           <input
             type="text"
             placeholder="메세지 보내기"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <TbSend onClick={sendMessage} size="25" />
-        </div>
+          <button type="submit">
+            <TbSend size="25" />
+          </button>
+        </form>
       </footer>
     </div>
   );
