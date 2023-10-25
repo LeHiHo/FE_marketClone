@@ -185,10 +185,26 @@ export const deleteWishProduct = async (id: number | undefined) => {
   return res;
 };
 
-export const putEditProfile = async (nickname: string, profileImg: File) => {
+export const putEditProfile = async (nickname?: string, profileImg?: File) => {
   const profileFormData = new FormData();
-  profileFormData.append('nickname', nickname);
-  profileFormData.append('profileImg', profileImg);
+  if (nickname) {
+    profileFormData.append('nickname', nickname);
+  }
+  if (profileImg) {
+    profileFormData.append('profileImg', profileImg);
+  }
+
   const res = await client.put('/myPage/profile', profileFormData, config);
   return res;
+};
+
+// 채팅 관련 api
+export const createNewChat = async (id: number) => {
+  const res = await client.post(`/products/${id}/chats`);
+  return res.data;
+};
+
+export const getChatContents = async (chatRoomId: string) => {
+  const res = await client.get(`/chatContents/${chatRoomId}`);
+  return res.data;
 };

@@ -41,7 +41,6 @@ export default function MypageWish() {
     fetchData();
   }, [filter]);
 
-  console.log(products);
   return (
     <>
       <Header goBack={true} title="관심상품" />

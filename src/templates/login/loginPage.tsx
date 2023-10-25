@@ -14,27 +14,31 @@ export default function LoginPage() {
 
   const router = useRouter();
 
-  const handleLogin = async () => {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
       const response = await postAuth(email, password);
       if (response.data.statusCode === 200) {
         setIsLogin(!isLogin);
+        alert('로그인되었습니다.');
         router.push('/main');
+      } else if (response.data.message === 'Invalid Username Or Password') {
+        alert('이메일 또는 비밀번호가 일치하지 않습니다.');
       } else {
-        console.error('Login failed:', response.data);
+        console.log(response);
       }
     } catch (error: any) {
-      if (error.response) {
-        const errorData = error.response?.data;
-        console.error('Login failed:', errorData);
+      if (error.response.data.message === 'no such user') {
+        alert('가입되지 않은 이메일입니다.');
       } else {
-        console.error('An unexpected error occurred:', error);
+        alert('로그인에 실패하였습니다.');
+        console.error('Login failed:', error.response.data);
       }
     }
   };
 
   return (
-    <>
+    <form onSubmit={handleLogin}>
       <Header title={'로그인'} />
       <div className="loginPage">
         <div className="loginPage__text">
@@ -56,9 +60,9 @@ export default function LoginPage() {
         </div>
         <footer>
           <Btn
-            type="button"
+            type="submit"
             disabled={!email || !password} // 이메일과 비밀번호가 모두 입력되었을 때만 버튼 활성화
-            onClick={handleLogin}
+            // onClick={handleLogin}
             label="로그인"
           />
           <div className="loginPage__text-pw">
@@ -67,6 +71,6 @@ export default function LoginPage() {
           </div>
         </footer>
       </div>
-    </>
+    </form>
   );
 }

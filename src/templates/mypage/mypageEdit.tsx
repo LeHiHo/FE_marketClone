@@ -28,12 +28,6 @@ export default function MypageEditPage() {
       const res: AXIOSResponse<IUser> = await getMyInfo();
       if (res.statusCode === 200) {
         setUser(res.data);
-        try {
-          const file = await convertURLtoFile(res.data.profileImage);
-          setProfileImage(file);
-        } catch (error) {
-          console.error('Failed to convert profile image to file:', error);
-        }
       } else {
         console.log('실패');
       }
@@ -41,29 +35,18 @@ export default function MypageEditPage() {
     fetchData();
   }, []);
 
-  const convertURLtoFile = async (imageUrl: string): Promise<File> => {
-    try {
-      const response = await fetch(imageUrl, { mode: 'no-cors' });
-      const blob = await response.blob();
-      const filename = 'profile';
-      const file = new File([blob], filename, { type: blob.type });
-      return file;
-    } catch (error) {
-      console.error('Error fetching or converting the image:', error);
-      throw new Error('Image conversion failed');
-    }
-  };
-
   const handleEditProfile = async () => {
     try {
-      if (profileImage) {
-        const res = await putEditProfile(name || user.nickname, profileImage);
-        if (res.status === 200) {
-          alert('프로필 수정이 완료되었습니다.');
-          router.push('/mypage');
-        } else {
-          console.log(res);
-        }
+      const res = await putEditProfile(
+        name || undefined,
+        profileImage || undefined,
+      );
+      if (res.status === 200) {
+        console.log(res.data);
+        alert('프로필 수정이 완료되었습니다.');
+        router.push('/mypage');
+      } else {
+        console.log(res);
       }
     } catch (error) {
       alert('프로필 수정 중 오류가 발생했습니다. 다시 시도해 주세요.');
