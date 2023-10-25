@@ -41,10 +41,9 @@ export default function MypageWish() {
     fetchData();
   }, [filter]);
 
-  console.log(products);
   return (
     <>
-      <Header goBack={true} title="판매상품 보기" />
+      <Header goBack={true} title="관심상품" />
       <ProductStateList onChangeList={handleChangeList} />
       <ProductList data={products} />
     </>

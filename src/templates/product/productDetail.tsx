@@ -4,56 +4,29 @@ import {
   deleteWishProduct,
   getProductDetail,
   updateProductState,
+  createNewChat,
+  getMyInfo,
 } from '@/api/service';
 import Btn from '@/components/btn';
 import Header from '@/components/header';
 import ProductBadge from '@/components/productBadge';
 import '@/styles/templates/product/productDetail.scss';
-import { AXIOSResponse } from '@/types/interface';
-import { useRouter, usePathname } from 'next/navigation';
+import { AXIOSResponse, Product } from '@/types/interface';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-
 import ProductDelete from './productDelete';
-
-type Seller = {
-  sellerId: number;
-  profileImage: string;
-  nickname: string;
-};
-
-type sellerProductInfos = {
-  id: number;
-  price: number;
-  thumbnail: string;
-  title: string;
-};
-
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  categoryName: string;
-  content: string;
-  images: string[];
-  status: string;
-  like: boolean;
-  likes: number;
-  myProduct: boolean;
-  seller: Seller;
-  sellerProductInfos: sellerProductInfos[];
-};
 
 export const ProductDetail = () => {
   const router = useRouter();
   const path = usePathname();
   const id = path.split('/')[2];
 
-  const productId: number = typeof id === 'string' ? parseInt(id, 10) : 0; // 또는 다른 기본값
+  const productId: number = typeof id === 'string' ? parseInt(id, 10) : 0;
 
   const [product, setProduct] = useState<Product | null>(null);
   const [onLike, setOnLike] = useState<boolean>(false);
@@ -65,6 +38,19 @@ export const ProductDetail = () => {
   const selectRef = useRef<HTMLSelectElement | null>(null);
 
   const [isBooking, setIsBooking] = useState<boolean>(false);
+
+  // 새로운 채팅
+  const handleClick = async () => {
+    const chat = await createNewChat(productId);
+    const roomId = chat.data.chatRoomId;
+    const my = await getMyInfo();
+    const myId = my.data.id;
+    if (product) {
+      router.push(
+        `/chat/${roomId}?productId=${productId}&userId=${myId}&nickName=${product.seller.nickname}`, //
+      );
+    }
+  };
 
   const handleSelectChange = () => {
     if (selectRef.current) {
@@ -173,9 +159,10 @@ export const ProductDetail = () => {
                     role="button"
                     ref={menuRef}
                     className="product-detail__menu">
-                    <div onClick={() => router.push('/product/edit')}>
+                    <div onClick={() => router.push(`/product/${id}/edit`)}>
                       게시글 수정
                     </div>
+
                     <div onClick={toggleModal}>삭제</div>
                   </div>
                 )}
@@ -305,7 +292,7 @@ export const ProductDetail = () => {
             </button>
           </div>
         ) : (
-          <div onClick={() => router.push(`/product/${id}/chats`)}>
+          <div onClick={handleClick}>
             <button
               className="product-detail__chat-button"
               disabled={isBooking ? true : false}>

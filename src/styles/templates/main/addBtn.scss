@@ -3,9 +3,9 @@
 .addbutton {
   $size: 3rem;
   background-color: $main-color;
-  position: fixed;
-  right: 5%;
-  bottom: 15%;
+  position: absolute;
+  right: 10%;
+  bottom: 10%;
   border: none;
   border-radius: 50%;
   width: $size;

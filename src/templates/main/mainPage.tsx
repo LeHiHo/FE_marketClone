@@ -32,7 +32,7 @@ export default function MainPage() {
     };
 
     fetchData();
-  }, []);
+  }, [category]);
 
   return (
     <div id="mainPage">
