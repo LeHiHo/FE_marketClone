@@ -18,7 +18,6 @@ export default function MypageWish() {
   useEffect(() => {
     const fetchData = async () => {
       const res: AXIOSResponse<IProduct[]> = await getMyWishList();
-      console.log(res);
       if (res.statusCode === 200) {
         setProducts(() => {
           return res.data.filter((product) => {
