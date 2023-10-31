@@ -18,29 +18,34 @@ export default function MypageWish() {
   useEffect(() => {
     const fetchData = async () => {
       const res: AXIOSResponse<IProduct[]> = await getMyWishList();
-      console.log(res);
       if (res.statusCode === 200) {
-        setProducts(() => {
-          return res.data.filter((product) => {
-            if (filter === 'all') {
-              return product;
-            } else if (
-              filter === 'completed' &&
-              product.status === '거래완료'
-            ) {
-              return product;
-            } else if (filter === 'sale' && product.status === '판매중') {
-              return product;
-            } else {
-              return;
-            }
-          });
-        });
+        switch (filter) {
+          case 'all':
+            setProducts(() => {
+              return res.data.map((product) => ({ ...product, like: true }));
+            });
+            break;
+          case 'completed':
+            setProducts(() => {
+              return res.data
+                .filter((product) => product.status === '거래완료')
+                .map((product) => ({ ...product, like: true }));
+            });
+            break;
+          case 'sale':
+            setProducts(() => {
+              return res.data
+                .filter((product) => product.status === '판매중')
+                .map((product) => ({ ...product, like: true }));
+            });
+            break;
+          default:
+            return;
+        }
       }
     };
     fetchData();
   }, [filter]);
-
   return (
     <>
       <Header goBack={true} title="관심상품" />

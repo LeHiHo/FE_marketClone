@@ -24,12 +24,18 @@ export default function ProductItem({ product }: { product: IProduct }) {
         {product.status === '거래완료' && (
           <ProductBadge productStatus={product.status} state={'sold'} />
         )}
-        <div className="like">
-          {product.like ? <AiFillHeart /> : <AiOutlineHeart />}
-          <p className="like__counter">
-            {product.likes > 0 ? product.likes : ' '}
-          </p>
-        </div>
+        {product.like !== undefined && (
+          <div className="like">
+            {product.like ? (
+              <AiFillHeart color="#ff0000" />
+            ) : (
+              <AiOutlineHeart />
+            )}
+            <p className="like__counter">
+              {product.likes > 0 ? product.likes : ' '}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
