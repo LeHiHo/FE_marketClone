@@ -1,38 +1,23 @@
 'use client';
 
-import { getProducts } from '@/api/service';
 import Header from '@/components/header';
 import ProductList from '@/components/productList';
-import { AXIOSResponse, IProduct } from '@/types/interface';
 import '@/styles/templates/main/main.scss';
 import AddBtn from './addBtn';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import Navbar from '@/components/navbar';
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
+interface MainPageProps {
+  data: any[]; // Use a more specific type based on your data structure
+}
 
-export default function MainPage() {
-  const [data, setData] = useState<IProduct[]>([]);
+export default function MainPage({ data }: MainPageProps) {
   const categoryParams = useSearchParams();
   const category = categoryParams.get('category') || undefined;
 
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res: AXIOSResponse<IProduct[]> = await getProducts(
-        undefined,
-        category,
-      );
-      if (res.statusCode === 200) {
-        setData(res.data);
-      }
-    };
-
-    fetchData();
-  }, [category]);
 
   return (
     <div id="mainPage">
