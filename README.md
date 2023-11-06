@@ -2,7 +2,7 @@
 
 <br>
 <div>
-  <a href="https://fe-market-clone.vercel.app/" target="_blank">
+  <a href="https://www.mwt-market.store/" target="_blank">
     <img src="https://img.shields.io/badge/배포 링크-ed234b?style=for-the-badge&logoColor=white" alt="example"/>
   </a>
 </div>
