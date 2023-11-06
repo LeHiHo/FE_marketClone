@@ -9,11 +9,9 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import Navbar from '@/components/navbar';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
-interface MainPageProps {
-  data: any[]; // Use a more specific type based on your data structure
-}
+import { IProductProps } from '@/types/interface';
 
-export default function MainPage({ data }: MainPageProps) {
+export default function MainPage({ data }: IProductProps) {
   const categoryParams = useSearchParams();
   const category = categoryParams.get('category') || undefined;
 
@@ -39,6 +37,7 @@ export default function MainPage({ data }: MainPageProps) {
       </header>
       <section className="main__content">
         <ProductList data={data} />
+
         <AddBtn />
       </section>
       <Navbar />
