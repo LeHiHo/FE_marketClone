@@ -9,6 +9,10 @@ export interface IProduct {
   thumbnail: string;
 }
 
+export interface IProductProps {
+  data: IProduct[];
+}
+
 export type Product = {
   id: number;
   title: string;
