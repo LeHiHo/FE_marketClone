@@ -23,6 +23,8 @@ TEST용 PASSWORD: 123456
 
 <br/>
 
+서버는 [이곳](https://github.com/FC-WhyWrongThoguhtRight/MWT-Market)을 클릭해주세요.
+
 <br/>
 
 ## 🛠️ 기술 스택
@@ -126,6 +128,7 @@ redirection" width="370"></td>
 
 ## 📓주요 기능 설명
 
+
 ## 🖌️ 프로젝트 아키텍처
 
 <div align="center">
@@ -200,7 +203,7 @@ redirection" width="370"></td>
 |:------------------:|:------------------:|:------------------:|:------------------:|
 | ![leHiHo](https://avatars.githubusercontent.com/leHiHo) | ![sunpaaaa](https://avatars.githubusercontent.com/u/125979833?v=4) | ![image](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/111065848/0b26208c-240a-4a7f-8c8b-e3e87f3c7d1e) | ![kyungkyuBae](https://avatars.githubusercontent.com/kyungkyuBae) |
 | [leHiHo](https://github.com/leHiHo) | [sunpaaaa](https://github.com/noSPkeepgoing) | [이연수](https://github.com/suehub) | [배경규](https://github.com/kyungkyuBae) |
-| <ul><li>로그인</li><li>초기설정</li><li>폴더구조설계</li><li>상품 수정</li><li>상품 등록</li><li>상품 삭제</li><li>카테고리</li></ul> | <ul><li>메인페이지 전체 상품 불러오기</li><li>카테고리 목록 불러오기</li><li>소켓 연결 후 실시간 채팅 구현</li><li>마이 페이지</li> | <ul><li>회원가입</li><li>프로필수정</li><li>상품 상세 페이지</li><li>상품 관련 채팅목록</li><li>소켓 연결 후 실시간 채팅 </li></ul> | <ul><li>판매내역 조회</li><li>상품 상태 변경</li><li>좋아요 기능</li><li>게임 서버 세팅</li><li>게임 서버 구현</li><li>게임방 UI</li></ul> |
+| <ul><li>로그인</li><li>초기설정</li><li>폴더구조설계</li><li>상품 수정·등록·삭제</li><li>카테고리</li></ul> | <ul><li>메인페이지 전체 상품 불러오기</li><li>카테고리 목록 불러오기</li><li>소켓 연결 후 실시간 채팅 구현</li><li>마이 페이지</li> | <ul><li>회원가입</li><li>프로필수정</li><li>상품 상세 페이지</li><li>상품 관련 채팅목록</li><li>소켓 연결 후 실시간 채팅 </li></ul> | <ul><li>판매내역 조회</li><li>상품 상태 변경</li><li>좋아요 기능</li><li>게임 서버 세팅</li><li>게임 서버 구현</li><li>게임방 UI</li></ul> |
  
 
 <br/>
