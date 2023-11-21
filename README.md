@@ -23,6 +23,8 @@ TEST용 PASSWORD: 123456
 
 <br/>
 
+서버는 [이곳](https://github.com/FC-WhyWrongThoguhtRight/MWT-Market)을 클릭해주세요.
+
 <br/>
 
 ## 🛠️ 기술 스택
@@ -126,6 +128,7 @@ redirection" width="370"></td>
 
 ## 📓주요 기능 설명
 
+
 ## 🖌️ 프로젝트 아키텍처
 
 <div align="center">
@@ -209,6 +212,7 @@ redirection" width="370"></td>
 | [![고동훤](https://avatars.githubusercontent.com/u/97681286?v=4) | ![김종훈](https://avatars.githubusercontent.com/u/40512982?v=4) | ![김진홍](https://avatars.githubusercontent.com/u/33937365?v=4) | ![서원빈](https://avatars.githubusercontent.com/u/81563920?v=4)  |
 | [Dr-KoKo](https://github.com/Dr-KoKo)| [WaterSpray](https://github.com/whdgns5059) | [deepredk](https://github.com/deepredk) | [Seo Wonbin](https://github.com/Wonbn) |
 | <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> | <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> | <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> | <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> |
+
  
 
 <br/>
@@ -217,4 +221,4 @@ redirection" width="370"></td>
 
 ## 📆 기간
 
-`2023.10.04 ~ 2023.10.17`
+`2023.10.04 ~ 2023.10.27`
