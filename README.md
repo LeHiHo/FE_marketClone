@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/LeHiHo/FastMind/assets/37584686/6e7fe4ca-ff6d-4a4d-b572-20e799a8c2c7" width=300>
+<img src="https://www.mwt-market.store/svg/%EC%98%A4%EC%9D%B4%EB%A7%88%EC%BC%93.svg" width=300>
 
 ### 오이마켓 🥒 프론트엔드
 
