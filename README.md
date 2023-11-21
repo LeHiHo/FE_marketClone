@@ -141,129 +141,55 @@ redirection" width="370"></td>
 ```
  📦src
  ┣ 📂api
- ┃ ┗ 📜service.ts
  ┣ 📂app
  ┃ ┣ 📂category
- ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 📂chat
  ┃ ┃ ┗ 📂[id]
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 📂login
- ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 📂main
- ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 📂mypage
  ┃ ┃ ┣ 📂chats
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┣ 📂edit
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┣ 📂sales
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┣ 📂wish
- ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 📂product
  ┃ ┃ ┣ 📂[id]
  ┃ ┃ ┃ ┣ 📂chats
- ┃ ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┃ ┣ 📂edit
- ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┗ 📂products
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 📂search
- ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 📂signup
- ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 📂write
- ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 📜layout.tsx
  ┃ ┗ 📜page.tsx
  ┣ 📂components
- ┃ ┣ 📜btn.tsx
- ┃ ┣ 📜header.tsx
- ┃ ┣ 📜navbar.tsx
- ┃ ┣ 📜productBadge.tsx
- ┃ ┣ 📜productItem.tsx
- ┃ ┣ 📜productList.tsx
- ┃ ┗ 📜productState.tsx
- ┣ 📂data
- ┃ ┗ 📜.gitkeep
  ┣ 📂styles
  ┃ ┣ 📂components
- ┃ ┃ ┣ 📜btn.scss
- ┃ ┃ ┣ 📜header.scss
- ┃ ┃ ┣ 📜navbar.scss
- ┃ ┃ ┣ 📜productBadge.scss
- ┃ ┃ ┣ 📜productItem.scss
- ┃ ┃ ┗ 📜productList.scss
  ┃ ┣ 📂templates
  ┃ ┃ ┣ 📂category
- ┃ ┃ ┃ ┗ 📜category.scss
  ┃ ┃ ┣ 📂chat
- ┃ ┃ ┃ ┣ 📜chatDetail.scss
- ┃ ┃ ┃ ┗ 📜chats.scss
  ┃ ┃ ┣ 📂login
- ┃ ┃ ┃ ┗ 📜login.scss
  ┃ ┃ ┣ 📂main
- ┃ ┃ ┃ ┣ 📜addBtn.scss
- ┃ ┃ ┃ ┗ 📜main.scss
  ┃ ┃ ┣ 📂mypage
- ┃ ┃ ┃ ┣ 📜mypage.scss
- ┃ ┃ ┃ ┣ 📜mypageEdit.scss
- ┃ ┃ ┃ ┗ 📜mypageSales.scss
  ┃ ┃ ┣ 📂product
- ┃ ┃ ┃ ┣ 📜productDelete.scss
- ┃ ┃ ┃ ┣ 📜productDetail.scss
- ┃ ┃ ┃ ┗ 📜productStateList.scss
  ┃ ┃ ┣ 📂search
- ┃ ┃ ┃ ┗ 📜search.scss
  ┃ ┃ ┣ 📂signup
- ┃ ┃ ┃ ┗ 📜signup.scss
  ┃ ┃ ┣ 📂write
- ┃ ┃ ┃ ┣ 📜categoryModal.scss
- ┃ ┃ ┃ ┗ 📜write.scss
- ┃ ┃ ┗ 📜home.scss
  ┃ ┣ 📜globals.scss
  ┃ ┣ 📜mixin.scss
  ┃ ┗ 📜reset.scss
  ┣ 📂templates
  ┃ ┣ 📂category
- ┃ ┃ ┗ 📜categoryPage.tsx
  ┃ ┣ 📂chat
- ┃ ┃ ┣ 📜chatDetail.tsx
- ┃ ┃ ┣ 📜chatItem.tsx
- ┃ ┃ ┣ 📜chatReceive.tsx
- ┃ ┃ ┣ 📜chatSend.tsx
- ┃ ┃ ┗ 📜chats.tsx
  ┃ ┣ 📂login
- ┃ ┃ ┗ 📜loginPage.tsx
  ┃ ┣ 📂main
- ┃ ┃ ┣ 📜addBtn.tsx
- ┃ ┃ ┗ 📜mainPage.tsx
  ┃ ┣ 📂mypage
- ┃ ┃ ┣ 📜mypageEdit.tsx
- ┃ ┃ ┣ 📜mypagePage.tsx
- ┃ ┃ ┣ 📜mypageSale.tsx
- ┃ ┃ ┗ 📜mypageWish.tsx
  ┃ ┣ 📂product
  ┃ ┃ ┣ 📂productStateList
- ┃ ┃ ┃ ┗ 📜productStateList.tsx
- ┃ ┃ ┣ 📜productDelete.tsx
- ┃ ┃ ┣ 📜productDetail.tsx
- ┃ ┃ ┣ 📜productPut.tsx
- ┃ ┃ ┗ 📜productShowAll.tsx
  ┃ ┣ 📂search
- ┃ ┃ ┗ 📜searchPage.tsx
  ┃ ┣ 📂signup
- ┃ ┃ ┗ 📜signupPage.tsx
  ┃ ┣ 📂write
- ┃ ┃ ┣ 📜categoryModal.tsx
- ┃ ┃ ┣ 📜useHandleImg.ts
- ┃ ┃ ┗ 📜writePage.tsx
- ┃ ┗ 📜homePage.tsx
  ┗ 📂types
- ┃ ┗ 📜interface.ts
 ```
 
 <br/>
