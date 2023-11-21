@@ -12,7 +12,7 @@
 
 ### ✅ Work Flow
 
-1. [ 기능 명세](https://www.notion.so/6017bafc0aca4b7ba1d2854b208efe39?pvs=21) 를 기반으로 `Issue` 생성
+1. [기능 명세](https://www.notion.so/6017bafc0aca4b7ba1d2854b208efe39?pvs=21) 를 기반으로 `Issue` 생성
 2. 생성한 `Issue` 번호로 로컬에서 브랜치 생성(feature/#이슈번호)
 3. `dev`의 최신변경사항을 pull 받아서 동기화
 4. 구현완료후 `dev`로 push후 Pull Request 생성
