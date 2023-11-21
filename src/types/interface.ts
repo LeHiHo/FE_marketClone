@@ -4,7 +4,7 @@ export interface IProduct {
   title: string;
   price: number;
   likes: number;
-  like: boolean;
+  like?: boolean;
   status: string;
   thumbnail: string;
 }

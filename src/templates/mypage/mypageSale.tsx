@@ -43,7 +43,7 @@ export default function MypageSale() {
   }, [productList, reLoad]);
   return (
     <div className="saleList">
-      <Header goBack={true} border={true} title={'판매내역'} />
+      <Header goBack={true} title={'판매내역'} />
       <ProductStateList onChangeList={handleChangeList} />
       <ul className="product-list">
         {myProducts.map((product) => (
