@@ -7,7 +7,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { postAuth } from '@/api/service';
 
-export default function LoginPage() {
+// interface LoginPageProps {
+//   cookies: string[] | undefined;
+// }
+
+const LoginPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [isLogin, setIsLogin] = useState(false);
@@ -73,4 +77,6 @@ export default function LoginPage() {
       </div>
     </form>
   );
-}
+};
+
+export default LoginPage;
