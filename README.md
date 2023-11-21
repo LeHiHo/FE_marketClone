@@ -1,104 +1,192 @@
-# 맞왜틀조와 함께하는 당근마켓 클론 프로젝트‼️
+<div align="center">
 
-<br>
-<div>
-  <a href="https://www.mwt-market.store/" target="_blank">
-    <img src="https://img.shields.io/badge/배포 링크-ed234b?style=for-the-badge&logoColor=white" alt="example"/>
+<img src="https://github.com/LeHiHo/FastMind/assets/37584686/6e7fe4ca-ff6d-4a4d-b572-20e799a8c2c7" width=300>
+
+### 오이마켓 🥒 프론트엔드
+
+<p align="center">
+  <a href="https://www.mwt-market.store/">
+    <img src="https://img.shields.io/badge/오이마켓-darkgreen?style=for-the-badge&logoColor=white" alt="site"/>
   </a>
+</p>
+
 </div>
+
+<br/>
+
+## 📝 프로젝트 소개
+
+초기 당근마켓을 벤치마킹한 중고거래 웹 프로젝트
+
+TEST용 ID: test@test.com  
+TEST용 PASSWORD: 123456
+
+<br/>
+
+<br/>
+
+## 🛠️ 기술 스택
+
+### FrontEnd
+
+#### Language
+
+<img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white">
+
+#### Development
+
+![Next](https://camo.githubusercontent.com/4a468968c96e15a2c8133fa0541676949d410f809aaa55285343884304a23058/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6e6578742e6a732d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d4e6578742e6a73266c6f676f436f6c6f723d7768697465)
+![Axios](https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white)
+![socket](https://camo.githubusercontent.com/32174858d1bdea9a447d456dbca619f69663a37b58fca078378ab4972344bc48/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f736f636b65742e696f2d6666666666663f7374796c653d666f722d7468652d6261646765266c6f676f3d736f636b6574646f74696f266c6f676f436f6c6f723d626c61636b)
+
+#### CI/CD
+
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)
+
+#### Design
+
+![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
+
 <br>
 
-### 0️⃣ Git convention!
+### Chatting BackEnd
 
-### ✅ Work Flow
+#### Language
 
-1. [기능 명세](https://www.notion.so/6017bafc0aca4b7ba1d2854b208efe39?pvs=21) 를 기반으로 `Issue` 생성
-2. 생성한 `Issue` 번호로 로컬에서 브랜치 생성(feature/#이슈번호)
-3. `dev`의 최신변경사항을 pull 받아서 동기화
-4. 구현완료후 `dev`로 push후 Pull Request 생성
-5. 14:00에 팀원들과 함께 conflict 해결 후 `dev`로 merge
-6. 브랜치 삭제후 1번으로
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
-### ✅ Commit log
+#### Framework
+
+![Express](https://img.shields.io/badge/Express-000000.svg?style=for-the-badge&logo=Express&logoColor=white)
+
+#### DB
+
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+
+#### Infra
+
+![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
+![Mongoose](https://img.shields.io/badge/Mongoose-880000.svg?style=for-the-badge&logo=Mongoose&logoColor=white)
+
+#### CI/CD
+
+![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
+![Amazon EC2](https://img.shields.io/badge/Amazon%20EC2-FF9900.svg?style=for-the-badge&logo=Amazon-EC2&logoColor=white)
+
+<br>
+
+### Game BackEnd
+
+#### Language
+
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+
+#### Framework
+
+![Express](https://img.shields.io/badge/Express-000000.svg?style=for-the-badge&logo=Express&logoColor=white)
+
+#### Infra
+
+![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
+![Babel](https://img.shields.io/badge/Babel-F9DC3e?style=for-the-badge&logo=babel&logoColor=black)
+
+#### CI/CD
+
+![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
+
+<br/>
+
+## 📚 주요 기능
+
+<div align="center">
+  <table>
+    <tr align="center">
+      <th>채팅/그림</th>
+      <th>채팅/게임</th>
+    </tr>
+    <tr>      
+      <td><img src="https://github.com/LeHiHo/FastMind/assets/134940630/589887ff-4530-484e-870e-29df2ec11271" alt="chatting/painting" width="370"></td>
+      <td><img src="https://github.com/LeHiHo/FastMind/assets/134940630/98f4aa75-d96f-453d-8c3d-c51f26c1a129"alt="chatting/game" width="370"></td>      
+    </tr>      
+    <tr align="center">
+      <th>1대1채팅</th>
+      <th>리다이렉션</th>
+    </tr>
+    <tr>
+      <td><img src="https://github.com/LeHiHo/FastMind/assets/134940630/f29dc190-4b3a-495e-be88-fa98cee49df9" alt="1:1chatting" width="370"></td>      
+      <td><img src= "https://github.com/LeHiHo/FastMind/assets/134940630/d1babdca-960f-41e5-9588-9cc29ebbdd4e"alt="
+redirection" width="370"></td>      
+    </tr>
+  </table>
+</div>
+
+<br>
+
+## 📓주요 기능 설명
+
+## 🖌️ 프로젝트 아키텍처
+
+<div align="center">
+  
+<img src="https://github.com/LeHiHo/FastMind/assets/93272421/d12f2a2c-123a-410d-bcca-253e98994453" />
+
+</div>
+
+<br/>
+
+## 📂 폴더 구조
 
 ```
-Feat : 새로운 기능 추가
-Fix : 버그 수정
-Style : 코드 스타일 수정 (세미 콜론, 인덴트 등의 스타일적인 부분만)
-Refactor : 코드 리팩토링 (더 효율적인 코드로 변경 등)
-Design : CSS 등 디자인 추가/수정
-Comment : 주석 추가/수정
-Docs : 내부 문서 추가/수정
-Test : 테스트 추가/수정
-Chore : 빌드 관련 코드 수정, 개발 환경 관련 설정(과거 Env)
-Move : 파일 및 폴더명 수정(과거 Rename)
-Remove : 파일 삭제
+  📦src
+ ┣ 📂api
+ ┃ ┣ 📜index.ts
+ ┃ ┗ 📜socket.ts
+ ┣ 📂components
+ ┃ ┣ 📂layout
+ ┃ ┗ 📂template
+ ┃ ┃ ┣ 📂lobby
+ ┃ ┃ ┣ 📂login
+ ┃ ┃ ┗ 📂room
+ ┣ 📂hooks
+ ┃ ┣ 📜useLoginSocket.ts
+ ┃ ┗ 📜useleaveHandle.ts
+ ┣ 📂interfaces
+ ┣ 📂pages
+ ┃ ┣ 📂lobby
+ ┃ ┃ ┗ 📜gameLobby.tsx
+ ┃ ┣ 📂login
+ ┃ ┃ ┣ 📜userJoin.tsx
+ ┃ ┃ ┗ 📜userLogin.tsx
+ ┃ ┗ 📂room
+ ┃ ┃ ┗ 📜gameRoom.tsx
+ ┣ 📂router
+ ┃ ┗ 📜MainRouter.tsx
+ ┣ 📂states
+ ┃ ┗ 📜atom.ts
+ ┣ 📂util
+ ┣ 📜App.tsx
+ ┣ 📜constant.ts
+ ┣ 📜index.css
+ ┣ 📜main.tsx
+ ┗ 📜vite-env.d.ts
 ```
 
-### ✅ Branch Naming
+<br/>
 
-```
-feature/#이슈번호
-```
+## 🧑🏻‍💻 팀 소개 및 역할
 
-### ✅ Branch strategy
+|                                                      장호진 (FE) <br> 팀장                                                       |                                                                                                                                         최선파 (FE) <br> 팀원                                                                                                                                         |                                                        이연수 (FE) <br> 팀원                                                        |                                                           배경규 (FE) <br> 팀원                                                            |
+| :------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | ------------------------------------------------------- |
+|                        <img height="100" src="https://avatars.githubusercontent.com/leHiHo" width="100"/>                        |                                                                                                     <img height="100" src="https://avatars.githubusercontent.com/u/125979833?v=4"  width="100"/>                                                                                                      |                        <img height="100" src="https://avatars.githubusercontent.com/gkdus2217" width="100"/>                        |                          <img height="100" src="https://avatars.githubusercontent.com/kyungkyuBae" width="100"/>                           |
+|                                               [leHiHo](https://github.com/leHiHo)                                                |                                                                                                                             [sunpaaaa](https://github.com/noSPkeepgoing)                                                                                                                              |                                              [gkdus2217](https://github.com/gkdus2217)                                              |                                                  [배경규](https://github.com/kyungkyuBae)                                                  |
+| <ul><li>로그인</li><li>초기설정</li><li>폴더구조설계</li><li>상품 수정</li><li>상품 등록</li><li>상품 삭제</li><li>카테고리</li> | <ul><li>메인페이지 전체 상품 불러오기</li><li>카테고리 목록 불러오기</li><li>소켓 연결 후 실시간 채팅 구현</li><li>마이 페이지</li><li>게임 소켓 구현</li><li>게임 소켓 연결</li><li>게임방 유저 목록 구현</li><li>방 만들기 구현</li><li>폴링 로직 구현</li><li>온라인 유저 목록 구현</li></ul> | <ul><li>회원가입</li><li>프로필수정</li><li>상품 상세 페이지</li><li>상품 관련 채팅목록</li><li>소켓 연결 후 실시간 채팅 </li></ul> | <ul><li>판매내역 조회</li><li>상품 상태 변경</li><li>좋아요 기능</li><li>게임 서버 세팅</li><li>게임 서버 구현</li><li>게임방 UI</li></ul> | <ul><li>채팅 서버 구현</li><li>채팅 서버 배포</li></ul> |
 
-### `main`
+<br/>
 
-- 소비자가 사용하는 제품이 존재하는 (배포될 코드가 있는) 브랜치
-  - PR받는 브랜치: `dev`
-  - Pull Request merge 완료후 `dev` push 받기
+<br>
 
-### `dev(develop)`
+## 📆 기간
 
-- 개발 단계의 코드가 있는 (개발의 중심) 브랜치
-- 개발 자체는 feature 브랜치에서 진행
-  - PR받는 브랜치: `feature/#이슈번호`
-  - 14:00에 다같이 Pull Request merge
-
-### `feature/#이슈번호`
-
-- 특정한 기능 (단위 기능) 을 구현하는 브랜치
-- 기능 구현이 완료되면, `dev`로 pr
-  - PR나가는 브랜치: dev
-  - 구현완료시 Push후 Pull Request 생성
-
----
-
-### 1️⃣ 초기설정
-
-## ![image](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/44bde4de-8c6d-4cda-ab1b-55e3256fe0d8)
-
-### 2️⃣ 라우팅구조
-
-```
-📦src
-┣ 📂api ➡️ API 요청관련 코드
-┣ 📂app ➡️ 직접적인 라우팅 구조를 나타내는 폴더
-┃ ┣ 📂category
-┃ ┣ 📂login
-┃ ┣ 📂main
-┃ ┣ 📂mypage
-┃ ┣ 📂product
-┃ ┣ 📂search
-┃ ┣ 📂signup
-┃ ┣ 📂write
-┃ ┣ 📜layout.tsx ➡️ 최상단 레이아웃(테마)
-┃ ┗ 📜page.tsx ➡️ 시작페이지
-┣ 📂components ➡️ 재사용이 가능한 코드
-┣ 📂data ➡️ 정적데이터(서버에서 불러오지않는), 설정파일
-┣ 📂styles ➡️ css 파일
-┃ ┣ 📜globals.scss
-┃ ┗ 📜reset.scss
-┣ 📂templates ➡️ 재사용이 곤란한 컴포넌트(하나의 기능이나 페이지에 주로사용)
-┣ 📂types ➡️ 타입 지정 함수
-┗ 📂utils ➡️ 유틸관련(날짜및시간관련 코드, 커스텀훅 등)
-```
-
----
-
-### 3️⃣ 라이브러리
-
-1.  Sass : 1.68.0
-
----
+`2023.10.04 ~ 2023.10.17`
