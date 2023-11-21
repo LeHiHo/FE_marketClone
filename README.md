@@ -199,11 +199,20 @@ redirection" width="370"></td>
 
 ## 🧑🏻‍💻 팀 소개 및 역할
 
-| 장호진 (FE) <br> 팀장 | 최선파 (FE) <br> 팀원 | 이연수 (FE) <br> 팀원 | 배경규 (FE) <br> 팀원 |
+### ✨ FE 팀 소개 
+| 장호진 (FE) <br> 팀장 | 배경규 (FE) <br> 팀원 | 이연수 (FE) <br> 팀원 | 최선파 (FE) <br> 팀원 |
 |:------------------:|:------------------:|:------------------:|:------------------:|
-| ![leHiHo](https://avatars.githubusercontent.com/leHiHo) | ![sunpaaaa](https://avatars.githubusercontent.com/u/125979833?v=4) | ![image](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/111065848/0b26208c-240a-4a7f-8c8b-e3e87f3c7d1e) | ![kyungkyuBae](https://avatars.githubusercontent.com/kyungkyuBae) |
-| [leHiHo](https://github.com/leHiHo) | [sunpaaaa](https://github.com/noSPkeepgoing) | [이연수](https://github.com/suehub) | [배경규](https://github.com/kyungkyuBae) |
-| <ul><li>로그인</li><li>초기설정</li><li>폴더구조설계</li><li>상품 수정·등록·삭제</li><li>카테고리</li></ul> | <ul><li>메인페이지 전체 상품 불러오기</li><li>카테고리 목록 불러오기</li><li>소켓 연결 후 실시간 채팅 구현</li><li>마이 페이지</li> | <ul><li>회원가입</li><li>프로필수정</li><li>상품 상세 페이지</li><li>상품 관련 채팅목록</li><li>소켓 연결 후 실시간 채팅 </li></ul> | <ul><li>판매내역 조회</li><li>상품 상태 변경</li><li>좋아요 기능</li><li>게임 서버 세팅</li><li>게임 서버 구현</li><li>게임방 UI</li></ul> |
+| ![leHiHo](https://avatars.githubusercontent.com/leHiHo) | ![kyungkyuBae](https://avatars.githubusercontent.com/kyungkyuBae) | ![image](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/111065848/0b26208c-240a-4a7f-8c8b-e3e87f3c7d1e) | ![sunpaaaa](https://avatars.githubusercontent.com/u/125979833?v=4) |
+| [leHiHo](https://github.com/leHiHo) | [배경규](https://github.com/kyungkyuBae) | [이연수](https://github.com/suehub) | [sunpaaaa](https://github.com/noSPkeepgoing) |
+| <ul><li>로그인</li><li>초기설정</li><li>폴더구조설계</li><li>상품 수정</li><li>상품 등록</li><li>상품 삭제</li><li>카테고리</li></ul> | <ul><li>판매내역 조회</li><li>상품 상태 변경</li><li>좋아요 기능</li><li>게임 서버 세팅</li><li>게임 서버 구현</li><li>게임방 UI</li></ul> | <ul><li>회원가입</li><li>프로필수정</li><li>상품 상세 페이지</li><li>상품 관련 채팅목록</li><li>소켓 연결 후 실시간 채팅 </li></ul> | <ul><li>메인페이지 전체 상품 불러오기</li><li>카테고리 목록 불러오기</li><li>소켓 연결 후 실시간 채팅 구현</li><li>마이 페이지</li> |
+
+### ✨ BE 팀 소개
+| 고동훤 (FE) <br> 팀장 | 김종훈 (FE) <br> 팀원 | 김진홍 (FE) <br> 팀원 | 서원빈 (FE) <br> 팀원 |
+|:------------------:|:------------------:|:------------------:|:------------------:|
+| [![고동훤](https://avatars.githubusercontent.com/u/97681286?v=4) | ![김종훈](https://avatars.githubusercontent.com/u/40512982?v=4) | ![김진홍](https://avatars.githubusercontent.com/u/33937365?v=4) | ![서원빈](https://avatars.githubusercontent.com/u/81563920?v=4)  |
+| [Dr-KoKo](https://github.com/Dr-KoKo)| [WaterSpray](https://github.com/whdgns5059) | [deepredk](https://github.com/deepredk) | [Seo Wonbin](https://github.com/Wonbn) |
+| <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> | <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> | <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> | <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> |
+
  
 
 <br/>
