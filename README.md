@@ -156,6 +156,21 @@ redirection" width="370"></td>
 ### 채팅목록
 ![스크린샷 2023-11-23 18 30 02](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/19295c5b-fa73-49dc-8eaf-e4293d38dff9)
 
+### 판매내역
+<img width="287" alt="스크린샷 2023-11-23 오후 6 36 22" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/131759810/58572745-1bd3-407b-81f7-143148631585">
+
+
+
+### 판매상품 상태변경
+<img width="287" alt="스크린샷 2023-11-23 오후 6 36 01" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/131759810/a2314022-48b9-42d7-88d0-0dcc86a9dfa0">
+
+
+
+### 상품 좋아요 표시 및 좋아요 클릭
+<img width="284" alt="스크린샷 2023-11-23 오후 6 35 41" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/131759810/615daa52-ec21-4d0b-afe1-65c16f452e3d">
+<img width="287" alt="스크린샷 2023-11-23 오후 6 48 26" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/131759810/2dde001c-85a1-4806-ae1d-10832203969c">
+
+
 
 
 
