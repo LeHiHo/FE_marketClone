@@ -102,38 +102,40 @@ TEST용 PASSWORD: 123456
 <br>
 
 ## 📓주요 기능(사진)
+<div align="center">
+  
 |로그인|회원가입|
 |---|---|
-|![스크린샷 2023-11-23 18 05 12](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/a00c0587-04e5-4472-8614-f431de567604)|![스크린샷 2023-11-23 18 05 25](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/44321261-c02b-434b-91db-13c94588b366)|
+| <img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/a00c0587-04e5-4472-8614-f431de567604" /> | <img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/44321261-c02b-434b-91db-13c94588b366" /> |
 
 |검색|카테고리|
 |---|---|
-|![스크린샷 2023-11-23 18 06 26](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/03081ff8-d2cd-48cb-8468-429554d4c28e)|![스크린샷 2023-11-23 18 30 22](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/cb1641d7-01ad-4b28-8b0a-653fba651707)|
+| <img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/03081ff8-d2cd-48cb-8468-429554d4c28e" /> | <img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/cb1641d7-01ad-4b28-8b0a-653fba651707" />|
 
 |판매내역|관심상품|
 |---|---|
-|![스크린샷 2023-11-23 18 29 00](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/f5e8ae5b-1174-49d9-b3e5-1b71d1af7230)|![스크린샷 2023-11-23 18 29 22](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/89b46487-1aa4-41ed-9e7f-c481b9fb759e)|
+| <img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/f5e8ae5b-1174-49d9-b3e5-1b71d1af7230" /> | <img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/89b46487-1aa4-41ed-9e7f-c481b9fb759e" />|
 
 |상품작성|상품삭제|
 |---|---|
-|![스크린샷 2023-11-23 18 09 56](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/ae495f09-c2b0-4374-8ad1-69992ac8d79b)|![스크린샷 2023-11-23 18 31 26](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/06fdf121-ed92-49c5-af42-d1863b25d1e9)|
+| <img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/ae495f09-c2b0-4374-8ad1-69992ac8d79b" /> | <img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/06fdf121-ed92-49c5-af42-d1863b25d1e9" />|
 
 
 
 |마이페이지|내정보수정|
 |---|---|
-|![스크린샷 2023-11-23 18 07 06](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/cf62b30e-2b74-4432-8278-e31045042e6a)|![스크린샷 2023-11-23 18 30 54](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/284ab259-99f7-476b-a57c-2a2639ca233b)|
+|<img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/cf62b30e-2b74-4432-8278-e31045042e6a" /> | <img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/284ab259-99f7-476b-a57c-2a2639ca233b" />|
 
 
 
 
 |채팅목록|
 |---|
-|![스크린샷 2023-11-23 18 30 02](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/19295c5b-fa73-49dc-8eaf-e4293d38dff9)|
+| <img style="height: 400px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/19295c5b-fa73-49dc-8eaf-e4293d38dff9" />|
 
 |판매내역|판매상품 상태변경|
 |---|---|
-|<img width="287" alt="스크린샷 2023-11-23 오후 6 36 22" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/131759810/58572745-1bd3-407b-81f7-143148631585">|<img width="287" alt="스크린샷 2023-11-23 오후 6 36 01" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/131759810/a2314022-48b9-42d7-88d0-0dcc86a9dfa0">|
+|<img height="400px" alt="스크린샷 2023-11-23 오후 6 36 22" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/131759810/58572745-1bd3-407b-81f7-143148631585">|<img width="287" alt="스크린샷 2023-11-23 오후 6 36 01" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/131759810/a2314022-48b9-42d7-88d0-0dcc86a9dfa0">|
 
 
 
@@ -145,11 +147,12 @@ TEST용 PASSWORD: 123456
 |<img width="284" alt="스크린샷 2023-11-23 오후 6 35 41" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/131759810/615daa52-ec21-4d0b-afe1-65c16f452e3d">|<img width="287" alt="스크린샷 2023-11-23 오후 6 48 26" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/131759810/2dde001c-85a1-4806-ae1d-10832203969c">|
 
 
+</div>
 
 
 
-
-
+</br>
+</br>
 
 
 
