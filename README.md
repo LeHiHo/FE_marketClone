@@ -65,16 +65,14 @@ TEST용 PASSWORD: 123456
 #### Language
 ![JAVA](https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=node.js&logoColor=white)
 
-
-
 #### Framework
-![Spring](https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=node.js&logoColor=white)
-![springboot](https://img.shields.io/badge/springboot-6DB33F.svg?style=for-the-badge&logo=Express&logoColor=white)
-![springsecurity](https://img.shields.io/badge/springsecurity-6DB33F.svg?style=for-the-badge&logo=Express&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![springboot](https://img.shields.io/badge/springboot-6DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)
+![springsecurity](https://img.shields.io/badge/springsecurity-6DB33F.svg?style=for-the-badge&logo=springsecurity&logoColor=white)
 
 #### DB
-
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![mysql](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
 #### Infra
 
