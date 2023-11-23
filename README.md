@@ -38,9 +38,12 @@ TEST용 PASSWORD: 123456
 
 #### Development
 
+<div style="display: flex" >
+  
 ![Next](https://camo.githubusercontent.com/4a468968c96e15a2c8133fa0541676949d410f809aaa55285343884304a23058/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6e6578742e6a732d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d4e6578742e6a73266c6f676f436f6c6f723d7768697465)
-![Axios](https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white)
-![socket](https://camo.githubusercontent.com/32174858d1bdea9a447d456dbca619f69663a37b58fca078378ab4972344bc48/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f736f636b65742e696f2d6666666666663f7374796c653d666f722d7468652d6261646765266c6f676f3d736f636b6574646f74696f266c6f676f436f6c6f723d626c61636b)
+![Axios](https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white) <img style="width: 100px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/111065848/af39786e-2421-4e5f-a498-9e7a0ceb5e7d" />
+</div>
+
 
 #### CI/CD
 
