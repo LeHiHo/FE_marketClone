@@ -1,5 +1,3 @@
-<div align="center">
-
 <img src="https://www.mwt-market.store/svg/%EC%98%A4%EC%9D%B4%EB%A7%88%EC%BC%93.svg" width=300>
 
 ### 오이마켓 🥒 프론트엔드
@@ -126,7 +124,42 @@ redirection" width="370"></td>
 
 <br>
 
-## 📓주요 기능 설명
+## 📓주요 기능(사진)
+### 로그인/회원가입
+![스크린샷 2023-11-23 18 05 12](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/a00c0587-04e5-4472-8614-f431de567604)
+![스크린샷 2023-11-23 18 05 25](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/44321261-c02b-434b-91db-13c94588b366)
+
+### 검색/카테고리
+![스크린샷 2023-11-23 18 06 26](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/03081ff8-d2cd-48cb-8468-429554d4c28e)
+![스크린샷 2023-11-23 18 30 22](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/cb1641d7-01ad-4b28-8b0a-653fba651707)
+
+### 관심내역
+![스크린샷 2023-11-23 18 29 00](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/f5e8ae5b-1174-49d9-b3e5-1b71d1af7230)
+![스크린샷 2023-11-23 18 29 22](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/89b46487-1aa4-41ed-9e7f-c481b9fb759e)
+
+### 상품작성 / 삭제
+![스크린샷 2023-11-23 18 09 56](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/ae495f09-c2b0-4374-8ad1-69992ac8d79b)
+![스크린샷 2023-11-23 18 31 26](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/06fdf121-ed92-49c5-af42-d1863b25d1e9)
+
+
+
+### 마이페이지 /  수정
+![스크린샷 2023-11-23 18 07 06](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/cf62b30e-2b74-4432-8278-e31045042e6a)
+![스크린샷 2023-11-23 18 30 54](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/284ab259-99f7-476b-a57c-2a2639ca233b)
+
+
+
+
+### 채팅목록
+![스크린샷 2023-11-23 18 30 02](https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/19295c5b-fa73-49dc-8eaf-e4293d38dff9)
+
+
+
+
+
+
+
+
 
 
 ## 🖌️ 프로젝트 아키텍처
