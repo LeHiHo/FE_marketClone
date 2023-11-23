@@ -93,8 +93,8 @@ TEST용 PASSWORD: 123456
     </tr>
     <tr>      
       <td><img src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/65627454-4d91-4db5-ac7f-1357e00a26c3"
- alt="chatting/painting" width="370"></td>
-      <td><img src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/b72206b1-1222-4a2f-9c02-2b75805363a4" width="370"></td>      
+ alt="chatting/painting" height="400"></td>
+      <td><img src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/134940630/b72206b1-1222-4a2f-9c02-2b75805363a4" height="400"></td>      
     </tr>      
   </table>
 </div>
