@@ -24,13 +24,18 @@ TEST용 PASSWORD: 123456
 
 <br/>
 
-서버는 [이곳](https://github.com/FC-WhyWrongThoguhtRight/MWT-Market)을 클릭해주세요.
+프론트엔드 노션은 [이곳](https://www.notion.so/3ac920f7fa864328a20ba394ee555132)을 클릭해주세요.
+<br/>
+<br/>
+백엔드 노션은 [이곳](https://www.notion.so/MWT-Team-Project-a7c024d8eecc4c7ba02cdecab12629d7)을 클릭해주세요.
+<br/>
+백엔드 레포지토리는 [이곳](https://github.com/FC-WhyWrongThoguhtRight/MWT-Market)을 클릭해주세요.
 
 <br/>
 
 ## 🛠️ 기술 스택
 
-### FrontEnd
+### ✅ FrontEnd
 
 #### Language
 
@@ -55,15 +60,17 @@ TEST용 PASSWORD: 123456
 
 <br>
 
-### Chatting BackEnd
+### ✅ BackEnd
 
 #### Language
+![JAVA](https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=node.js&logoColor=white)
 
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+
 
 #### Framework
-
-![Express](https://img.shields.io/badge/Express-000000.svg?style=for-the-badge&logo=Express&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=node.js&logoColor=white)
+![springboot](https://img.shields.io/badge/springboot-6DB33F.svg?style=for-the-badge&logo=Express&logoColor=white)
+![springsecurity](https://img.shields.io/badge/springsecurity-6DB33F.svg?style=for-the-badge&logo=Express&logoColor=white)
 
 #### DB
 
@@ -80,29 +87,6 @@ TEST용 PASSWORD: 123456
 
 ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Amazon EC2](https://img.shields.io/badge/Amazon%20EC2-FF9900.svg?style=for-the-badge&logo=Amazon-EC2&logoColor=white)
-
-<br>
-
-### Game BackEnd
-
-#### Language
-
-![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-
-#### Framework
-
-![Express](https://img.shields.io/badge/Express-000000.svg?style=for-the-badge&logo=Express&logoColor=white)
-
-#### Infra
-
-![Socket.io](https://img.shields.io/badge/Socket.io-black?style=for-the-badge&logo=socket.io&badgeColor=010101)
-![Babel](https://img.shields.io/badge/Babel-F9DC3e?style=for-the-badge&logo=babel&logoColor=black)
-
-#### CI/CD
-
-![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
-
-<br/>
 
 ## 📚 주요 기능
 
