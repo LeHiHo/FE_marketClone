@@ -38,10 +38,10 @@ TEST용 PASSWORD: 123456
 
 #### Development
 
-<div style="display: flex" >
+<div style="display: flex; align-items: center;" >
   
 ![Next](https://camo.githubusercontent.com/4a468968c96e15a2c8133fa0541676949d410f809aaa55285343884304a23058/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6e6578742e6a732d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d4e6578742e6a73266c6f676f436f6c6f723d7768697465)
-![Axios](https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white) <img style="width: 100px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/111065848/af39786e-2421-4e5f-a498-9e7a0ceb5e7d" />
+![Axios](https://img.shields.io/badge/axios-671ddf?&style=for-the-badge&logo=axios&logoColor=white) <img style="height: 26px" src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/111065848/0eb55b12-5a54-476f-a657-b1574ae3a37c" />
 </div>
 
 
