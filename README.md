@@ -1,4 +1,7 @@
-<img src="https://www.mwt-market.store/svg/%EC%98%A4%EC%9D%B4%EB%A7%88%EC%BC%93.svg" width=300>
+<div align="center">
+  
+</br>
+<img src="https://github.com/EmploymentRescueTeam/FE_marketClone/assets/111065848/32b6fd0c-387c-4570-8222-323f40126681" width=300 />
 
 ### 오이마켓 🥒 프론트엔드
 
