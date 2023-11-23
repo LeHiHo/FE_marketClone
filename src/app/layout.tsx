@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import '@/styles/globals.scss';
-import Head from 'next/head';
 
 export const metadata = {
   title: '오이마켓',
