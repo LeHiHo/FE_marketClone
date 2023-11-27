@@ -26,11 +26,15 @@ TEST용 PASSWORD: 123456
 
 프론트엔드 노션은 [이곳](https://www.notion.so/3ac920f7fa864328a20ba394ee555132)을 클릭해주세요.
 <br/>
+피그마는 [이곳](https://www.figma.com/file/ZE6vTyljDbEu4qWPdP3rd9/%EC%98%A4%EC%9D%B4%EB%A7%88%EC%BC%93?type=design&node-id=0%3A1&mode=design&t=eZjDhRFb0hHTc976-1)을 클릭해주세요
 <br/>
 백엔드 노션은 [이곳](https://www.notion.so/MWT-Team-Project-a7c024d8eecc4c7ba02cdecab12629d7)을 클릭해주세요.
 <br/>
 백엔드 레포지토리는 [이곳](https://github.com/FC-WhyWrongThoguhtRight/MWT-Market)을 클릭해주세요.
-
+<br/>
+프로젝트 제안서는 [이곳](https://acoustic-polka-c6d.notion.site/cfcf3393c85d44deafe488fa93bef54c)을 클릭해주세요.
+<br/>
+스웨거는 [이곳](https://api.mwt-market.store/api/v1/swagger-ui/index.html#/)을 클릭해주세요.
 <br/>
 
 ## 🛠️ 기술 스택
@@ -100,8 +104,6 @@ TEST용 PASSWORD: 123456
 </div>
 
 <br>
-
-## 📓 주요 기능(사진)
   
 |로그인|회원가입|검색|카테고리|
 |---|---|---|---|
@@ -137,7 +139,7 @@ TEST용 PASSWORD: 123456
 
 <div align="center">
   
-<img src="https://github.com/LeHiHo/FastMind/assets/93272421/d12f2a2c-123a-410d-bcca-253e98994453" />
+<img src="https://github.com/LeHiHo/FE_marketClone/assets/134940630/38949786-7b36-41ff-b148-453077ba805f" alt="아키텍쳐" />
 
 </div>
 
@@ -213,9 +215,10 @@ TEST용 PASSWORD: 123456
 ### ✨ BE 팀 소개
 | 고동훤 (FE) <br> 팀장 | 김종훈 (FE) <br> 팀원 | 김진홍 (FE) <br> 팀원 | 서원빈 (FE) <br> 팀원 |
 |:------------------:|:------------------:|:------------------:|:------------------:|
-| [![고동훤](https://avatars.githubusercontent.com/u/97681286?v=4) | ![김종훈](https://avatars.githubusercontent.com/u/40512982?v=4) | ![김진홍](https://avatars.githubusercontent.com/u/33937365?v=4) | ![서원빈](https://avatars.githubusercontent.com/u/81563920?v=4)  |
+| ![고동훤](https://avatars.githubusercontent.com/u/97681286?v=4&size=300) | ![김종훈](https://avatars.githubusercontent.com/u/40512982?v=4&size=300) | ![김진홍](https://avatars.githubusercontent.com/u/33937365?v=4&size=300) | ![서원빈](https://avatars.githubusercontent.com/u/81563920?v=4&size=300)  |
 | [Dr-KoKo](https://github.com/Dr-KoKo)| [WaterSpray](https://github.com/whdgns5059) | [deepredk](https://github.com/deepredk) | [Seo Wonbin](https://github.com/Wonbn) |
-| <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> | <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> | <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> | <ul><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li><li>구현 내용</li></ul> |
+| <ul><li>인증/인가</li><li>Spring 기본설계</li><li>Github Actions</li><li>AWS S3</li><li>Nginx</li><li>Mypage API</li><li>Product API</li></ul> | <ul><li>채팅 API</li></ul> | <ul><li>상품 관심목록 API</li><li>상품 채팅목록 API</li><li>상품 상태변경 API</li><li>상품 카테고리 API</li></ul> | <ul><li>상품 CRUD API</li><li>상품 전체조회 API</li><li>상품 상세조회 API</li></ul> |
+
 
  
 
