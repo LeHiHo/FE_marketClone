@@ -26,6 +26,7 @@ TEST용 PASSWORD: 123456
 
 프론트엔드 노션은 [이곳](https://www.notion.so/3ac920f7fa864328a20ba394ee555132)을 클릭해주세요.
 <br/>
+피그마는 [이곳](https://www.figma.com/file/ZE6vTyljDbEu4qWPdP3rd9/%EC%98%A4%EC%9D%B4%EB%A7%88%EC%BC%93?type=design&node-id=0%3A1&mode=design&t=eZjDhRFb0hHTc976-1)을 클릭해주세요
 <br/>
 백엔드 노션은 [이곳](https://www.notion.so/MWT-Team-Project-a7c024d8eecc4c7ba02cdecab12629d7)을 클릭해주세요.
 <br/>
