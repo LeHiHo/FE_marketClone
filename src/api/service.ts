@@ -11,6 +11,15 @@ const config = {
   },
 };
 
+//로그인
+export const postAuth = async (email: string, password: string) => {
+  const res = await client.post('/login', {
+    email: email,
+    password: password,
+  });
+  return res;
+};
+
 export const getProductDetail = async (id: number | undefined) => {
   const res = await client.get(`/products/${id}`, {
     params: {
@@ -122,20 +131,6 @@ export const postSignUp = async (
   });
   return res;
 };
-
-//로그인
-export const postAuth = async (email: string, password: string) => {
-  const res = await client.post('/login', {
-    email: email,
-    password: password,
-  });
-  return res;
-};
-
-// axios.get('https://example.com/api/data').then((response) => {
-//   const cookies = response.headers['set-cookie'];
-//   console.log(cookies);
-// });
 
 export const updateProductState = async (
   productStateId: number | undefined,
