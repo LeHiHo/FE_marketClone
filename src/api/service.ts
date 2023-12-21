@@ -159,7 +159,7 @@ export const getMyProductAxios = async (accessToken: string) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    console.log(response.data); // Axios wraps the response data in a 'data' property
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     console.error('Fetching products failed:', error);
