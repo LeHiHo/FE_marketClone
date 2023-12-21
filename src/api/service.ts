@@ -127,12 +127,18 @@ export const getProductsfetch = async () => {
   }
 };
 
-export const getMyProductfetch = async () => {
+export const getMyProductfetch = async (accessToken: string) => {
   // 기본 URL 설정
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/myPage/products`;
 
   try {
-    const response = await fetch(url, { cache: 'no-store' });
+    const response = await fetch(url, {
+      cache: 'no-store',
+      credentials: 'include', // 추가된 옵션
+      headers: {
+        Authorization: `Bearer ${accessToken}`, // 엑세스 토큰을 헤더에 추가
+      },
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
