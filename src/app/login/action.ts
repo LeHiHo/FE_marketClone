@@ -33,7 +33,7 @@ export async function LoginServerAction(formData: FormData) {
           secure: true,
           sameSite: 'none',
           maxAge: 1800,
-          // domain: 'mwt-market.store',
+          domain: 'mwt-market.store',
         });
         cookies().set({
           name: 'refresh-token',
@@ -43,7 +43,7 @@ export async function LoginServerAction(formData: FormData) {
           secure: true,
           sameSite: 'none',
           maxAge: 86400,
-          // domain: 'mwt-market.store',
+          domain: 'mwt-market.store',
         });
       }
       return {
