@@ -13,7 +13,7 @@ export default function ProductItem({ product }: { product: IProduct }) {
   return (
     <div className="product" onClick={onClick}>
       <div className="product__img">
-        <img src={product.thumbnail} alt="" />
+        {product.thumbnail && <img src={product.thumbnail} alt="img" />}
       </div>
       <div className="product__content">
         <div className="title">{product.title}</div>

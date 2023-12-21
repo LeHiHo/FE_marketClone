@@ -1,25 +1,31 @@
 import LoginPage from '@/templates/login/loginPage';
-// import axios from 'axios';
-
-// const client = axios.create({
-//   withCredentials: true,
-//   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-// });
-// export const postAuth = async (email: string, password: string) => {
-//   const res = await client.post('/login', {
-//     email: email,
-//     password: password,
-//   });
-//   return res.headers;
-// };
+// import { postAuth } from '@/api/service';
 
 export default async function Login() {
-  // const res = await postAuth('hojin@naver.com', '123456');
-  // console.log(res['set-cookie']);
+  // async function handleSubmit(formData: FormData) {
+  //   'use server';
+  //   console.log(formData.get('useremail'));
+  //   console.log(formData.get('password'));
+
+  //   const userEmail = formData.get('useremail')?.toString();
+  //   const userPassword = formData.get('password')?.toString();
+  //   if (userEmail && userPassword) {
+  //     const response = await postAuth(userEmail, userPassword);
+  //   }
+  // }
 
   return (
     <>
       <LoginPage />
+      {/* <div>
+        <form action={handleSubmit}>
+          <p>이메일(ID)</p>
+          <input type="email" name="useremail" />
+          <p>비밀번호(PW)</p>
+          <input className="pw" type="password" name="password" />
+          <button type="submit">버튼</button>
+        </form>
+      </div> */}
     </>
   );
 }

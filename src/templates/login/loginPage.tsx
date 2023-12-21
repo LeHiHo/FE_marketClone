@@ -5,7 +5,7 @@ import '@/styles/templates/login/login.scss';
 import Header from '@/components/header';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { postAuth } from '@/api/service';
+import { proxyLogin } from '@/api/service';
 
 // interface LoginPageProps {
 //   cookies: string[] | undefined;
@@ -21,7 +21,7 @@ const LoginPage = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await postAuth(email, password);
+      const response = await proxyLogin(email, password);
       if (response.data.statusCode === 200) {
         setIsLogin(!isLogin);
         alert('로그인되었습니다.');
