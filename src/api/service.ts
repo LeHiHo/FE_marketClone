@@ -132,11 +132,6 @@ export const postSignUp = async (
   return res;
 };
 
-// axios.get('https://example.com/api/data').then((response) => {
-//   const cookies = response.headers['set-cookie'];
-//   console.log(cookies);
-// });
-
 export const updateProductState = async (
   productStateId: number | undefined,
   changeStateCode: number,
