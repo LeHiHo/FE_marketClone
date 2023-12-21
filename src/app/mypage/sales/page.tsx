@@ -1,17 +1,6 @@
-'use client';
 // import MypageSale from '@/templates/mypage/mypageSale';
-import { getMyProduct } from '@/api/service';
-import { useEffect } from 'react';
 
 export default function Mypage() {
-  useEffect(() => {
-    const fetch = async () => {
-      const res = await getMyProduct();
-      console.log(res);
-    };
-    fetch();
-  }, []);
-
   // if (accessToken) {
   //   const token = accessToken.value;
 
@@ -23,13 +12,5 @@ export default function Mypage() {
   // myProductData = res.data;
   // }
 
-  return (
-    <>
-      {/* {myProductData ? (
-        <MypageSale data={myProductData} />
-      ) : (
-        <div>{myProductData}</div>
-      )} */}
-    </>
-  );
+  return <div>123</div>;
 }
