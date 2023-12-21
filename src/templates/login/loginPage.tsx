@@ -16,7 +16,6 @@ const LoginPage = () => {
     <form
       action={async (formData: FormData) => {
         const result = await LoginServerAction(formData);
-        console.log(result);
 
         alert(result?.message);
         if (result?.redirect && result.redirectUri) {

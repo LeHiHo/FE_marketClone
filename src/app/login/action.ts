@@ -1,17 +1,16 @@
 'use server';
 
 import { postAuth } from '@/api/service';
-import parseCookies from '@/util/util';
+import parseCookies from '@/util/parsedCookies';
 import { cookies } from 'next/headers';
 
 export async function LoginServerAction(formData: FormData) {
   const userEmail = formData.get('useremail')?.toString();
   const userPassword = formData.get('password')?.toString();
+
   if (userEmail && userPassword) {
     try {
       const res = await postAuth(userEmail, userPassword);
-      console.log(res.data);
-
       if (res.data.statusCode === 400) {
         return {
           redirect: false,
