@@ -8,6 +8,7 @@ const nextConfig = {
   experimental: {
     serverActions: true,
   },
+  swcMinify: true, // SWC 기반 최소화 활성화
 };
 
 module.exports = nextConfig;
