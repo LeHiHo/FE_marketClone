@@ -127,6 +127,21 @@ export const getProductsfetch = async () => {
   }
 };
 
+export const getMyProductfetch = async () => {
+  // 기본 URL 설정
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/myPage/products`;
+
+  try {
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Fetching products failed:', error);
+  }
+};
+
 export const getUserProducts = async (id: string) => {
   const res = await client.get(`/products/${id}/list`);
   return res.data;

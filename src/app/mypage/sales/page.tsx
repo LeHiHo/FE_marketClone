@@ -1,9 +1,12 @@
 import MypageSale from '@/templates/mypage/mypageSale';
+import { getMyProductfetch } from '@/api/service';
 
-export default function Mypage() {
+export default async function Mypage() {
+  const res = await getMyProductfetch();
+
   return (
     <>
-      <MypageSale />
+      <MypageSale data={res.data} />
     </>
   );
 }
