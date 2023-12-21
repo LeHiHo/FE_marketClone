@@ -20,14 +20,6 @@ export const postAuth = async (email: string, password: string) => {
   return res;
 };
 
-export const proxyLogin = async (email: string, password: string) => {
-  const res = await client.post('http://localhost:3000/api/hojin', {
-    email: email,
-    password: password,
-  });
-  return res;
-};
-
 export const getProductDetail = async (id: number | undefined) => {
   const res = await client.get(`/products/${id}`, {
     params: {

@@ -10,8 +10,8 @@ function parseCookies(
   const parsedCookies: ParsedCookies = {};
 
   cookies.forEach((cookie) => {
-    const [nameValue, ...rest] = cookie.split(';');
-    const [name, value] = nameValue.split('=');
+    const [cookiePair] = cookie.split(';');
+    const [name, value] = cookiePair.split('=').map((c) => c.trim());
 
     if (cookieNames.includes(name as CookieName)) {
       parsedCookies[name as CookieName] = value;
