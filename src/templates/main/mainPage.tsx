@@ -7,8 +7,7 @@ import AddBtn from './addBtn';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import Navbar from '@/components/navbar';
-import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { IProductProps } from '@/types/interface';
 
 export default function MainPage({ data }: IProductProps) {

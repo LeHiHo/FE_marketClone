@@ -2,12 +2,11 @@
 // import type { NextRequest } from 'next/server';
 
 // export function middleware(request: NextRequest) {
-//   // let cookie = request.cookies.get('nextjs');
-//   // console.log(cookie); // => { name: 'nextjs', value: 'fast', Path: '/' }
-//   // const allCookies = request.cookies.getAll();
-//   // console.log(allCookies); // => [{ name: 'nextjs', value: 'fast' }]
+//   const allCookies = request.cookies.getAll();
+//   console.log(allCookies); // => [{ name: 'nextjs', value: 'fast' }]
 
-//   // request.cookies.has('nextjs'); // => true
+//   // console.log(request.cookies.has('access-token'));
+
 //   // request.cookies.delete('nextjs');
 //   // request.cookies.has('nextjs'); // => false
 
