@@ -132,7 +132,10 @@ export const getMyProductfetch = async () => {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/myPage/products`;
 
   try {
-    const response = await fetch(url, { cache: 'no-store' });
+    const response = await fetch(url, {
+      cache: 'no-store',
+      credentials: 'include', // 추가된 옵션
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
