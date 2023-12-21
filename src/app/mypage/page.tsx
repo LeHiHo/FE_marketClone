@@ -4,9 +4,12 @@ import { cookies } from 'next/headers';
 
 export default async function Mypage() {
   const accessToken = cookies().get('access-token');
-  const res = await getMyProductAxios(accessToken?.value);
+  if (accessToken?.value) {
+    const res = await getMyProductAxios(accessToken?.value);
+    console.log(res);
+  }
+
   console.log(accessToken);
-  console.log(res);
 
   // oductData = null;  let myPr
 
