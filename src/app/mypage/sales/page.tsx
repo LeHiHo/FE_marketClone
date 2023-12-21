@@ -1,4 +1,4 @@
-import MypageSale from '@/templates/mypage/mypageSale';
+// import MypageSale from '@/templates/mypage/mypageSale';
 
 export default function Mypage() {
   // if (accessToken) {
