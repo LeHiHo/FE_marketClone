@@ -46,7 +46,7 @@ export default function MypagePage() {
       <Header title={'마이페이지'} border={true} />
       <div className="mypage-container">
         <div className="user__info">
-          {imageSrc && <img src={imageSrc} alt="유저 이미지" />}
+          <img src={imageSrc} alt="유저 이미지" />
           <span>{user.nickname}</span>
           <Btn type="button" href="/mypage/edit" label="프로필수정" />
         </div>
