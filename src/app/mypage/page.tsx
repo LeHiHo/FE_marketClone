@@ -1,12 +1,12 @@
 import MypagePage from '@/templates/mypage/mypagePage';
-// import { getMyProductfetch } from '@/api/service';
-// import { cookies } from 'next/headers';
+import { getMyProductAxios } from '@/api/service';
+import { cookies } from 'next/headers';
 
 export default async function Mypage() {
-  // const accessToken = cookies().get('access-token');
-  // const res = await getMyProductfetch(accessToken?.value);
-
-  // console.log('엑세스',accessToken?.value);
+  const accessToken = cookies().get('access-token');
+  const res = await getMyProductAxios(accessToken?.value);
+  console.log(accessToken);
+  console.log(res);
 
   // oductData = null;  let myPr
 
