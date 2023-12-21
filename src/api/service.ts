@@ -130,6 +130,7 @@ export const getProductsfetch = async () => {
 export const getMyProductfetch = async (accessToken: string) => {
   // 기본 URL 설정
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/myPage/products`;
+  console.log(url);
 
   try {
     const response = await fetch(url, {
@@ -139,6 +140,7 @@ export const getMyProductfetch = async (accessToken: string) => {
         Authorization: `Bearer ${accessToken}`, // 엑세스 토큰을 헤더에 추가
       },
     });
+    console.log(response.json());
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

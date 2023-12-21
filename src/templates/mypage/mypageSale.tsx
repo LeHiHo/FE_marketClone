@@ -17,6 +17,7 @@ export default function MypageSale({ data }: IProductProps) {
   ) => {
     setProductList(state);
   };
+
   useEffect(() => {
     if (data) {
       setMyProducts(() => {
