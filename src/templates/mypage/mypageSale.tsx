@@ -43,12 +43,16 @@ export default function MypageSale({ data }: IProductProps) {
       <Header goBack={true} title={'판매내역'} />
       <ProductStateList onChangeList={handleChangeList} />
       <ul className="product-list">
-        {myProducts.map((product) => (
-          <Fragment key={product.id}>
-            <ProductItem product={product} />
-            <ProductState product={product} setReLoad={setReLoad} />
-          </Fragment>
-        ))}
+        {myProducts === null || myProducts === undefined ? (
+          <div>데이터 패칭 실패</div>
+        ) : (
+          myProducts.map((product) => (
+            <Fragment key={product.id}>
+              <ProductItem product={product} />
+              <ProductState product={product} setReLoad={setReLoad} />
+            </Fragment>
+          ))
+        )}
       </ul>
     </div>
   );
