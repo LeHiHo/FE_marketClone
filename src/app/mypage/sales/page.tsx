@@ -1,20 +1,26 @@
 import MypageSale from '@/templates/mypage/mypageSale';
-import { getMyProductAxios } from '@/api/service';
+import { getMyProductfetch } from '@/api/service';
 import { cookies } from 'next/headers';
 
 export default async function Mypage() {
   const accessToken = cookies().get('access-token');
   let myProductData = null;
+  console.log(accessToken);
 
   if (accessToken) {
     const token = accessToken.value;
-    const res = await getMyProductAxios(token);
+    const res = await getMyProductfetch(token);
+    console.log(res);
     myProductData = res.data;
   }
 
   return (
     <>
-      <MypageSale data={myProductData} />
+      {myProductData && myProductData.length > 0 ? (
+        <MypageSale data={myProductData} />
+      ) : (
+        <div>상품 데이터가 없습니다.</div>
+      )}
     </>
   );
 }
