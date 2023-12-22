@@ -1,12 +1,12 @@
 import MainPage from '@/templates/main/mainPage';
-import { getProducts } from '@/api/service';
+import { getProductsfetch } from '@/api/service';
 
 export default async function Main() {
-  const { data } = await getProducts();
+  const res = await getProductsfetch();
 
   return (
     <>
-      <MainPage data={data} />
+      <MainPage data={res.data} />
     </>
   );
 }

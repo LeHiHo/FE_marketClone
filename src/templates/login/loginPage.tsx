@@ -5,44 +5,23 @@ import '@/styles/templates/login/login.scss';
 import Header from '@/components/header';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { postAuth } from '@/api/service';
-
-// interface LoginPageProps {
-//   cookies: string[] | undefined;
-// }
+import { LoginServerAction } from '@/app/login/action';
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [isLogin, setIsLogin] = useState(false);
-
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const response = await postAuth(email, password);
-      if (response.data.statusCode === 200) {
-        setIsLogin(!isLogin);
-        alert('로그인되었습니다.');
-        router.push('/main');
-      } else if (response.data.message === 'Invalid Username Or Password') {
-        alert('이메일 또는 비밀번호가 일치하지 않습니다.');
-      } else {
-        console.log(response);
-      }
-    } catch (error: any) {
-      if (error.response.data.message === 'no such user') {
-        alert('가입되지 않은 이메일입니다.');
-      } else {
-        alert('로그인에 실패하였습니다.');
-        console.error('Login failed:', error.response.data);
-      }
-    }
-  };
-
   return (
-    <form onSubmit={handleLogin}>
+    <form
+      action={async (formData: FormData) => {
+        const result = await LoginServerAction(formData);
+
+        alert(result?.message);
+        if (result?.redirect && result.redirectUri) {
+          router.push(result.redirectUri);
+        }
+      }}>
       <Header title={'로그인'} />
       <div className="loginPage">
         <div className="loginPage__text">
