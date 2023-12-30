@@ -134,9 +134,9 @@ export const getMyProductfetch = async (accessToken: string) => {
   try {
     const response = await fetch(url, {
       cache: 'no-store',
-      credentials: 'include', // 추가된 옵션
+      credentials: 'include',
       headers: {
-        Authorization: `Bearer ${accessToken}`, // 엑세스 토큰을 헤더에 추가
+        Authorization: `Bearer ${accessToken}`,
       },
     });
 

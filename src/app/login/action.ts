@@ -46,20 +46,17 @@ export async function LoginServerAction(formData: FormData) {
         });
       }
       return {
-        redirect: true,
         redirectUri: '/main',
         message: '로그인에 성공했습니다.',
       };
     } catch (error: any) {
       return {
-        redirect: false,
         redirectUri: null,
         message: '로그인에 실패했습니다.',
       };
     }
   } else {
     return {
-      redirect: false,
       redirectUri: null,
       message: '아이디와 비밀번호를 입력해주세요',
     };
