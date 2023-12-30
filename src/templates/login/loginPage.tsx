@@ -18,7 +18,7 @@ const LoginPage = () => {
         const result = await LoginServerAction(formData);
 
         alert(result?.message);
-        if (result?.redirect && result.redirectUri) {
+        if (result?.redirectUri) {
           router.push(result.redirectUri);
         }
       }}>
