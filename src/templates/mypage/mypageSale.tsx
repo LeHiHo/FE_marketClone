@@ -5,7 +5,7 @@ import ProductItem from '@/components/productItem';
 import ProductState from '@/components/productState';
 import 'src/styles/templates/mypage/mypageSales.scss';
 import ProductStateList from '@/templates/product/productStateList/productStateList';
-import { IProductProps, IProduct } from '@/types/interface';
+import { IProduct, IProductProps } from '@/types/interface';
 import { useState, useEffect, Fragment } from 'react';
 
 export default function MypageSale({ data }: IProductProps) {
@@ -23,19 +23,20 @@ export default function MypageSale({ data }: IProductProps) {
       setMyProducts(() => {
         return data.filter((product) => {
           if (productList === 'all') {
-            return product;
+            return true;
           } else if (
             productList === 'completed' &&
             product.status === '거래완료'
           ) {
-            return product;
+            return true;
           } else if (productList === 'sale' && product.status === '판매중') {
-            return product;
-          } else {
-            return;
+            return true;
           }
+          return false;
         });
       });
+    } else {
+      setMyProducts([]);
     }
   }, [productList, data, reLoad]);
 
@@ -44,8 +45,8 @@ export default function MypageSale({ data }: IProductProps) {
       <Header goBack={true} title={'판매내역'} />
       <ProductStateList onChangeList={handleChangeList} />
       <ul className="product-list">
-        {myProducts === null || myProducts === undefined ? (
-          <div>데이터 패칭 실패</div>
+        {myProducts.length === 0 ? (
+          <div>데이터가 없거나 패칭에 실패했습니다.</div>
         ) : (
           myProducts.map((product) => (
             <Fragment key={product.id}>
