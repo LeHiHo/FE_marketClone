@@ -5,10 +5,12 @@ import ProductItem from '@/components/productItem';
 import ProductState from '@/components/productState';
 import 'src/styles/templates/mypage/mypageSales.scss';
 import ProductStateList from '@/templates/product/productStateList/productStateList';
-import { IProductProps, IProduct } from '@/types/interface';
+import { IProduct } from '@/types/interface';
 import { useState, useEffect, Fragment } from 'react';
+import { MypageSaleServerAction } from '@/app/mypage/sales/action';
+// import { getMyProduct } from '@/api/service';
 
-export default function MypageSale({ data }: IProductProps) {
+export default function MypageSale() {
   const [productList, setProductList] = useState<string>('all');
   const [reLoad, setReLoad] = useState<boolean>(false);
   const [myProducts, setMyProducts] = useState<IProduct[]>([]);
@@ -18,26 +20,47 @@ export default function MypageSale({ data }: IProductProps) {
     setProductList(state);
   };
 
+  // useEffect(() => {
+  //   const fetchDatamy = async () => {
+  //     try {
+  //       const foo = await getMyProduct();
+  //       console.log(foo);
+  //     } catch (error) {
+  //       console.error('Failed to fetch data:', error);
+  //     }
+  //   };
+
+  //   fetchDatamy();
+  // }, []);
+
   useEffect(() => {
-    if (data) {
-      setMyProducts(() => {
-        return data.filter((product) => {
-          if (productList === 'all') {
-            return product;
-          } else if (
-            productList === 'completed' &&
-            product.status === '거래완료'
-          ) {
-            return product;
-          } else if (productList === 'sale' && product.status === '판매중') {
-            return product;
-          } else {
-            return;
-          }
-        });
-      });
-    }
-  }, [productList, data, reLoad]);
+    const fetchData = async () => {
+      try {
+        const data = await MypageSaleServerAction();
+        console.log(data);
+        if (data) {
+          const filteredProducts = data.filter((product: any) => {
+            if (productList === 'all') {
+              return true;
+            } else if (
+              productList === 'completed' &&
+              product.status === '거래완료'
+            ) {
+              return true;
+            } else if (productList === 'sale' && product.status === '판매중') {
+              return true;
+            }
+            return false;
+          });
+          setMyProducts(filteredProducts);
+        }
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
+
+    fetchData();
+  }, [productList, reLoad]);
 
   return (
     <div className="saleList">

@@ -13,7 +13,6 @@ export async function LoginServerAction(formData: FormData) {
       const res = await postAuth(userEmail, userPassword);
       if (res.data.statusCode === 400) {
         return {
-          redirect: false,
           redirectUri: null,
           message: '이메일 또는 패스워드가 일치하지 않습니다.',
         };
